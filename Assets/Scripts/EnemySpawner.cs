@@ -20,13 +20,12 @@ public class EnemySpawner : MonoBehaviour
         //Wait for the initial spawn delay
         yield return new WaitForSeconds(spawnDelay);
 
-        //Loop to spawn enemies at regular intervals
         //while (true)
         while (enemiesSpawned < 10)
         {
             SpawnEnemy();
 
-            //Wait for the nect interval
+            //Wait for the next interval
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -38,7 +37,15 @@ public class EnemySpawner : MonoBehaviour
             //Spawn the enemy at the spawn location
             Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
             enemiesSpawned++;
-            Debug.Log($"New enemy spawned: {enemiesSpawned}");
+            
+            if (enemiesSpawned == 1)
+            {
+                Debug.Log($"{enemiesSpawned} enemy spawned.");
+            }
+            else
+            {
+                Debug.Log($"{enemiesSpawned} enemies spawned.");
+            }
             //Debug.LogWarning("Enemy prefab is assigned.");
         }
         else
