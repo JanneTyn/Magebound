@@ -18,9 +18,10 @@ public class SpellBaseEffect : MonoBehaviour
 
     public void InitializeProjectile(Vector3 playerLocation, Vector3 targetLocation)
     {
-        Vector3 dir = (targetLocation - playerLocation).normalized;
-        Debug.DrawLine(playerLocation, playerLocation + dir * 10, Color.red, Mathf.Infinity);
+        Vector3 linedir = (targetLocation - playerLocation).normalized;
+        Debug.DrawLine(playerLocation, playerLocation + linedir * 50, Color.red, Mathf.Infinity);
 
-        Instantiate(BasicAttackFirePrefab, playerLocation, Quaternion.identity);
+        GameObject attack = Instantiate(BasicAttackFirePrefab, playerLocation, Quaternion.identity);
+        attack.GetComponent<SpellProjectile>().SetProjectileDirection(targetLocation, playerLocation);
     }
 }

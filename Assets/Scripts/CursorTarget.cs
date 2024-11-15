@@ -41,9 +41,8 @@ public class CursorTarget : MonoBehaviour
         if (hit.collider.CompareTag("Ground"))
         {
             Debug.Log("Ground target hit");
-            attackTarget = hit.transform.position;
-            attackTarget.y += 1;
-            spellEffect.InitializeProjectile(player.transform.position, hit.point);
+            Vector3 fixedPoint = hit.point;
+            spellEffect.InitializeProjectile(player.transform.position, fixedPoint);
         }
     }
 
