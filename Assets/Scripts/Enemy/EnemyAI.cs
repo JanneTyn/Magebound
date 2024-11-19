@@ -4,20 +4,18 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    private string playerTag = "Player";
-    private float detectionRange = 10f;
+    private float detectionRange = 100f;
     private float moveSpeed = 5f;
     private float rotationSpeed = 5f;
 
     private NavMeshAgent agent;
     private Transform player;
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //Find player GameObject by its tag
-        GameObject playerObject = GameObject.FindWithTag(playerTag);
+        GameObject playerObject = GameObject.FindWithTag("Player");
 
         if (playerObject != null)
         {
