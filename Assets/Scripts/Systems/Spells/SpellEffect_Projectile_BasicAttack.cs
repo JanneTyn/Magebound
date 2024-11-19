@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
 {
@@ -29,7 +30,18 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+            if (GetIsExplosive())
+            {
+                Collider[] enemies = Physics.OverlapSphere(transform.position, GetExplosionRadius(), GetExplosionLayer());
+
+                foreach (Collider enemy in enemies)
+                {
+                    enemy.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+                }
+            } else
+            {
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+            }
         }
         else if (other.CompareTag("SpellEffect"))
         {
