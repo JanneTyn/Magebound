@@ -14,6 +14,8 @@ public class CharacterStats_EnemyStats : CharacterStats
 
     private void DeathSequence()
     {
+        Destroy(gameObject);
+        Debug.Log("Enemy died!");
         throw new System.NotImplementedException();
     }
 }

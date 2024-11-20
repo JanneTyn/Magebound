@@ -15,7 +15,6 @@ public class EnemyHandOverlapCheck : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
 }
