@@ -761,8 +761,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 888348756227885499, guid: 9cd3fe1e496be72438763bdfee85601d, type: 3}
   spawnLocation: {x: -3.057574, y: 0.547, z: 13.83197}
-  spawnDelay: 3
-  spawnInterval: 5
+  spawnDelay: 1
+  spawnInterval: 2.5
 --- !u!4 &1572981322
 Transform:
   m_ObjectHideFlags: 0
