@@ -14,35 +14,46 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool rightMovement = false;
     private bool leftMovement = false;
+    private Vector3 newLoc;
+    private Dash dash;
 
     void Start()
     {
         playerFollow = GameObject.Find("PlayerFollow");
         rb = GetComponent<Rigidbody>();
+        dash = GetComponent<Dash>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (UnityEngine.Input.GetKey("w"))
+        if (!dash.dashIsActive)
         {
-            transform.position += Vector3.forward * Time.deltaTime * movementSpeed; 
-        }
-        else if (UnityEngine.Input.GetKey("s"))
-        {
-            transform.position -= Vector3.forward * Time.deltaTime * movementSpeed;
-        }
+            newLoc = new Vector3();
+            if (UnityEngine.Input.GetKey("w"))
+            {
+                transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+                newLoc += Vector3.forward;
+            }
+            else if (UnityEngine.Input.GetKey("s"))
+            {
+                transform.position -= Vector3.forward * Time.deltaTime * movementSpeed;
+                newLoc -= Vector3.forward;
+            }
 
-        if (UnityEngine.Input.GetKey("a"))
-        {
-            transform.position -= Vector3.right * Time.deltaTime * movementSpeed;
+            if (UnityEngine.Input.GetKey("a"))
+            {
+                transform.position -= Vector3.right * Time.deltaTime * movementSpeed;
+                newLoc += -Vector3.right;
+            }
+            else if (UnityEngine.Input.GetKey("d"))
+            {
+                transform.position += Vector3.right * Time.deltaTime * movementSpeed;
+                newLoc += Vector3.right;
+            }
+            transform.LookAt(transform.position + newLoc);          
         }
-        else if (UnityEngine.Input.GetKey("d"))
-            transform.position += Vector3.right * Time.deltaTime * movementSpeed;
-
         playerFollow.transform.position = transform.position;
-
     }
 
     private void OnCollisionEnter(Collision collision)
