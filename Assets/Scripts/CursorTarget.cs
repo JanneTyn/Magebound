@@ -26,10 +26,11 @@ public class CursorTarget : MonoBehaviour
     {
         ray = cam.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
-        if (Input.GetMouseButtonDown(0)) AttackPrepare();
+        if (Input.GetMouseButtonDown(0)) AttackPrepare(false);
+        else if (Input.GetMouseButtonDown(1)) AttackPrepare(true);
     }
 
-    void AttackPrepare()
+    void AttackPrepare(bool isDash)
     {
         if (!CheckForTarget())
         {
@@ -41,7 +42,13 @@ public class CursorTarget : MonoBehaviour
         {
             Debug.Log("Ground target hit");
             Vector3 fixedPoint = hit.point;
-            spellEffect.InitializeProjectile(player.transform.position, fixedPoint);
+            if (!isDash) spellEffect.InitializeProjectile(player.transform.position, fixedPoint);
+            else
+            {
+                fixedPoint.y = player.transform.position.y;
+                player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint);
+            }
+
         }
     }
 
