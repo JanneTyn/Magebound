@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BasicAttackFirePrefab: {fileID: 0}
   PreLoadBasicAttackFirePrefab: {fileID: 0}
-  projectileSpeed: 6
+  projectileSpeed: 8
   travelDistance: 50
 --- !u!114 &-5267166148424484232
 MonoBehaviour:

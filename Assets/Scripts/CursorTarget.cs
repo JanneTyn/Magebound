@@ -44,8 +44,8 @@ public class CursorTarget : MonoBehaviour
         {
             Debug.Log("Ground target hit");
             if (!isDash) 
-            { 
-                spellEffect.InitializeProjectile(player.transform.position, fixedPoint); 
+            {
+                spellEffect.InitializeProjectile(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement()); 
                 StartCoroutine(RotationLockOnTarget(fixedPoint));
             }
             else

@@ -56,6 +56,22 @@ public class PlayerMovement : MonoBehaviour
         playerFollow.transform.position = transform.position;
     }
 
+    private void FixedUpdate()
+    {
+        if (UnityEngine.Input.GetKey("1"))
+        {
+            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(1);
+        }
+        if (UnityEngine.Input.GetKey("2"))
+        {
+            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(2);
+        }
+        if (UnityEngine.Input.GetKey("3"))
+        {
+            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(3);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         
