@@ -237,7 +237,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274318271}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: fc452d1228cf00f4f9938ab916f99671, type: 3}
+  m_Asset: {fileID: 0}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -648,7 +648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!73398921 &1229029013
 VFXRenderer:
   serializedVersion: 1
@@ -657,7 +657,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229029012}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -998,8 +998,8 @@ SceneRoots:
   - {fileID: 1491121708}
   - {fileID: 582815493}
   - {fileID: 45010272}
+  - {fileID: 1362044393}
   - {fileID: 274318274}
   - {fileID: 616183261}
   - {fileID: 677423671}
   - {fileID: 1229029015}
-  - {fileID: 1362044393}
