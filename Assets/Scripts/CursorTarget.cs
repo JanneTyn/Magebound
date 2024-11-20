@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,13 +7,15 @@ public class CursorTarget : MonoBehaviour
     public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
+    public float rotationLockTime = 0.3f;
     private SpellBaseEffect spellEffect;
     private GameObject player;
     private Vector3 attackTarget;
     private Camera cam;
     private Ray ray;
     private Ray rayAttack;
-    private RaycastHit hit;
+    private RaycastHit[] hits;
+    private Vector3 fixedPoint;
 
     private void Start()
     {
@@ -34,15 +37,17 @@ public class CursorTarget : MonoBehaviour
     {
         if (!CheckForTarget())
         {
-            Debug.Log("Valid target not found");
+            Debug.Log("Ground target not found");
             return;
         }
-
-        if (hit.collider.CompareTag("Ground"))
+        else
         {
             Debug.Log("Ground target hit");
-            Vector3 fixedPoint = hit.point;
-            if (!isDash) spellEffect.InitializeProjectile(player.transform.position, fixedPoint);
+            if (!isDash) 
+            { 
+                spellEffect.InitializeProjectile(player.transform.position, fixedPoint); 
+                StartCoroutine(RotationLockOnTarget(fixedPoint));
+            }
             else
             {
                 fixedPoint.y = player.transform.position.y;
@@ -52,25 +57,38 @@ public class CursorTarget : MonoBehaviour
         }
     }
 
+    IEnumerator RotationLockOnTarget(Vector3 targetLoc)
+    {
+        var t = 0f;
+        targetLoc.y = player.transform.position.y;
+        player.transform.LookAt(targetLoc);
+        Quaternion rotation = player.transform.rotation;
+        while (t < rotationLockTime)
+        {
+            t += Time.deltaTime;
+            player.transform.rotation = rotation;
+
+            yield return null;
+        }
+
+    }
+
     bool CheckForTarget()
     {
-        rayAttack = cam.ScreenPointToRay(Input.mousePosition);
+        hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 100.0f);
 
-        if (Physics.Raycast(ray, out hit))
+        for (int i = 0; i < hits.Length; i++)
         {
+            RaycastHit hit = hits[i];
+
             if (hit.collider.CompareTag("Ground"))
             {
+                fixedPoint = hit.point;
                 return true;
             }
-            else
-            {
-                return false;
-            }
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
 
     }
 
