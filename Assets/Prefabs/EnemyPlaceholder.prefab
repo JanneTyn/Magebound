@@ -162,6 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 8248729392685421451}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &5162765160415514655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a2a44d1982f2f4ca6194dc3e1b603f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LayerMask:
+  playerLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
