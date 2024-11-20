@@ -7292,7 +7292,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615777}
   m_ExposedName: TrailLife
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:
@@ -9226,7 +9226,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615932}
   m_ExposedName: IsDashing
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:

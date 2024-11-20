@@ -293,7 +293,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":3.51092267036438,"g":1.6938409805297852,"b":5.886792182922363,"a":1.0},"time":0.0},{"color":{"r":1.4980392456054688,"g":0.5723640322685242,"b":1.1933702230453492,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.8117647171020508,"time":0.0},{"alpha":0.45098039507865908,"time":0.014709697104990483},{"alpha":0.40392157435417178,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":5.886792182922363,"g":4.342782020568848,"b":1.6951494216918946,"a":1.0},"time":0.0},{"color":{"r":1.4980392456054688,"g":0.5723640322685242,"b":1.1933702230453492,"a":1.0},"time":0.723537027835846}],"alphaKeys":[{"alpha":0.8117647171020508,"time":0.0},{"alpha":0.45098039507865908,"time":0.014709697104990483},{"alpha":0.40392157435417178,"time":1.0}],"gradientMode":0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -1380,7 +1380,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":3.51092267036438,"g":1.6938409805297852,"b":5.886792182922363,"a":1.0},"time":0.0},{"color":{"r":1.4980392456054688,"g":0.5723640322685242,"b":1.1933702230453492,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.8117647171020508,"time":0.0},{"alpha":0.45098039507865908,"time":0.014709697104990483},{"alpha":0.40392157435417178,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":5.886792182922363,"g":4.342782020568848,"b":1.6951494216918946,"a":1.0},"time":0.0},{"color":{"r":1.4980392456054688,"g":0.5723640322685242,"b":1.1933702230453492,"a":1.0},"time":0.723537027835846}],"alphaKeys":[{"alpha":0.8117647171020508,"time":0.0},{"alpha":0.45098039507865908,"time":0.014709697104990483},{"alpha":0.40392157435417178,"time":1.0}],"gradientMode":0}'
     m_Space: -1
   m_Property:
     name: o
