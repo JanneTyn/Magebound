@@ -1,17 +1,26 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public Vector3 spawnLocation = new Vector3(-3.057574f, 0.547f, 13.83197f);
-    public float spawnDelay = 3f;
-    public float spawnInterval = 5f;
+    public GameObject spawnpointsObject;
+    private float spawnDelay = 1f; //Wait for the initial spawn delay
+    private float spawnInterval = 2.5f;
     private int enemiesSpawned = 0;
+    private List<Transform> spawnPoints = new List<Transform>();
+    private int lastSpawnIndex = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        foreach (Transform spawnpoint in spawnpointsObject.transform)
+        {
+            spawnPoints.Add(spawnpoint);
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -20,38 +29,34 @@ public class EnemySpawner : MonoBehaviour
         //Wait for the initial spawn delay
         yield return new WaitForSeconds(spawnDelay);
 
-        //while (true) for endless enemy spawns
-
-        while (enemiesSpawned < 1)
+        //Endless enemy spawns
+        while (true)
         {
             SpawnEnemy();
-
-            //Wait for the next interval
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
     void SpawnEnemy()
     {
-        if (enemyPrefab != null)
+        if (enemyPrefab != null && spawnPoints.Count > 0)
         {
-            //Spawn the enemy at the spawn location
-            Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            int spawnIndex;
+
+            //Make sure that next spawn point isn't same as last one
+            do
+            {
+                spawnIndex = Random.Range(0, spawnPoints.Count); //Random spawn point
+            } while (spawnIndex == lastSpawnIndex); //Repeat if same as last one
+
+            Transform spawnLocation = spawnPoints[spawnIndex];
+            Instantiate(enemyPrefab, spawnLocation.position, Quaternion.identity);
             enemiesSpawned++;
-            
-            if (enemiesSpawned == 1)
-            {
-                Debug.Log($"{enemiesSpawned} enemy spawned.");
-            }
-            else
-            {
-                Debug.Log($"{enemiesSpawned} enemies spawned.");
-            }
-            //Debug.LogWarning("Enemy prefab is assigned.");
+            lastSpawnIndex = spawnIndex;
         }
         else
         {
-            Debug.LogWarning("Enemy prefab is not assigned.");
+            Debug.LogWarning("EnemySpawner.cs: Enemy prefab or spawn points are not assigned.");
         }
     }
 }

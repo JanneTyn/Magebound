@@ -45,3 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicAttackFirePrefab: {fileID: 8123524897872665603, guid: 799f38cd1992c454b9d897163fa673b6, type: 3}
+  BasicAttackIcePrefab: {fileID: 8296769998848445900, guid: 49cf6dd77be8c2747a285f01a8536bf2, type: 3}
+  BasicAttackThunderPrefab: {fileID: 4487233413147765572, guid: 2a058a9863c0dcf488b6df1836c6f358, type: 3}
+  BasicAttackToUse: {fileID: 0}
+  PreLoadBasicAttackFirePrefab: {fileID: 0}
