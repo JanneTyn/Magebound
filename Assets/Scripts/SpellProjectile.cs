@@ -5,7 +5,7 @@ public class SpellProjectile : SpellBaseEffect
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Vector3 projectileDir;
     public float projectileSpeed = 6;
-    public float travelDistance = 50;
+    public float maxTravelDistance = 50;
     private bool directionSet;
 
     void Start()

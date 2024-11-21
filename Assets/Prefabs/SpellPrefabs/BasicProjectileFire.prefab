@@ -191,9 +191,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicAttackFirePrefab: {fileID: 0}
+  BasicAttackIcePrefab: {fileID: 0}
+  BasicAttackThunderPrefab: {fileID: 0}
+  BasicAttackToUse: {fileID: 0}
   PreLoadBasicAttackFirePrefab: {fileID: 0}
   projectileSpeed: 8
-  travelDistance: 50
+  maxTravelDistance: 50
 --- !u!114 &-5267166148424484232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +214,8 @@ MonoBehaviour:
   statusID: 0
   spellID: 1
   ElementID: 1
+  projectileSpeed: 8
+  travelDistance: 20
   overlappableEffectID: 
   lifetime: 0
   isExplosive: 0

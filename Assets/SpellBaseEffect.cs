@@ -26,8 +26,8 @@ public class SpellBaseEffect : MonoBehaviour
     public void InitializeProjectile(Vector3 playerLocation, Vector3 targetLocation, int element)
     {
         Vector3 linedir = (targetLocation - playerLocation).normalized;
+        float dist = Vector3.Distance(targetLocation, playerLocation);
         Debug.DrawLine(playerLocation, playerLocation + linedir * 50, Color.red, Mathf.Infinity);
-
         switch (element)
         {
             case 1:
@@ -46,7 +46,7 @@ public class SpellBaseEffect : MonoBehaviour
         }
         
         GameObject attack = Instantiate(BasicAttackToUse, playerLocation, Quaternion.identity);
-        attack.GetComponent<SpellProjectile>().SetProjectileDirection(targetLocation, playerLocation);
+        attack.GetComponent<SpellEffect_Projectile_BasicAttack>().SetProjectileDirection(targetLocation, playerLocation);
         //var VFX = Resources.Load<VisualEffectAsset>("VFX/BasicProjectile/BasicProjectileFire");
         //attack.GetComponent<VisualEffect>().visualEffectAsset = VFX;
     }
