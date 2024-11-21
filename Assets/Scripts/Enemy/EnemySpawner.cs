@@ -6,22 +6,21 @@ using Unity.VisualScripting;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject spawnpointsObject;
     private float spawnDelay = 1f; //Wait for the initial spawn delay
     private float spawnInterval = 2.5f;
     private int enemiesSpawned = 0;
-    private List<Vector3> spawnPoints = new List<Vector3>
-    {
-        new Vector3(-3.057574f, 0.547f, 13.83197f),
-        new Vector3(-8.142998f, 1f, -8.4376f),
-        new Vector3(4.571501f, 1f, -1.891045f),
-        new Vector3(12.4353f, 0.9999998f, -0.8511049f),
-        new Vector3(15.0247f, 1f, 7.231292f)
-    };
+    private List<Transform> spawnPoints = new List<Transform>();
     private int lastSpawnIndex = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        foreach (Transform spawnpoint in spawnpointsObject.transform)
+        {
+            spawnPoints.Add(spawnpoint);
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -50,8 +49,8 @@ public class EnemySpawner : MonoBehaviour
                 spawnIndex = Random.Range(0, spawnPoints.Count); //Random spawn point
             } while (spawnIndex == lastSpawnIndex); //Repeat if same as last one
 
-            Vector3 spawnLocation = spawnPoints[spawnIndex];
-            Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            Transform spawnLocation = spawnPoints[spawnIndex];
+            Instantiate(enemyPrefab, spawnLocation.position, Quaternion.identity);
             enemiesSpawned++;
             lastSpawnIndex = spawnIndex;
         }
