@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412b53b8400f0ae40a3e3e5a5d4db977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  detectionRange: 100
+  attackRange: 3
 --- !u!114 &-3983593868916787163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +188,7 @@ MonoBehaviour:
   fireResistance: 0
   iceResistance: 0
   electricResistance: 0
+  currentElement: 0
 --- !u!54 &-5267693220221234108
 Rigidbody:
   m_ObjectHideFlags: 0

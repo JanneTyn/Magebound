@@ -48,13 +48,13 @@ public class EnemyAttack : MonoBehaviour
         {
             if (Time.time - lastAttackTime >= attackCooldown)
             {
-                AttackPlayer();
+                Attack();
                 lastAttackTime = Time.time;
             }
         }
     }
 
-    void AttackPlayer()
+    public void Attack()
     {
         StartCoroutine(ActivateAndDeactivateAttack());
         Debug.Log($"Enemy attacked player. Damage: {attackDamage}");

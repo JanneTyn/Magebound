@@ -1,94 +1,77 @@
 using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    private float detectionRange = 100f;
-    private float moveSpeed = 5f;
-    private float rotationSpeed = 5f;
-
+    public Transform player;
     private NavMeshAgent agent;
-    private Transform player;
+    private EnemyAttack enemyAttack;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private BTNode currentBehaviorTree;
+
+    public float detectionRange = 100f;
+    public float attackRange = 3f;
+
     void Start()
     {
-        //Find player GameObject by its tag
+        agent = GetComponent<NavMeshAgent>();
+        enemyAttack = GetComponent<EnemyAttack>();
         GameObject playerObject = GameObject.FindWithTag("Player");
 
-        if (playerObject != null)
+        if (playerObject != null )
         {
             player = playerObject.transform;
         }
         else
         {
             Debug.LogError("EnemyAI.cs: Player not found. Make sure the player GameObject has the correct tag.");
-            enabled = false; //Disable the script if player is not found
+            enabled = false; // Disable the script if player is not found
             return;
         }
 
-        agent = GetComponent<NavMeshAgent>();
-
-        if (agent == null)
-        {
-            Debug.LogError("EnemyAI.cs: NavMeshAgent component is missing from Enemy GameObject", this);
-            enabled = false; //Disable the script if NavMeshAgent component is missing from Enemy GameObject
-            return;
-        }
-
-        //Agents movement and rotation speeds
-        agent.speed = moveSpeed;
-        agent.angularSpeed = rotationSpeed;
+        BuildBehaviorTree();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (agent == null)
+        if (currentBehaviorTree != null)
         {
-            Debug.Log("EnemyAI.cs: agent is null.");
-            return;
+            BTNode.NodeState state = currentBehaviorTree.Evaluate();
+
+            // Optionally, handle the state (like logging or additional checks)
+            if (state == BTNode.NodeState.RUNNING)
+            {
+                //Debug.Log("AI is running.");
+            }
+            else if (state == BTNode.NodeState.SUCCESS)
+            {
+                //Debug.Log("AI successfully completed action");
+            }
+            else if (state == BTNode.NodeState.FAILURE)
+            {
+                //Debug.Log("AI failed to perform action.");
+            }
         }
-        if (player == null)
-        {
-            Debug.Log("EnemyAI.cs: player is null.");
-            return;
-        }
-
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        //Debug.Log($"Enemy distance to player: {distanceToPlayer}");
-
-        if (distanceToPlayer < detectionRange)
-        {
-            //Set players position as the destination
-            agent.SetDestination(player.position);
-        }
-
-        /*else
-        {
-            //Stop the agent if out of detection range
-            agent.ResetPath();
-        }*/
-
-        RotateTowardsPlayer();
     }
 
-    void RotateTowardsPlayer()
+    void BuildBehaviorTree()
     {
-        //Calculate the direction to the player
-        Vector3 directionToPlayer = player.position - transform.position;
+        //Condition nodes
+        var isPlayerInSight = new IsPlayerInSight(transform, player, detectionRange);
+        var isPlayerInAttackRange = new IsPlayerInAttackRange(transform, player, attackRange);
 
-        //Keep the rotation on the Y - axis (ignore vertical rotation)
-        directionToPlayer.y = 0f;
+        //Action nodes
+        var moveToPlayer = new MoveToPlayer(agent, player);
+        var attackPlayer = new AttackPlayer(enemyAttack);
 
-        //Lerp or Slerp can be used for smooth rotation
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+        //Sequences for chasing & attacking
+        var chaseSequence = new Sequence(new List<BTNode> { isPlayerInSight, moveToPlayer });
+        var attackSequence = new Sequence(new List<BTNode> { isPlayerInAttackRange,  attackPlayer});
 
-        //For instant rotation, this can be used:
-        //transform.rotation = targetRotation;
-
-        //For smooth rotation, this can be used:
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        //Selector
+        currentBehaviorTree = new Selector(new List<BTNode> { chaseSequence, attackSequence });
     }
 }
