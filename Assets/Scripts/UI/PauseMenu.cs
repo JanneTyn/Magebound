@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject[] toDisable;
-    public GameObject pauseMenu;
+    public GameObject[] toDisable; //To Disable when Pause menu active and reactivate if resumin
+    public GameObject pauseMenu; 
 
     private bool pauseMenuIsActive = false;
     private void Update()
@@ -13,8 +13,8 @@ public class PauseMenu : MonoBehaviour
         {
             if(!pauseMenuIsActive)
             {
-                Time.timeScale = 0;
-                pauseMenu.SetActive(true);
+                Time.timeScale = 0; //Pause game
+                pauseMenu.SetActive(true); 
                 foreach (GameObject go in toDisable)
                 {
                     go.SetActive(false);
@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1;
+                Time.timeScale = 1; //Continue Game
                 foreach (GameObject go in toDisable)
                 {
                     go.SetActive(true);
@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeButton()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1; //Continue game
         foreach (GameObject go in toDisable)
         {
             go.SetActive(true);

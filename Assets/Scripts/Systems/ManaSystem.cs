@@ -9,7 +9,7 @@ public class ManaSystem : MonoBehaviour
     [SerializeField] private float passiveManaRegen;
 
     public float manaOnHitRecoverAmmount = 20;
-    public ManaBar manaBar;
+    public ManaBar manaBar; //UI Manabar
 
     IEnumerator manaRecovery;
 
@@ -17,9 +17,11 @@ public class ManaSystem : MonoBehaviour
     {
         characterStats = GetComponent<CharacterStats>();
 
+        //Set original Mana values
         maxMana = characterStats.GetMaxMana();
         currentMana = maxMana;
 
+        //Set Mana values to UI
         manaBar.SetMaxMana(maxMana); 
         manaBar.SetCurrentMana(currentMana);
     }
@@ -29,6 +31,7 @@ public class ManaSystem : MonoBehaviour
         currentMana -= manaAmmount;
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
+        //Start passive mana recover after using Mana
         if (manaRecovery != null)
         {
             StopCoroutine(manaRecovery);
@@ -42,6 +45,7 @@ public class ManaSystem : MonoBehaviour
         currentMana += manaOnHitRecoverAmmount;
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
+        //Update UI
         manaBar.SetCurrentMana(currentMana);
     }
 
@@ -52,7 +56,8 @@ public class ManaSystem : MonoBehaviour
             currentMana += passiveManaRegen * Time.deltaTime;
             currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
-            manaBar?.SetCurrentMana(currentMana);
+            //Update UI
+            manaBar.SetCurrentMana(currentMana);
 
             yield return null;
         }

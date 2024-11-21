@@ -6,6 +6,7 @@ public class CharacterStats_PlayerStats : CharacterStats
 
     private void Start()
     {
+        //Set Start values for UI
         healthBar.SetMaxHealth(GetMaxHealth());
         healthBar.SetCurrentHealth(GetCurrentHealth());
     }
@@ -14,6 +15,7 @@ public class CharacterStats_PlayerStats : CharacterStats
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
 
+        //Update UI
         healthBar.SetCurrentHealth(GetCurrentHealth());
 
         if (GetCurrentHealth() <= 0)

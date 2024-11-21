@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: -136397113228576530}
   - component: {fileID: -5892868005573375593}
   - component: {fileID: 8445912197333104168}
+  - component: {fileID: 3012029268623363483}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -293,6 +294,8 @@ MonoBehaviour:
   level: 1
   experienceNeeded: 0
   currentExperience: 0
+  experienceBar: {fileID: 0}
+  levelText: {fileID: 0}
   baseXP: 50
   increment: 20
   multiplier: 5
@@ -327,6 +330,8 @@ MonoBehaviour:
   fireResistance: 0
   iceResistance: 0
   electricResistance: 0
+  currentElement: 0
+  healthBar: {fileID: 0}
 --- !u!114 &8445912197333104168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +346,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashDistance: 10
   dashDuration: 0.25
+  dashIsActive: 0
+--- !u!114 &3012029268623363483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777497927225088024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6596820d85070d446b991e0622cf273a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4730023678267145898
 GameObject:
   m_ObjectHideFlags: 0

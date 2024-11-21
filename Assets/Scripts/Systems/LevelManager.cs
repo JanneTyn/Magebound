@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 
     public ExperienceBar experienceBar;
     public LevelText levelText;
+    public UpgradeWindow upgradeWindow;
 
     // Variables for the XP formula
     [SerializeField] private int baseXP = 50; // Base XP for level 1
@@ -21,6 +22,7 @@ public class LevelManager : MonoBehaviour
     {
         experienceNeeded = CalculateExperienceNeeded(level);
 
+        //Set Start values and Level to UI
         experienceBar.SetExperienceNeeded(experienceNeeded);
         experienceBar.SetCurrentExperience(currentExperience);
         levelText.setLevel(level.ToString());
@@ -31,8 +33,10 @@ public class LevelManager : MonoBehaviour
         currentExperience += experienceAmmount;
         Debug.Log("Gained " +  experienceAmmount + " of experience");
 
+        //Check if enough exp, level up
         if (currentExperience >= experienceNeeded) { LevelUp(); }
 
+        //Update UI
         experienceBar.SetCurrentExperience(currentExperience);
     }
 
@@ -41,11 +45,14 @@ public class LevelManager : MonoBehaviour
         currentExperience -= experienceNeeded;
         level++;
         
+        //Update UI
         levelText.setLevel(level.ToString());
 
         experienceNeeded = CalculateExperienceNeeded(level);
 
         experienceBar.SetExperienceNeeded(experienceNeeded);
+
+        upgradeWindow.OpenUpgradeWindow();
     }
 
     private int CalculateExperienceNeeded(int level)
