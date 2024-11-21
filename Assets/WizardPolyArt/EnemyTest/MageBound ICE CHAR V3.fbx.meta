@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ICE_IDLE_LOOP (1)
-      takeName: ICE_IDLE_LOOP
+      name: ICE_ATTACK_SPIN
+      takeName: ICE_ATTACK_SPIN
       internalID: -8281544583906860448
       firstFrame: 0
-      lastFrame: 180
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
