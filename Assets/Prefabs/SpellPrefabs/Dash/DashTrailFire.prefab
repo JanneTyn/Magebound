@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4536906082644513800}
   - component: {fileID: 6216903264728699388}
   - component: {fileID: 1088924018646347904}
+  - component: {fileID: -8185806311786221969}
   m_Layer: 0
   m_Name: DashTrailFire
   m_TagString: Untagged
@@ -136,3 +137,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.01, z: 1}
   m_Center: {x: -2, y: 0, z: 0}
+--- !u!114 &-8185806311786221969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979670671004471724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19afdb8fd6ea0940a4d0244741ee5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  giveStatus: 0
+  statusID: 0
+  spellID: 0
+  ElementID: 0
+  projectileSpeed: 8
+  travelDistance: 20
+  overlappableEffectID: 
+  dashFinished: 0
+  trailLifeWait: 0
