@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -45,7 +46,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenuButton()
     {
-        //Implement shift to MainMenu when made
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ExitButton()
