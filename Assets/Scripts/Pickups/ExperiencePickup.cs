@@ -4,6 +4,7 @@ public class ExperiencePickup : MonoBehaviour
 {
     public int speed = 10;
     public int experienceAmmount = 20;
+    public int pointAmmount = 420;
     private GameObject player;
     
 
@@ -30,6 +31,7 @@ public class ExperiencePickup : MonoBehaviour
         if (other.GetComponent<LevelManager>() != null)
         {
             player.GetComponent<LevelManager>().GainExperience(experienceAmmount);
+            player.GetComponent<CharacterStats_PlayerStats>().GainPoints(pointAmmount);
             Destroy(this.gameObject);
         }
         else
