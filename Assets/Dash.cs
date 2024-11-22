@@ -27,6 +27,8 @@ public class Dash : MonoBehaviour
         var t = 0f;
         dashIsActive = true;
         transform.LookAt(targetLocation);
+        dashEffect.transform.LookAt(targetLocation);
+        dashEffect.transform.Rotate(0, 180, 0);
         while (t < 1)
         {
             t += Time.deltaTime / dashDuration;
@@ -37,5 +39,6 @@ public class Dash : MonoBehaviour
 
             yield return null;
         }
+        dashEffect.GetComponent<SpellDash>().dashFinished = true;
     }
 }
