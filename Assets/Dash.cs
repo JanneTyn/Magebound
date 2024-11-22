@@ -13,10 +13,13 @@ public class Dash : MonoBehaviour
          Vector3 vectorDist = targetLocation - playerLocation;
          vectorDist.Normalize();
          targetLocation = playerLocation + (dashDistance * vectorDist);
-
-        GameObject dashEffect = Instantiate(DashFirePrefab, playerLocation, Quaternion.identity);
-        dashEffect.transform.position = new Vector3(playerLocation.x, 0, playerLocation.z);
-        if (!dashIsActive) StartCoroutine(DashActive(playerLocation, targetLocation, dashEffect));
+        
+        if (!dashIsActive)
+        {
+            GameObject dashEffect = Instantiate(DashFirePrefab, playerLocation, Quaternion.identity);
+            dashEffect.transform.position = new Vector3(playerLocation.x, 0, playerLocation.z);
+            StartCoroutine(DashActive(playerLocation, targetLocation, dashEffect));
+        }
     }
 
     IEnumerator DashActive(Vector3 playerLocation, Vector3 targetLocation, GameObject dashEffect)
