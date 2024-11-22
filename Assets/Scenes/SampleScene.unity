@@ -1866,6 +1866,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1574060716149685699, guid: a833c470dab562a45827b9f6686e2697, type: 3}
+      propertyPath: manaBar
+      value: 
+      objectReference: {fileID: 592648641}
     - target: {fileID: 2162552564429031551, guid: a833c470dab562a45827b9f6686e2697, type: 3}
       propertyPath: m_IsTrigger
       value: 0
