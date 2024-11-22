@@ -15,6 +15,7 @@ public class Dash : MonoBehaviour
          targetLocation = playerLocation + (dashDistance * vectorDist);
 
         GameObject dashEffect = Instantiate(DashFirePrefab, playerLocation, Quaternion.identity);
+        dashEffect.transform.position = new Vector3(playerLocation.x, 0, playerLocation.z);
         if (!dashIsActive) StartCoroutine(DashActive(playerLocation, targetLocation, dashEffect));
     }
 
@@ -29,7 +30,7 @@ public class Dash : MonoBehaviour
             if (t > 1) { t = 1; dashIsActive = false; }
 
             transform.position = Vector3.Lerp(playerLocation, targetLocation, t);
-            dashEffect.transform.position = transform.position;
+            dashEffect.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
 
             yield return null;
         }
