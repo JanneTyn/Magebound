@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3012029268623363483}
   - component: {fileID: 4062857874348230946}
   - component: {fileID: 1574060716149685699}
+  - component: {fileID: 7366495836035966625}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -335,6 +336,7 @@ MonoBehaviour:
   electricResistance: 0
   currentElement: 0
   healthBar: {fileID: 0}
+  points: 0
 --- !u!114 &8445912197333104168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +395,21 @@ MonoBehaviour:
   passiveManaRegen: 20
   manaOnHitRecoverAmmount: 20
   manaBar: {fileID: 0}
+--- !u!114 &7366495836035966625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777497927225088024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c817890a5f2874898a1f7899a9097a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCooldownDuration: 2
+  uiSettings:
+    skillIconsParent: {fileID: 0}
 --- !u!1 &4730023678267145898
 GameObject:
   m_ObjectHideFlags: 0

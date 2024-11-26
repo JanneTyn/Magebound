@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool leftMovement = false;
     private Vector3 newLoc;
     private Dash dash;
+
 
     void Start()
     {
@@ -58,18 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (UnityEngine.Input.GetKey("1"))
-        {
-            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(1);
-        }
-        if (UnityEngine.Input.GetKey("2"))
-        {
-            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(2);
-        }
-        if (UnityEngine.Input.GetKey("3"))
-        {
-            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(3);
-        }
+
     }
 
     private void OnCollisionEnter(Collision collision)

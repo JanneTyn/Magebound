@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitButton()
     {
-        EditorApplication.isPlaying = false;
+        //EditorApplication.isPlaying = false; //Comment this line before building
         Application.Quit();
 
     }
