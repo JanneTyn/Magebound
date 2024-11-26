@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28708f3a563b6494d9973ea6fbeba43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8155449686368741564, guid: 2cbf9a0f0c255c346a3682ff31adff0f, type: 3}
+  iceEnemyPrefab: {fileID: 8155449686368741564, guid: 2cbf9a0f0c255c346a3682ff31adff0f, type: 3}
+  fireEnemyPrefab: {fileID: 3266664533847300665, guid: 35ade1d0afbde8d438a165eb1ebecc56, type: 3}
+  electricEnemyPrefab: {fileID: 8281266788715662994, guid: 70893e20407bf014ab0dc504d314a27e, type: 3}
   spawnpointsObject: {fileID: 1019056181586122014, guid: a61f253a75db08e4b948081db8db62db, type: 3}
