@@ -17,7 +17,7 @@ public class Dash : MonoBehaviour
         if (!dashIsActive)
         {
             GameObject dashEffect = Instantiate(DashFirePrefab, playerLocation, Quaternion.identity);
-            dashEffect.transform.position = new Vector3(playerLocation.x, 0, playerLocation.z);
+            dashEffect.transform.position = new Vector3(playerLocation.x, 1, playerLocation.z);
             StartCoroutine(DashActive(playerLocation, targetLocation, dashEffect));
         }
     }
@@ -39,6 +39,7 @@ public class Dash : MonoBehaviour
 
             yield return null;
         }
+        dashEffect.GetComponent<BoxCollider>().enabled = true; //to prevent dmg happening in front of player during dash
         dashEffect.GetComponent<SpellDash>().dashFinished = true;
     }
 }
