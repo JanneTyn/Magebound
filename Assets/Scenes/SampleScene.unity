@@ -1174,9 +1174,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
+      propertyPath: iceEnemyPrefab
+      value: 
+      objectReference: {fileID: 8155449686368741564, guid: 2cbf9a0f0c255c346a3682ff31adff0f, type: 3}
+    - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
+      propertyPath: fireEnemyPrefab
+      value: 
+      objectReference: {fileID: 3266664533847300665, guid: 35ade1d0afbde8d438a165eb1ebecc56, type: 3}
+    - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
       propertyPath: spawnpointsObject
       value: 
       objectReference: {fileID: 885835259}
+    - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
+      propertyPath: electricEnemyPrefab
+      value: 
+      objectReference: {fileID: 8281266788715662994, guid: 70893e20407bf014ab0dc504d314a27e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

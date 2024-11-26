@@ -5,13 +5,17 @@ using Unity.VisualScripting;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject iceEnemyPrefab;
+    public GameObject fireEnemyPrefab;
+    public GameObject electricEnemyPrefab;
     public GameObject spawnpointsObject;
-    private float spawnDelay = 1f; //Wait for the initial spawn delay
+
+    private float spawnDelay = 1f; //Initial spawn delay
     private float spawnInterval = 2.5f;
     private int enemiesSpawned = 0;
     private List<Transform> spawnPoints = new List<Transform>();
     private int lastSpawnIndex = -1;
+    private GameObject lastSpawnedPrefab = null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
         //Endless enemy spawns
         //while (true)
-        while (enemiesSpawned < 1)
+        while (enemiesSpawned < 10)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(spawnInterval);
@@ -40,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (enemyPrefab != null && spawnPoints.Count > 0)
+        if (iceEnemyPrefab != null && fireEnemyPrefab != null && electricEnemyPrefab != null && spawnPoints.Count > 0)
         {
             int spawnIndex;
 
@@ -51,9 +55,23 @@ public class EnemySpawner : MonoBehaviour
             } while (spawnIndex == lastSpawnIndex); //Repeat if same as last one
 
             Transform spawnLocation = spawnPoints[spawnIndex];
-            Instantiate(enemyPrefab, spawnLocation.position, Quaternion.identity);
-            enemiesSpawned++;
             lastSpawnIndex = spawnIndex;
+
+            //Randomly select an enemy prefab and make sure it's not same as last one.
+            GameObject[] enemyPrefabs = {iceEnemyPrefab, fireEnemyPrefab, electricEnemyPrefab};
+            GameObject selectedPrefab;
+
+            do
+            {
+                selectedPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            } while (selectedPrefab == lastSpawnedPrefab);
+
+            //Spawn the selected enemy prefab
+            //Instantiate(selectedPrefab, spawnLocation.position, Quaternion.identity);
+            Instantiate(electricEnemyPrefab, spawnLocation.position, Quaternion.identity);
+            lastSpawnedPrefab = selectedPrefab;
+            enemiesSpawned++;
+            
         }
         else
         {
