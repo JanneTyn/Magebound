@@ -1,104 +1,91 @@
 using System.Collections;
+
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private float attackRange = 3f;
+    private float attackRange = 2f;
     private float attackCooldown = 3f;
     private float lastAttackTime = 0f;
     private float attackDamage = 50f;
-    
-    private Transform player;
-    public GameObject hand;
-    public LayerMask playerLayerMask; //Might not be needed if everything is in the same layer
 
-    private EnemyHandOverlapCheck handOverlapCheck; //Used for checking if enemies hand hits player
-    private bool hasDamagedPlayer = false;
+    private Transform player;
+    public LayerMask playerLayerMask;
+    private Animator animator;
+
+    public Vector3 attackSize = new Vector3(1f, 1f, 2f);
+    public Vector3 attackCenterOffset = new Vector3(0f, 1f, 0f);
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        animator = GetComponent<Animator>();
 
-        if (hand != null)
-        {
-            handOverlapCheck = hand.GetComponent<EnemyHandOverlapCheck>();
-            if (handOverlapCheck == null)
-            {
-                Debug.LogError("EnemyAttack.cs: EnemyHandOverlapCheck component not found on hand.");
-            }
-        }
-        else
-        {
-            Debug.LogError("EnemyAttack.cs: Hand == null.");
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         if (player == null)
         {
             Debug.LogWarning("EnemyAttack.cs: Player not found!");
             return;
         }
 
+        if (animator == null)
+        {
+            Debug.LogWarning("EnemyAttack.cs: Animator == null");
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange )
+        if (distanceToPlayer <= attackRange)
         {
             if (Time.time - lastAttackTime >= attackCooldown)
             {
+                Debug.Log("EnemyAttack.cs: Calling Attack() method");
                 Attack();
-                lastAttackTime = Time.time;
             }
         }
     }
 
     public void Attack()
     {
-        StartCoroutine(ActivateAndDeactivateAttack());
-        Debug.Log($"Enemy attacked player. Damage: {attackDamage}");
+        TriggerAttackAnimation();
+        lastAttackTime = Time.time;
     }
 
-    IEnumerator ActivateAndDeactivateAttack()
-    {   
-        //TODO:
-        //Add animation
-        //Delete hand.SetActive() stuff (after animation is added)
+    private void TriggerAttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+        StartCoroutine(CheckForPlayerInAttackArea());
+    }
 
-        if (hand != null)
+    private IEnumerator CheckForPlayerInAttackArea()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Vector3 attackCenter = transform.position + attackCenterOffset;
+        Collider[] hitColliders = Physics.OverlapBox(attackCenter, attackSize / 2, Quaternion.identity, playerLayerMask);
+        //Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, playerLayerMask);
+
+        foreach (var hitCollider in hitColliders)
         {
-            hand.SetActive(true);
-
-            if (handOverlapCheck != null)
+            if (hitCollider.CompareTag("Player"))
             {
-                if (handOverlapCheck.IsPlayerInRange() && !hasDamagedPlayer)
+                yield return new WaitForSeconds(0.25f);
+                hitCollider.GetComponent<DamageSystem>().CalculateDamage(attackDamage, false, 0, 2);
+                Debug.Log($"Player hit and damaged! ({attackDamage} HP)");
+
+                //DamageSystem playerDamageSystem = hitCollider.GetComponent<DamageSystem>();
+                /*if (playerDamageSystem != null)
                 {
-                    ApplyDamage();
-                }
+                    playerDamageSystem.CalculateDamage(attackDamage, false, 0, 2);
+                    Debug.Log($"Player hit and damaged! ({attackDamage} HP)");
+                }*/
             }
-
-            yield return new WaitForSeconds(1); //Duration of attack
-            hand.SetActive(false);
-            ResetDamageFlag();
+            else
+            {
+                Debug.LogWarning("EnemyAttack.cs: Player does not have a DamageSystem component.");
+            }
         }
-        else
-        {
-            Debug.LogError("EnemyAttack.cs: Hand GameObject not found.");
-        }
-    }
-
-    void ApplyDamage()
-    {
-        //Check for enemy & player states (Ice, fire or electric) before applying damage
-        //Player loses health, esim:
-        //player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
-        hasDamagedPlayer = true;
-    }
-
-    void ResetDamageFlag()
-    {
-        hasDamagedPlayer = false;
-        Debug.Log("EnemyAttack.cs: Damage flag resetted.");
     }
 }
