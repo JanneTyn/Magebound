@@ -51,7 +51,7 @@ public class CursorTarget : MonoBehaviour
             else
             {
                 fixedPoint.y = player.transform.position.y;
-                player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint);
+                player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
             }
 
         }

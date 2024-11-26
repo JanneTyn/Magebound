@@ -6,9 +6,27 @@ public class SpellDash : SpellEffect
 {
     public bool dashFinished = false;
     public bool trailLifeWait = false;
+    private bool iceActivated = false;
+    private bool thunderActivated = false;
     private string isDashingProperty = "IsDashing";
     private float dmgTimer = 0;
     private void Update()
+    {
+        switch(GetElementID())
+        {
+            case 1:
+                FireTrail();
+                break;
+            case 2:
+                IceFreeze();
+                break;
+            case 3:
+                ThunderStun();
+                break;
+        }
+    }
+
+    private void FireTrail()
     {
         if (dashFinished && !trailLifeWait)
         {
@@ -20,6 +38,52 @@ public class SpellDash : SpellEffect
             StartCoroutine(TrailDuration());
             dashFinished = false;
         }
+    }
+
+    private void IceFreeze()
+    {
+        if (!iceActivated) 
+        {
+            StartCoroutine(IceEffectDuration());
+            iceActivated = true;
+        }
+    }
+
+    private void ThunderStun()
+    {
+        if (!thunderActivated)
+        {
+            StartCoroutine(ThunderEffectDuration());
+            thunderActivated = true;
+        }
+    }
+
+    IEnumerator IceEffectDuration()
+    {
+        float effectLife = GetComponent<VisualEffect>().GetFloat("FreezeTime");
+        Debug.Log("effectlife: " + effectLife);
+        float t = 0;
+
+        while (t < effectLife)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
+    IEnumerator ThunderEffectDuration()
+    {
+        float effectLife = GetComponent<VisualEffect>().GetFloat("StunTime");
+        Debug.Log("effectlife: " + effectLife);
+        float t = 0;
+
+        while (t < effectLife)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     IEnumerator TrailDuration()
