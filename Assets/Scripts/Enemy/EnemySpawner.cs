@@ -67,8 +67,7 @@ public class EnemySpawner : MonoBehaviour
             } while (selectedPrefab == lastSpawnedPrefab);
 
             //Spawn the selected enemy prefab
-            //Instantiate(selectedPrefab, spawnLocation.position, Quaternion.identity);
-            Instantiate(electricEnemyPrefab, spawnLocation.position, Quaternion.identity);
+            Instantiate(selectedPrefab, spawnLocation.position, Quaternion.identity);
             lastSpawnedPrefab = selectedPrefab;
             enemiesSpawned++;
             
