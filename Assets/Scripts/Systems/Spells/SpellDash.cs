@@ -7,6 +7,7 @@ public class SpellDash : SpellEffect
     public bool dashFinished = false;
     public bool trailLifeWait = false;
     private string isDashingProperty = "IsDashing";
+    private float dmgTimer = 0;
     private void Update()
     {
         if (dashFinished && !trailLifeWait)
@@ -32,6 +33,19 @@ public class SpellDash : SpellEffect
             yield return null;
         }
         Destroy(gameObject);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        dmgTimer += Time.deltaTime;
+        if (dmgTimer >= 0.5f)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+            }
+            dmgTimer = 0;
+        }
     }
     public override void CheckOverlap(int o)
     {
