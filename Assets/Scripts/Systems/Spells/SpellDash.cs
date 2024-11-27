@@ -88,7 +88,7 @@ public class SpellDash : SpellEffect
         Destroy(gameObject);
     }
 
-    IEnumerator TrailDuration()
+    public IEnumerator TrailDuration()
     {
         float trailLife = GetComponent<VisualEffect>().GetFloat("TrailLife") - 1;
         float t = 0;

@@ -6,38 +6,82 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 {
     float time = 0;
     float explosionDamageDelayTime = 0.3f;
-    float explosionEffectTime = 1f;
+    public float explosionEffectTime = 1f;
     bool dmgActive = false;
-    bool explosionFin = false;
-    
+    bool collided = false;
+    public bool explosionFin = false;
+    public bool groundSet = false;
+    Vector3 projectileDir;
+    Vector3 playerLocation;
+    private bool directionSet;
+
     // Update is called once per frame
     void Update()
     {
-        if (time > explosionDamageDelayTime && !dmgActive)
+
+        if (directionSet && !collided)
         {
-            GetComponent<BoxCollider>().enabled = true;
-            dmgActive = true;
+            var step = GetBoltSpeed() * Time.deltaTime; // calculate distance to move
+            transform.position = Vector3.MoveTowards(transform.position, projectileDir, step);
+            Debug.Log("projectileDir:" + projectileDir);
         }
-        if (time > explosionEffectTime && !explosionFin)
-        {
-            GetComponent<MeshRenderer>().enabled = false;
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            StartCoroutine(TrailDuration());
-            explosionFin = true;
+
+        float dist = Vector3.Distance(transform.position, playerLocation);
+        if (dist > 2000) { StartCoroutine(InitializeBurningGround()); }
+        else if (transform.position == projectileDir) { StartCoroutine(InitializeBurningGround()); }
+
+        if (explosionFin && groundSet)
+        {        
+            Destroy(gameObject);
         }
-        time += Time.deltaTime;
     }
 
-    IEnumerator TrailDuration()
+    public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
     {
-        float trailLife = GetComponentInChildren<VisualEffect>().GetFloat("TrailLife") - 1;
+        projectileDir = dir;
+        transform.LookAt(projectileDir);
+        directionSet = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            if (GetIsExplosive())
+            {
+                Collider[] enemies = Physics.OverlapSphere(transform.position, GetExplosionRadius(), GetExplosionLayer());
+
+                foreach (Collider enemy in enemies)
+                {
+                    enemy.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                }
+                Debug.Log("Collidedd");
+                collided = true;
+                GetComponent<VisualEffect>().SetBool("IsExploding", true);
+                StartCoroutine(InitializeBurningGround());
+            }
+            else
+            {
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                Destroy(gameObject);
+            }
+        }
+        /* else if (other.CompareTag("SpellEffect"))
+        {
+            otherSpellEffect = other.GetComponent<SpellEffect>();
+            CheckOverlap(other.GetComponent<SpellEffect>().GetSpellID());
+        } */
+    }
+
+    IEnumerator InitializeBurningGround()
+    {
         float t = 0;
 
-        while (t < trailLife)
+        while (t < explosionEffectTime)
         {
             t += Time.deltaTime;
             yield return null;
         }
-        Destroy(gameObject);
+        explosionFin = true;
     }
 }
