@@ -29,14 +29,14 @@ public class Ability_Wall : MonoBehaviour
             rotation = Quaternion.LookRotation(direction);
             rotation = Quaternion.Euler(0f, rotation.eulerAngles.y + 90, 0f);
 
-            midpoint += direction.normalized * 1f;
+            //midpoint += direction.normalized * 1f;
         }
 
         switch(elementID)
         {
             case 1:
 
-                var fireWall = Instantiate(walls[0], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_FireWall>();
+                var fireWall = Instantiate(walls[0], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
                 fireWall.length = (distance - 1f) / 2;
                 fireWall.size = 5;
 
@@ -44,11 +44,18 @@ public class Ability_Wall : MonoBehaviour
 
             case 2:
 
-
+                var iceWall = Instantiate(walls[1], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
+                iceWall.length = (distance - 1f) / 2;
+                iceWall.size = 5;
 
                 break;
             
             case 3:
+
+                var electricWall = Instantiate(walls[2], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
+                electricWall.length = (distance - 1f) / 2;
+                electricWall.size = 5;
+
                 break;
         }
     }

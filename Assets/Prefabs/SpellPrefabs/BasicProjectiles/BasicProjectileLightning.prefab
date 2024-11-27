@@ -182,12 +182,13 @@ MonoBehaviour:
   statusID: 0
   spellID: 301
   ElementID: 3
-  projectileSpeed: 8
-  travelDistance: 20
   overlappableEffectID: 
   lifetime: 0
   isExplosive: 0
+  isOverCharged: 0
   explosionRadius: 0
   explosionLayer:
     serializedVersion: 2
     m_Bits: 0
+  projectileSpeed: 8
+  travelDistance: 20

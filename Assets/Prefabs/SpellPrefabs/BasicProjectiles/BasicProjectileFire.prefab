@@ -217,6 +217,7 @@ MonoBehaviour:
   overlappableEffectID: 
   lifetime: 0
   isExplosive: 0
+  isOverCharged: 0
   explosionRadius: 20
   explosionLayer:
     serializedVersion: 2
