@@ -25,7 +25,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.E))
+        if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.Q))
         {
             GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
             StartCoroutine(GlobalCooldown());
