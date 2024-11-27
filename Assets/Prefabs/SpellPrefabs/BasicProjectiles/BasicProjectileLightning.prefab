@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8205352911127435840}
   m_Layer: 0
   m_Name: BasicProjectileLightning
-  m_TagString: Untagged
+  m_TagString: SpellEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

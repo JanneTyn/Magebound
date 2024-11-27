@@ -29,6 +29,7 @@ public abstract class SpellEffect : MonoBehaviour
         Debug.Log(spellID + "Check overlap = false");
         return false;
     }
+
     public abstract void Activate(int spellID);
 
     public virtual int GetSpellID() { return spellID; }
