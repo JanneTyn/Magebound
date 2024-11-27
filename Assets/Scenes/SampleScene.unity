@@ -130,26 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2461f2d554e8ce447b56ef83864f29e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &320987657 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1058666511257578218, guid: 481bcc03040183f40b631650d3620220, type: 3}
-  m_PrefabInstance: {fileID: 543348908211700231}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &320987660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320987657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20309a1029c782f4886d10b1ac03290e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExplosionFirePrefab: {fileID: 2372955532575742026, guid: 93097d2bd568b3249bd120a3ec97a874, type: 3}
-  ExplosionIcePrefab: {fileID: 0}
-  ExplosionThunderPrefab: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,10 +1372,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1058666511257578218, guid: 481bcc03040183f40b631650d3620220, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 320987660}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 481bcc03040183f40b631650d3620220, type: 3}
 --- !u!1001 &1116310758761585786
 PrefabInstance:
@@ -1994,18 +1971,6 @@ PrefabInstance:
     - target: {fileID: 6569498665281243011, guid: e72367f59a926a4409659288882070eb, type: 3}
       propertyPath: m_Name
       value: PlayerFollow
-      objectReference: {fileID: 0}
-    - target: {fileID: 6690192816761040643, guid: e72367f59a926a4409659288882070eb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 6690192816761040643, guid: e72367f59a926a4409659288882070eb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 6690192816761040643, guid: e72367f59a926a4409659288882070eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
