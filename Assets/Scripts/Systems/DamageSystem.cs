@@ -10,13 +10,13 @@ public class DamageSystem : MonoBehaviour
     {
         characterStats = GetComponent<CharacterStats>();
     }
+
     public void CalculateDamage(float damage, int elementID)
     {
         float finalDamage = calculateElementalDamage(damage, elementID);
 
         characterStats.ApplyDamage(finalDamage);
     }
-
     public void CalculateDamage(float damage, bool applyStatus, int statusID, float statusDuration, int elementID)
     {
         float finalDamage = calculateElementalDamage(damage, elementID);

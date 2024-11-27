@@ -86,7 +86,14 @@ public class StatusManager : MonoBehaviour
 
     private void ApplyFreeze(float duration)
     {
+        if (this.gameObject.CompareTag("Player"))
+        {
 
+        }
+        else if(this.gameObject.CompareTag("Enemy"))
+        {
+
+        }
     }
 
     private IEnumerator ApplyChill(float duration)
