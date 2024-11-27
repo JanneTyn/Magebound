@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterStats_PlayerStats : CharacterStats
 {
@@ -32,6 +33,14 @@ public class CharacterStats_PlayerStats : CharacterStats
 
     private void DeathSequence()
     {
+        //TODO:
+        //Death animation
+
+        Destroy(gameObject);
+        Debug.Log("Player died.");
+
+        //DELETE:
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         throw new System.NotImplementedException();
     }
 }
