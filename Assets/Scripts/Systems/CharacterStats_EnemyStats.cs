@@ -15,6 +15,11 @@ public class CharacterStats_EnemyStats : CharacterStats
     private void DeathSequence()
     {
         Destroy(gameObject);
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+
         Debug.Log("Enemy died!");
     }
 }
