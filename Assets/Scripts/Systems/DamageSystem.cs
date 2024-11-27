@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class DamageSystem : MonoBehaviour
 {
@@ -9,19 +10,50 @@ public class DamageSystem : MonoBehaviour
     {
         characterStats = GetComponent<CharacterStats>();
     }
-    public void CalculateDamage(float damage, bool applyStatus, int statusID, int ElementID)
+    public void CalculateDamage(float damage, int elementID)
+    {
+        float finalDamage = calculateElementalDamage(damage, elementID);
+
+        characterStats.ApplyDamage(finalDamage);
+    }
+
+    public void CalculateDamage(float damage, bool applyStatus, int statusID, float statusDuration, int elementID)
+    {
+        float finalDamage = calculateElementalDamage(damage, elementID);
+
+        characterStats.ApplyDamage(finalDamage);
+
+        if (applyStatus)
+        {
+            GetComponent<StatusManager>().Activate(statusID, statusDuration);
+        }
+    }
+    public void CalculateDamage(float damage, bool applyStatus, int statusID, float statusDuration, float statusDamage, int elementID)
+    {
+        float finalDamage = calculateElementalDamage(damage, elementID);
+
+        characterStats.ApplyDamage(finalDamage);
+
+        if (applyStatus)
+        {
+            GetComponent<StatusManager>().Activate(statusID, statusDuration, statusDamage);
+        }
+    }
+
+
+    private float calculateElementalDamage(float damage, int elementID)
     {
         float finalDamage = damage;
 
-        switch (ElementID)
+        switch (elementID)
         {
             //fire
-            case 01: 
+            case 01:
                 finalDamage -= finalDamage * characterStats.GetFireResistance();
                 break;
-            
+
             // Ice
-            case 02: 
+            case 02:
                 finalDamage -= finalDamage * characterStats.GetFireResistance();
                 break;
 
@@ -34,13 +66,7 @@ public class DamageSystem : MonoBehaviour
                 Debug.Log("Error! Should not be here, apply element ID");
                 break;
         }
-        
 
-        characterStats.ApplyDamage(finalDamage);
-
-        if(applyStatus)
-        {
-            GetComponent<StatusManager>().Activate(statusID);
-        }
+        return finalDamage;
     }
 }
