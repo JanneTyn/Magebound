@@ -14,7 +14,10 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
         switch (spellID)
         {
             case 104:
-                this.SetisExplosive(true);
+                this.SetIsExplosive(true);
+                break;
+            case 304:
+                this.SetIsOverCharged(true);
                 break;
         }
     }

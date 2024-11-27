@@ -13,19 +13,23 @@ public abstract class SpellEffect : MonoBehaviour
 
     public virtual bool CheckOverlap(int otherID)
     {
-        bool isOverlap = false;
 
-        foreach (int id in overlappableEffectID)
+        foreach (var id in overlappableEffectID)
         {
             if (id == otherID)
             {
-                isOverlap = true;
-                break;
+                Debug.Log(spellID + " CheckOverlap = true");
+                return true;         
+            }else
+            {
+                Debug.Log(spellID + " CheckOverlap = false");
             }
         }
 
-        return isOverlap;
+        Debug.Log(spellID + "Check overlap = false");
+        return false;
     }
+
     public abstract void Activate(int spellID);
 
     public virtual int GetSpellID() { return spellID; }

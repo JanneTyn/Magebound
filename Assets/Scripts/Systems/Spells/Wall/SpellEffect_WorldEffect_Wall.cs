@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 using UnityEngine.VFX;
 
-public class SpellEffect_WorldEffect_FireWall : SpellEffect_WorldEffect
+public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
 {
     private GameObject parentObject;
     public float length;
@@ -19,13 +20,20 @@ public class SpellEffect_WorldEffect_FireWall : SpellEffect_WorldEffect
     {
         BoxCollider collider = parentObject.GetComponent<BoxCollider>();
 
-        collider.size = new Vector3 (length * 2, size / 2, 1);
+        collider.size = new Vector3 (length * 2, size , 1);
 
         VisualEffect visualEffect = parentObject.GetComponent<VisualEffect>();
 
         visualEffect.SetFloat("Width", length);
         visualEffect.SetFloat("SpikeScale", size);
         visualEffect.SetFloat("Duration", GetDuration());
+
+        if (parentObject.GetComponent<NavMeshObstacle>() != null)
+        {
+            var obstacle = parentObject.GetComponent<NavMeshObstacle>();
+
+            obstacle.size = new Vector3(length * 2, size, 1);
+        }
 
         StartCoroutine(lifecycle());
     }
