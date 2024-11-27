@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7936675705994974584}
   - component: {fileID: 2190913598244950547}
+  - component: {fileID: 2182111763750690051}
   m_Layer: 0
   m_Name: SpellBaseEffect
   m_TagString: Untagged
@@ -49,3 +50,18 @@ MonoBehaviour:
   BasicAttackThunderPrefab: {fileID: 4487233413147765572, guid: 2a058a9863c0dcf488b6df1836c6f358, type: 3}
   BasicAttackToUse: {fileID: 0}
   PreLoadBasicAttackFirePrefab: {fileID: 0}
+--- !u!114 &2182111763750690051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058666511257578218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20309a1029c782f4886d10b1ac03290e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplosionFirePrefab: {fileID: 2372955532575742026, guid: 93097d2bd568b3249bd120a3ec97a874, type: 3}
+  ExplosionIcePrefab: {fileID: 0}
+  ExplosionThunderPrefab: {fileID: 0}

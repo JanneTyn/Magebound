@@ -63,6 +63,7 @@ public class SpellDash : SpellEffect
         float effectLife = GetComponent<VisualEffect>().GetFloat("FreezeTime");
         Debug.Log("effectlife: " + effectLife);
         float t = 0;
+        GetComponent<BoxCollider>().enabled = true;
 
         while (t < effectLife)
         {
@@ -77,6 +78,7 @@ public class SpellDash : SpellEffect
         float effectLife = GetComponent<VisualEffect>().GetFloat("StunTime");
         Debug.Log("effectlife: " + effectLife);
         float t = 0;
+        GetComponent<BoxCollider>().enabled = true;
 
         while (t < effectLife)
         {
@@ -99,16 +101,27 @@ public class SpellDash : SpellEffect
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (GetElementID() == 2 || GetElementID() == 3)
+        {
+            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        dmgTimer += Time.deltaTime;
-        if (dmgTimer >= 0.5f)
+        if (GetElementID() == 1)
         {
-            if (other.CompareTag("Enemy"))
+            dmgTimer += Time.deltaTime;
+            if (dmgTimer >= 0.5f)
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+                if (other.CompareTag("Enemy"))
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+                }
+                dmgTimer = 0;
             }
-            dmgTimer = 0;
         }
     }
 
