@@ -8,25 +8,15 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
     Vector3 projectileDir;
     Vector3 playerLocation;
     private bool directionSet;
-    public override void CheckOverlap(int otherID)
-    {
-        foreach (int spellID in overlappableEffectID)
-        {
-            if (otherID == spellID)
-            {
-                Activate(otherID);
-
-                break;
-            }
-        }
-    }
 
     public override void Activate(int spellID)
     {
-        //if needed
-        //otherSpellEffect.Activate(spellID);
-
-        //And what this one does
+        switch (spellID)
+        {
+            case 104:
+                this.SetisExplosive(true);
+                break;
+        }
     }
 
     void Update()

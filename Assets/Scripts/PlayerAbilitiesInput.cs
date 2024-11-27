@@ -25,7 +25,11 @@ public class PlayerAbilitiesInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.E))
+        {
+            GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
+            StartCoroutine(GlobalCooldown());
+        }
     }
 
     private void FixedUpdate()
@@ -36,27 +40,28 @@ public class PlayerAbilitiesInput : MonoBehaviour
         {
             GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(1);
             uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(1);
-            StartCoroutine(GlobalCooldown(globalCooldownDuration));
+            StartCoroutine(GlobalCooldown());
         }
         if (!isGlobalCooldownActive && Input.GetKey("2"))
         {
             GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(2);
             uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(2);
-            StartCoroutine(GlobalCooldown(globalCooldownDuration));
+            StartCoroutine(GlobalCooldown());
         }
         if (!isGlobalCooldownActive && Input.GetKey("3"))
         {
             GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(3);
             uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(3);
-            StartCoroutine(GlobalCooldown(globalCooldownDuration));
+            StartCoroutine(GlobalCooldown());
         }
+
     }
 
-    private IEnumerator GlobalCooldown(float duration)
+    private IEnumerator GlobalCooldown()
     {
         isGlobalCooldownActive = true;
-        uiSettings.skillIconsParent.GetComponent<SkillIconParent>().StartGlobalCooldown(duration);
-        yield return new WaitForSeconds(duration);
+        uiSettings.skillIconsParent.GetComponent<SkillIconParent>().StartGlobalCooldown(globalCooldownDuration);
+        yield return new WaitForSeconds(globalCooldownDuration);
         isGlobalCooldownActive = false;
     }
 }

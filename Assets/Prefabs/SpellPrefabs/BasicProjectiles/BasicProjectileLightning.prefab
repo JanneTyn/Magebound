@@ -180,7 +180,7 @@ MonoBehaviour:
   damage: 50
   giveStatus: 0
   statusID: 0
-  spellID: 1
+  spellID: 301
   ElementID: 3
   projectileSpeed: 8
   travelDistance: 20

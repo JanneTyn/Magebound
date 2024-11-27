@@ -177,7 +177,7 @@ MonoBehaviour:
   damage: 50
   giveStatus: 0
   statusID: 0
-  spellID: 1
+  spellID: 201
   ElementID: 2
   projectileSpeed: 8
   travelDistance: 20

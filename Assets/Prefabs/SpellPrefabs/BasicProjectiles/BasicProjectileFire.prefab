@@ -212,14 +212,14 @@ MonoBehaviour:
   damage: 50
   giveStatus: 0
   statusID: 0
-  spellID: 1
+  spellID: 101
   ElementID: 1
-  projectileSpeed: 8
-  travelDistance: 20
   overlappableEffectID: 
   lifetime: 0
   isExplosive: 0
-  explosionRadius: 0
+  explosionRadius: 20
   explosionLayer:
     serializedVersion: 2
     m_Bits: 0
+  projectileSpeed: 8
+  travelDistance: 20
