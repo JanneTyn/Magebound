@@ -32,10 +32,8 @@ public class Dash : MonoBehaviour
                     dashEffectIce.transform.position = new Vector3(playerLocation.x, 0.1f, playerLocation.z);
                     StartCoroutine(IceDashActive(playerLocation, targetLocation, dashEffectIce));
                     break;
-                case 3:
-                    GameObject dashEffectThunder = Instantiate(DashThunderPrefab, playerLocation, Quaternion.identity);
-                    dashEffectThunder.transform.position = new Vector3(playerLocation.x, 0.1f, playerLocation.z);
-                    StartCoroutine(IceDashActive(playerLocation, targetLocation, dashEffectThunder));
+                case 3:                   
+                    StartCoroutine(ThunderDashActive(playerLocation, targetLocation));
                     break;
 
                 default:
@@ -82,5 +80,23 @@ public class Dash : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    IEnumerator ThunderDashActive(Vector3 playerLocation, Vector3 targetLocation)
+    {
+        var t = 0f;
+        dashIsActive = true;
+        transform.LookAt(targetLocation);
+        while (t < 1)
+        {
+            t += Time.deltaTime / dashDuration;
+            if (t > 1) { t = 1; dashIsActive = false; }
+
+            transform.position = Vector3.Lerp(playerLocation, targetLocation, t);
+
+            yield return null;
+        }
+        GameObject dashEffectThunder = Instantiate(DashThunderPrefab, transform.position, Quaternion.identity);
+        dashEffectThunder.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
     }
 }
