@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 1574060716149685699}
   - component: {fileID: 7366495836035966625}
   - component: {fileID: 217135097968322971}
-  - component: {fileID: 1426408748612421805}
+  - component: {fileID: -3541707250020787797}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858317554fcfaf049ac364521d629deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1426408748612421805
+--- !u!114 &-3541707250020787797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,12 +436,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 777497927225088024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcea0cb3c537d7249bc56314d476af45, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e47352debd20cc4888c2346a0235389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveManaRegen: 20
-  manaOnHitRecoverAmmount: 20
-  manaBar: {fileID: 0}
+  walls: []
+  cam: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4730023678267145898
 GameObject:
   m_ObjectHideFlags: 0

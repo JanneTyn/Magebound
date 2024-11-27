@@ -9,6 +9,7 @@ public class CursorTarget : MonoBehaviour
     public Vector2 hotSpot = Vector2.zero;
     public float rotationLockTime = 0.3f;
     private SpellBaseEffect spellEffect;
+    private SpellExplosion spellExplosion;
     private GameObject player;
     private Vector3 attackTarget;
     private Camera cam;
@@ -22,6 +23,7 @@ public class CursorTarget : MonoBehaviour
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         cam = GetComponent<Camera>();
         spellEffect = GameObject.Find("SpellBaseEffect").GetComponent<SpellBaseEffect>();
+        spellExplosion = GameObject.Find("SpellBaseEffect").GetComponent<SpellExplosion>();
         player = GameObject.Find("Player");
     }
 
@@ -29,11 +31,12 @@ public class CursorTarget : MonoBehaviour
     {
         ray = cam.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
-        if (Input.GetMouseButtonDown(0)) AttackPrepare(false);
-        else if (Input.GetMouseButtonDown(1)) AttackPrepare(true);
+        if (Input.GetMouseButtonDown(0)) AttackPrepare(0);
+        else if (Input.GetMouseButtonDown(1)) AttackPrepare(1);
+        else if (Input.GetKeyDown(KeyCode.E)) AttackPrepare(2);
     }
 
-    void AttackPrepare(bool isDash)
+    void AttackPrepare(int attackID)
     {
         if (!CheckForTarget())
         {
@@ -43,17 +46,20 @@ public class CursorTarget : MonoBehaviour
         else
         {
             Debug.Log("Ground target hit");
-            if (!isDash) 
+            switch (attackID)
             {
-                spellEffect.InitializeProjectile(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement()); 
-                StartCoroutine(RotationLockOnTarget(fixedPoint));
+                case 0: //projectile
+                    spellEffect.InitializeProjectile(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                    StartCoroutine(RotationLockOnTarget(fixedPoint));
+                    break;
+                case 1: //Dash
+                    fixedPoint.y = player.transform.position.y;
+                    player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                    break;
+                case 2: //explosion
+                    spellExplosion.InitializeExplosion(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                    break;
             }
-            else
-            {
-                fixedPoint.y = player.transform.position.y;
-                player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
-            }
-
         }
     }
 
