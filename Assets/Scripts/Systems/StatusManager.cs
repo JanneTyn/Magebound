@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class StatusManager : MonoBehaviour
+public class StatusManager : MonoBehaviour, IStatusVariables
 {
+    public float speed { get; set; }
     public void Activate(int statusID, float duration)
     {
         switch (statusID)
@@ -84,53 +85,132 @@ public class StatusManager : MonoBehaviour
         }
     }
 
+
+
     private void ApplyFreeze(float duration)
     {
         if (this.gameObject.CompareTag("Player"))
         {
-
-        }
-        else if(this.gameObject.CompareTag("Enemy"))
-        {
-
-        }
-    }
-
-    private IEnumerator ApplyChill(float duration)
-    {
-        float elapsedTime = 0;
-        if (this.gameObject.CompareTag("Player"))
-        {
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-
-                this.gameObject.GetComponent<PlayerMovement>().movementSpeed /= 2;
-
-                yield return null;
-            }
-
-            this.gameObject.GetComponent<PlayerMovement>().movementSpeed *= 2;
+            StartCoroutine(Freeze<PlayerMovement>(duration));
+            StartCoroutine(Freeze<PlayerAbilitiesInput>(duration));
         }
         else if (this.gameObject.CompareTag("Enemy"))
         {
-            while ( elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
+            StartCoroutine(Freeze<EnemyAI>(duration));
+        }
+    }
 
-                this.gameObject.GetComponent<NavMeshAgent>().speed /= 2;
+    private void ApplyChill(float duration)
+    {
+        if (this.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(Chill<PlayerMovement>(duration));
+        }
+        else if (this.gameObject.CompareTag("Enemy"))
+        {
+            StartCoroutine(Chill<NavMeshAgentWrapper>(duration));
 
-                yield return null;
-            }
-
-            this.gameObject.GetComponent<NavMeshAgent>().speed *= 2;
         }
 
     }
-    private void ApplyStun(float duration)
-    {
 
+    private IEnumerator Chill<T>(float duration) where T : Behaviour, IStatusVariables
+    {
+        T component = this.GetComponent<T>();
+        float originalSpeed = component.speed;
+
+        if (component != null)
+        {
+            component.speed = originalSpeed / 10;
+
+            yield return new WaitForSeconds(duration);
+
+            component.speed = originalSpeed;
+        }
     }
 
-    
+    private void ApplyStun(float duration)
+    {
+        if (this.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(Stun<PlayerMovement>(duration));
+            StartCoroutine(Stun<PlayerAbilitiesInput>(duration));
+        }
+        else if (this.gameObject.CompareTag("Enemy"))
+        {
+            StartCoroutine(Stun<EnemyAI>(duration));
+        }
+    }
+
+
+
+    private IEnumerator Freeze<T>(float duration) where T : Behaviour
+    {
+        T component = this.GetComponent<T>();
+        NavMeshAgent navAgent = GetComponent<NavMeshAgent>();
+
+        if (component != null)
+        {
+            if(navAgent != null)
+            {
+                navAgent.isStopped = true;
+                navAgent.velocity = Vector3.zero;
+            }
+
+            component.enabled = false;
+
+            yield return new WaitForSeconds(duration);
+
+            component.enabled = true;
+
+            if (navAgent != null)
+            {
+                navAgent.isStopped = false;
+            }
+        }
+    }
+    private IEnumerator Stun<T>(float duration) where T : Behaviour
+    {
+        T component = this.GetComponent<T>();
+        NavMeshAgent navAgent = GetComponent<NavMeshAgent>();
+        
+        float elapsedTime = 0;
+
+
+        if (component != null)
+        {
+            while (elapsedTime < duration)
+            {
+                if (navAgent != null)
+                {
+                    navAgent.isStopped = true;
+                    navAgent.velocity = Vector3.zero;
+                }
+
+                component.enabled = false;
+
+                yield return new WaitForSeconds(duration / 10);
+                elapsedTime += duration / 10;
+
+                component.enabled = true;
+
+                if (navAgent != null)
+                {
+                    navAgent.isStopped = false;
+                }
+
+                yield return new WaitForSeconds(duration / 5);
+
+                elapsedTime += duration / 5;
+            }
+
+            component.enabled = true;
+
+            if (navAgent != null)
+            {
+                navAgent.isStopped = false;
+            }
+        }
+    }
+
 }
