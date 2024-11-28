@@ -33,8 +33,8 @@ public class SpellExplosion : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        GameObject dashEffect = Instantiate(DashFirePrefab, targetLocation, Quaternion.identity);
-        dashEffect.transform.position = new Vector3(targetLocation.x, 0, targetLocation.z);
+        GameObject dashEffect = Instantiate(DashFirePrefab, explosion.transform.position, Quaternion.identity);
+        dashEffect.transform.position = new Vector3(explosion.transform.position.x, 0, explosion.transform.position.z);
         StartCoroutine(dashEffect.GetComponent<SpellDash>().TrailDuration());
         dashEffect.GetComponent<BoxCollider>().enabled = true;
         explosion.GetComponent<SpellEffect_Explosion_Fire>().groundSet = true;

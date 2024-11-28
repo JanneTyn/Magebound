@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelMap
       objectReference: {fileID: 0}
+    - target: {fileID: 433565208025928798, guid: 9d8722cf7c5d55d41bee85ae90cab926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 831356281549804839, guid: 9d8722cf7c5d55d41bee85ae90cab926, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -929,6 +933,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1019056181586122014, guid: a61f253a75db08e4b948081db8db62db, type: 3}
   m_PrefabInstance: {fileID: 350046193517770707}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1394560551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 777497927225088024, guid: a833c470dab562a45827b9f6686e2697, type: 3}
+  m_PrefabInstance: {fileID: 8627356881636246513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1394560569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394560551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8b7c31d9748d43b316db5d82c751b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireVortexPrefab: {fileID: 8849572267102682041, guid: e2d01414a2a537c4a9e64e2996dd4e56, type: 3}
+  targetingCirclePrefab: {fileID: 5761501634439072031, guid: 91e0870a96aa14d46ae66abb8906563e, type: 3}
+  range: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  pullRadius: 5
+  pullForce: 10
 --- !u!1 &1409191644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,7 +2299,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 777497927225088024, guid: a833c470dab562a45827b9f6686e2697, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1394560569}
   m_SourcePrefab: {fileID: 100100000, guid: a833c470dab562a45827b9f6686e2697, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
