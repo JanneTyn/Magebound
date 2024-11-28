@@ -88,7 +88,7 @@ public class SpellDash : SpellEffect
         Destroy(gameObject);
     }
 
-    IEnumerator TrailDuration()
+    public IEnumerator TrailDuration()
     {
         float trailLife = GetComponent<VisualEffect>().GetFloat("TrailLife") - 1;
         float t = 0;
@@ -105,7 +105,7 @@ public class SpellDash : SpellEffect
     {
         if (GetElementID() == 2 || GetElementID() == 3)
         {
-            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
         }
     }
 
@@ -118,7 +118,7 @@ public class SpellDash : SpellEffect
             {
                 if (other.CompareTag("Enemy"))
                 {
-                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
                 }
                 dmgTimer = 0;
             }

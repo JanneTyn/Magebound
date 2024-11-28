@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4471143125965601584, guid: 9d8722cf7c5d55d41bee85ae90cab926, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4471143125965601584, guid: 9d8722cf7c5d55d41bee85ae90cab926, type: 3}
       propertyPath: m_LocalPosition.z
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 882825410}
   m_Layer: 10
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -886,7 +886,7 @@ Transform:
   m_GameObject: {fileID: 882825405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1368,6 +1368,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 780619430916702219, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1805280928560897340, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8685641
@@ -1437,45 +1441,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 559824193049193572, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 559824193049193572, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 15.88
-      objectReference: {fileID: 0}
     - target: {fileID: 1019056181586122014, guid: a61f253a75db08e4b948081db8db62db, type: 3}
       propertyPath: m_Name
       value: Spawnpoints
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352756959202270640, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -14.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 3711664892443397973, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 3711664892443397973, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032122955419879912, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032122955419879912, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17.506
-      objectReference: {fileID: 0}
-    - target: {fileID: 7413618031384025084, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -28.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 7413618031384025084, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 8498766767194880538, guid: a61f253a75db08e4b948081db8db62db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1534,6 +1502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpellBaseEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 2182111763750690051, guid: 481bcc03040183f40b631650d3620220, type: 3}
+      propertyPath: DashFirePrefab
+      value: 
+      objectReference: {fileID: 1979670671004471724, guid: c10358af85b41844b9c1fc08acbb2504, type: 3}
     - target: {fileID: 7936675705994974584, guid: 481bcc03040183f40b631650d3620220, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.3029184

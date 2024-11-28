@@ -5,8 +5,11 @@ public class Ability_Wall : MonoBehaviour
     [SerializeField] private GameObject[] walls;
     [SerializeField] private Camera cam;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float maxWallSize = 10f;
+    [SerializeField] private float minWallSize = 3f;
     private float distance;
     private Vector3 midpoint;
+    private Vector3 spawnPosition;
     private Vector3 direction;
     private Quaternion rotation;
 
@@ -24,10 +27,12 @@ public class Ability_Wall : MonoBehaviour
 
             midpoint = (transform.position + hitInfo.point) / 2;
 
+            spawnPosition = hitInfo.point;
+
             direction = hitInfo.point - transform.position;
 
             rotation = Quaternion.LookRotation(direction);
-            rotation = Quaternion.Euler(0f, rotation.eulerAngles.y + 90, 0f);
+            rotation = Quaternion.Euler(0f, rotation.eulerAngles.y, 0f);
 
             //midpoint += direction.normalized * 1f;
         }
@@ -36,8 +41,8 @@ public class Ability_Wall : MonoBehaviour
         {
             case 1:
 
-                var fireWall = Instantiate(walls[0], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
-                fireWall.length = (distance - 1f) / 2;
+                var fireWall = Instantiate(walls[0], spawnPosition, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
+                fireWall.length = Mathf.Clamp((distance - 1f) / 2, minWallSize, maxWallSize);
                 fireWall.size = 5;
 
                 break;
@@ -45,7 +50,7 @@ public class Ability_Wall : MonoBehaviour
             case 2:
 
                 var iceWall = Instantiate(walls[1], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
-                iceWall.length = (distance - 1f) / 2;
+                iceWall.length = Mathf.Clamp((distance - 1f) / 2, minWallSize, maxWallSize);
                 iceWall.size = 5;
 
                 break;
@@ -53,7 +58,7 @@ public class Ability_Wall : MonoBehaviour
             case 3:
 
                 var electricWall = Instantiate(walls[2], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
-                electricWall.length = (distance - 1f) / 2;
+                electricWall.length = Mathf.Clamp((distance - 1f) / 2, minWallSize, maxWallSize);
                 electricWall.size = 5;
 
                 break;

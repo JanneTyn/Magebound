@@ -42,8 +42,9 @@ public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
-        } else if (other.gameObject.CompareTag("SpellEffect"))
+            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+        } 
+        else if (other.gameObject.CompareTag("SpellEffect"))
         {
             if (CheckOverlap(other.GetComponent<SpellEffect>().GetSpellID()))
             {
