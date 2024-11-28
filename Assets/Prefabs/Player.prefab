@@ -444,6 +444,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  maxWallSize: 10
+  minWallSize: 1.5
 --- !u!1 &4730023678267145898
 GameObject:
   m_ObjectHideFlags: 0
