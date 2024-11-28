@@ -65,4 +65,4 @@ MonoBehaviour:
   ExplosionFirePrefab: {fileID: 8567131400130850514, guid: a5da36f900a742d478294b91404c1e6e, type: 3}
   ExplosionIcePrefab: {fileID: 0}
   ExplosionThunderPrefab: {fileID: 0}
-  DashFirePrefab: {fileID: 0}
+  DashFirePrefab: {fileID: 1979670671004471724, guid: 9b92acd3b2d240440a4f924c88940013, type: 3}
