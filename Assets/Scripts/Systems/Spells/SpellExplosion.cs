@@ -10,7 +10,6 @@ public class SpellExplosion : MonoBehaviour
     public GameObject DashFirePrefab; //used for burning ground, replacable
     public void InitializeExplosion(Vector3 playerLocation, Vector3 targetLocation, int element)
     {
-        targetLocation.y += 2f;
         switch (element)
         {
             case 1:
