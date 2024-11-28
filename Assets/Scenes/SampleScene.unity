@@ -1437,45 +1437,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 559824193049193572, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 559824193049193572, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 15.88
-      objectReference: {fileID: 0}
     - target: {fileID: 1019056181586122014, guid: a61f253a75db08e4b948081db8db62db, type: 3}
       propertyPath: m_Name
       value: Spawnpoints
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352756959202270640, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -14.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 3711664892443397973, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 3711664892443397973, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032122955419879912, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032122955419879912, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17.506
-      objectReference: {fileID: 0}
-    - target: {fileID: 7413618031384025084, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -28.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 7413618031384025084, guid: a61f253a75db08e4b948081db8db62db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 8498766767194880538, guid: a61f253a75db08e4b948081db8db62db, type: 3}
       propertyPath: m_LocalPosition.x
