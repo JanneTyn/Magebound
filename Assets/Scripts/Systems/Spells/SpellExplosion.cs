@@ -10,7 +10,6 @@ public class SpellExplosion : MonoBehaviour
     public GameObject DashFirePrefab; //used for burning ground, replacable
     public void InitializeExplosion(Vector3 playerLocation, Vector3 targetLocation, int element)
     {
-        targetLocation.y += 2f;
         switch (element)
         {
             case 1:
@@ -34,8 +33,8 @@ public class SpellExplosion : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        GameObject dashEffect = Instantiate(DashFirePrefab, targetLocation, Quaternion.identity);
-        dashEffect.transform.position = new Vector3(targetLocation.x, 0, targetLocation.z);
+        GameObject dashEffect = Instantiate(DashFirePrefab, explosion.transform.position, Quaternion.identity);
+        dashEffect.transform.position = new Vector3(explosion.transform.position.x, 0, explosion.transform.position.z);
         StartCoroutine(dashEffect.GetComponent<SpellDash>().TrailDuration());
         dashEffect.GetComponent<BoxCollider>().enabled = true;
         explosion.GetComponent<SpellEffect_Explosion_Fire>().groundSet = true;
