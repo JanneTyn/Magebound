@@ -1,9 +1,11 @@
 using System.Collections;
-
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VortexTesting : MonoBehaviour
 {
+    public Transform player;
     public GameObject fireVortexPrefab; // The vortex effect prefab
     public GameObject targetingCirclePrefab; // Visual indicator for targeting
     public float range = 10f;
@@ -15,9 +17,11 @@ public class VortexTesting : MonoBehaviour
     private bool isTargeting = false; // Whether the player is in targeting mode
     private Vector3 lastValidPosition; // Stores the last valid position for the targeting circle
 
+
+
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             ActivateTargetingMode();
         }
@@ -31,7 +35,7 @@ public class VortexTesting : MonoBehaviour
         if (isTargeting)
         {
             UpdateTargetingCircle();
-        }*/
+        }
     }
 
     void ActivateTargetingMode()
@@ -97,35 +101,83 @@ public class VortexTesting : MonoBehaviour
 
     IEnumerator VortexEffect(GameObject vortexInstance)
     {
-        float duration = 5f;
+        float duration = 5f; // Duration of the vortex effect
         float timer = 0f;
 
-        while (timer < duration) {
-
+        List<NavMeshAgent> disabledAgents = new List<NavMeshAgent>(); //Keep track of enemy NavMeshAgent disabling & re-enabling
+        
+        while (timer < duration)
+        {
             if (vortexInstance == null)
             {
+                foreach (NavMeshAgent agent in disabledAgents)
+                {
+                    if (agent != null)
+                    {
+                        agent.enabled = true;
+
+                        //Force the agent to recalculate its path
+                        agent.SetDestination(player.position);
+                    }
+                }
                 yield break;
             }
 
             timer += Time.deltaTime;
 
-            //Find all objects within the pull radius
+            // Find all objects within the pull radius
             Collider[] hitColliders = Physics.OverlapSphere(vortexInstance.transform.position, pullRadius);
 
             foreach (Collider hit in hitColliders)
             {
                 if (hit.CompareTag("Enemy"))
                 {
-                    Rigidbody rb = hit.GetComponent<Rigidbody>();
+                    Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
+                    NavMeshAgent agent = hit.GetComponentInChildren<NavMeshAgent>();
+
+                    if (agent != null && agent.enabled)
+                    {
+                        // Disable the NavMeshAgent temporarily for the pull effect
+                        agent.enabled = false;
+
+                        //Add the enemy to the list if not already added
+                        if (!disabledAgents.Contains(agent))
+                        {
+                            disabledAgents.Add(agent);
+                        }
+                    }
+
+                    // Apply the pull force
                     if (rb != null)
                     {
-                        Vector3 direction = (vortexInstance.transform.position - hit.transform.position).normalized;
-                        rb.AddForce(direction * pullForce * Time.deltaTime, ForceMode.VelocityChange);
+                        Vector3 direction = (vortexInstance.transform.position - rb.position).normalized;
+                        float distance = Vector3.Distance(vortexInstance.transform.position, rb.position);
+                        float pullStrength = Mathf.Lerp(pullForce, 0, distance / pullRadius); //Pull strength diminishes with distance
+                        rb.AddForce(direction * pullStrength, ForceMode.Acceleration);
                     }
                 }
             }
 
             yield return null;
         }
+
+        // Re-enable NavMeshAgents after the vortex effect ends
+        foreach (NavMeshAgent agent in disabledAgents)
+        {
+            if (agent != null)
+            {
+                agent.enabled = true;
+
+                //Force the agent to recalculate its path
+                agent.SetDestination(player.position);
+            }
+        }
+    }
+
+    //For debugging
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, pullRadius);
     }
 }
