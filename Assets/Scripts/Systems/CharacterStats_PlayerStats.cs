@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class CharacterStats_PlayerStats : CharacterStats
 {
     public HealthBar healthBar;
+    public GameOverFade gameOverScreen;
     public int points;
 
     private void Start()
@@ -35,12 +36,9 @@ public class CharacterStats_PlayerStats : CharacterStats
     {
         //TODO:
         //Death animation
+        gameOverScreen.SetUI(true);
 
         Destroy(gameObject);
         Debug.Log("Player died.");
-
-        //DELETE:
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        throw new System.NotImplementedException();
     }
 }

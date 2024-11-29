@@ -31,12 +31,16 @@ public abstract class EnemyAttack : MonoBehaviour
 
     protected virtual void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= attackRange && Time.time - lastAttackTime >= attackCooldown)
+        if (player != null)
         {
-            Attack();
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if (distanceToPlayer <= attackRange && Time.time - lastAttackTime >= attackCooldown)
+            {
+                Attack();
+            }
         }
+
     }
 
     public virtual void Attack()

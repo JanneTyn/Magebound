@@ -17,19 +17,27 @@ public class IsPlayerInSight : BTNode
 
     public override NodeState Evaluate()
     {
-        float distance = Vector3.Distance(enemy.position, player.position);
-      
-        if (distance <= detectionRange)
+        if(player != null)
         {
-            Vector3 direction = (player.position - enemy.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            state = NodeState.SUCCESS;
+            float distance = Vector3.Distance(enemy.position, player.position);
+
+            if (distance <= detectionRange)
+            {
+                Vector3 direction = (player.position - enemy.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+                state = NodeState.SUCCESS;
+            }
+            else
+            {
+                state = NodeState.FAILURE;
+            }
+            return state;
         }
         else
         {
-            state = NodeState.FAILURE;
+            return state = NodeState.FAILURE;
         }
-        return state;
+
     }
 }

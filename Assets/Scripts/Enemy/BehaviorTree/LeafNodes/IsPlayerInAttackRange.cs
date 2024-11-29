@@ -15,14 +15,22 @@ public class IsPlayerInAttackRange : BTNode
 
     public override NodeState Evaluate()
     {
-        float distance = Vector3.Distance(enemy.position, player.position);
-        if (distance <= attackRange) {
-            state = NodeState.SUCCESS;
+        if(player != null)
+        {
+            float distance = Vector3.Distance(enemy.position, player.position);
+            if (distance <= attackRange)
+            {
+                state = NodeState.SUCCESS;
+            }
+            else
+            {
+                state = NodeState.FAILURE;
+            }
+            return state;
         }
         else
         {
-            state = NodeState.FAILURE;
+            return state = NodeState.FAILURE;
         }
-        return state;
     }
 }
