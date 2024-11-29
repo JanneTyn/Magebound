@@ -152,6 +152,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6653145739964501066}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 268683113674368267}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8105832993784991005}
   m_SourcePrefab: {fileID: 100100000, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
 --- !u!1 &7061217602136878473 stripped
 GameObject:
@@ -194,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   detectionRange: 100
+  rotationSpeed: 5
   attackRange: 3
 --- !u!195 &4058013026547349794
 NavMeshAgent:
@@ -313,6 +320,30 @@ MonoBehaviour:
     m_Bits: 4294967295
   attackSize: {x: 2, y: 2, z: 2}
   attackCenterOffset: {x: 0, y: 1, z: 0}
+--- !u!114 &268683113674368267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061217602136878473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd7dfd702717e0488283f013538dbb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8105832993784991005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061217602136878473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161c1024d690edf449907105c48d3493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7689240315326822195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}

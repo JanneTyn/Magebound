@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     private BTNode currentBehaviorTree;
 
     public float detectionRange = 100f;
+    public float rotationSpeed = 5;
     public float attackRange = 3f;
 
     void Start()
@@ -60,7 +61,7 @@ public class EnemyAI : MonoBehaviour
     void BuildBehaviorTree()
     {
         //Condition nodes
-        var isPlayerInSight = new IsPlayerInSight(transform, player, detectionRange);
+        var isPlayerInSight = new IsPlayerInSight(transform, player, detectionRange, rotationSpeed);
         var isPlayerInAttackRange = new IsPlayerInAttackRange(transform, player, attackRange);
 
         //Action nodes

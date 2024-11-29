@@ -56,11 +56,11 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
 
                 foreach (Collider enemy in enemies)
                 {
-                    enemy.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+                    enemy.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
                 }
             } else
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), GetElementID());
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
                 Destroy(gameObject);
             }
         }

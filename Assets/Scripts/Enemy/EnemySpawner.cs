@@ -34,8 +34,8 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(spawnDelay);
 
         //Endless enemy spawns
-        //while (true)
-        while (enemiesSpawned < 10)
+        while (true)
+        //while (enemiesSpawned < 10)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(spawnInterval);

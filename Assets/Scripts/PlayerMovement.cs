@@ -2,11 +2,18 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IStatusVariables
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private GameObject playerFollow;
+
     public float movementSpeed = 1.0f;
+    public float speed 
+    { 
+        get => movementSpeed; 
+        set => movementSpeed = value; 
+    }
+
     public float rotationSpeed = 1.0f;
     private float movementX = 0.0f;
     private float movementZ = 0.0f;
@@ -34,23 +41,23 @@ public class PlayerMovement : MonoBehaviour
             newLoc = new Vector3();
             if (UnityEngine.Input.GetKey("w"))
             {
-                transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+                transform.position += Vector3.forward * Time.deltaTime * speed;
                 newLoc += Vector3.forward;
             }
             else if (UnityEngine.Input.GetKey("s"))
             {
-                transform.position -= Vector3.forward * Time.deltaTime * movementSpeed;
+                transform.position -= Vector3.forward * Time.deltaTime * speed;
                 newLoc -= Vector3.forward;
             }
 
             if (UnityEngine.Input.GetKey("a"))
             {
-                transform.position -= Vector3.right * Time.deltaTime * movementSpeed;
+                transform.position -= Vector3.right * Time.deltaTime * speed;
                 newLoc += -Vector3.right;
             }
             else if (UnityEngine.Input.GetKey("d"))
             {
-                transform.position += Vector3.right * Time.deltaTime * movementSpeed;
+                transform.position += Vector3.right * Time.deltaTime * speed;
                 newLoc += Vector3.right;
             }
             transform.LookAt(transform.position + newLoc);          

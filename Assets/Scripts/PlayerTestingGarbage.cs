@@ -9,7 +9,7 @@ public class PlayerTestingGarbage : MonoBehaviour
         {
             DamageSystem damageSystem = GetComponent<DamageSystem>();
 
-            damageSystem.CalculateDamage(100f, false, 0, 01);
+            damageSystem.CalculateDamage(100f, 01);
         }
 
         if(Input.GetKeyDown(KeyCode.P)) 
