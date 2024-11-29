@@ -12,12 +12,10 @@ public class VortexTesting : MonoBehaviour
     public LayerMask groundLayer;
     public float pullRadius = 5;
     public float pullForce = 10f;
+    public bool isTargeting = false; // Whether the player is in targeting mode or not
 
     private GameObject targetingCircle; // Instance of the targeting circle
-    private bool isTargeting = false; // Whether the player is in targeting mode
     private Vector3 lastValidPosition; // Stores the last valid position for the targeting circle
-
-
 
     void Update()
     {
@@ -89,11 +87,8 @@ public class VortexTesting : MonoBehaviour
         {
             // Instantiate the ability prefab at the targeting circle's position
             GameObject vortexInstance = Instantiate(fireVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
-
             StartCoroutine(VortexEffect(vortexInstance));
-            
             Destroy(vortexInstance, 5f);
-
             Destroy(targetingCircle);
             isTargeting = false;
         }
@@ -105,7 +100,8 @@ public class VortexTesting : MonoBehaviour
         float timer = 0f;
 
         List<NavMeshAgent> disabledAgents = new List<NavMeshAgent>(); //Keep track of enemy NavMeshAgent disabling & re-enabling
-        
+        List<Rigidbody> affectedRigidbodies = new List<Rigidbody>(); //Keep track of enemy Rigidbodies disabling & re-enabling rigidbodies freeze positions
+
         while (timer < duration)
         {
             if (vortexInstance == null)
@@ -120,6 +116,16 @@ public class VortexTesting : MonoBehaviour
                         agent.SetDestination(player.position);
                     }
                 }
+
+                //Restore rigidbody freeze positions
+                foreach (Rigidbody rb in affectedRigidbodies)
+                {
+                    if (rb != null)
+                    {
+                        rb.constraints = RigidbodyConstraints.FreezePosition;
+                    }
+                }
+
                 yield break;
             }
 
@@ -150,10 +156,19 @@ public class VortexTesting : MonoBehaviour
                     // Apply the pull force
                     if (rb != null)
                     {
-                        Vector3 direction = (vortexInstance.transform.position - rb.position).normalized;
-                        float distance = Vector3.Distance(vortexInstance.transform.position, rb.position);
-                        float pullStrength = Mathf.Lerp(pullForce, 0, distance / pullRadius); //Pull strength diminishes with distance
-                        rb.AddForce(direction * pullStrength, ForceMode.Acceleration);
+                        //Remove rigidbody constraints so the vortex pull effext is possible
+                        if (!affectedRigidbodies.Contains(rb))
+                        {
+                            affectedRigidbodies.Add(rb);
+                            rb.constraints = RigidbodyConstraints.FreezePositionY;
+                        }
+
+                        Vector3 directionToCenter = (vortexInstance.transform.position - rb.position).normalized;
+                        Vector3 tangentialDirection = Vector3.Cross(directionToCenter, Vector3.up).normalized;
+                        float spinForce = Mathf.Lerp(pullForce * 0.5f, 0, Vector3.Distance(vortexInstance.transform.position, rb.position) / pullRadius);
+                        rb.AddForce(tangentialDirection * spinForce, ForceMode.Acceleration);
+                        rb.AddForce(directionToCenter * (pullForce * 0.1f), ForceMode.Acceleration);
+                        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, 3f);
                     }
                 }
             }
@@ -161,7 +176,7 @@ public class VortexTesting : MonoBehaviour
             yield return null;
         }
 
-        // Re-enable NavMeshAgents after the vortex effect ends
+        // Re-enable NavMeshAgents and restore Rigidbody constraints after the vortex effect ends
         foreach (NavMeshAgent agent in disabledAgents)
         {
             if (agent != null)
@@ -170,6 +185,14 @@ public class VortexTesting : MonoBehaviour
 
                 //Force the agent to recalculate its path
                 agent.SetDestination(player.position);
+            }
+        }
+
+        foreach (Rigidbody rb in affectedRigidbodies)
+        {
+            if (rb != null)
+            {
+                rb.constraints = RigidbodyConstraints.FreezePosition;
             }
         }
     }
