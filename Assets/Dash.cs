@@ -12,6 +12,9 @@ public class Dash : MonoBehaviour
     public GameObject DashIcePrefab;
     public GameObject DashThunderPrefab;
     public GameObject DashToUse;
+    RaycastHit m_Hit;
+    bool m_HitDetect;
+    Vector3 collisionCheck;
     public void InitializeDash(Vector3 playerLocation, Vector3 targetLocation, int element)
     {       
          Vector3 vectorDist = targetLocation - playerLocation;
@@ -57,7 +60,10 @@ public class Dash : MonoBehaviour
             t += Time.deltaTime / dashDuration;
             if (t > 1) { t = 1; dashIsActive = false; }
 
-            transform.position = Vector3.Lerp(playerLocation, targetLocation, t);
+            collisionCheck = Vector3.Lerp(playerLocation, targetLocation, t);
+            if (DashCollisionRayCast(collisionCheck)) { dashIsActive = false; break; }
+
+            transform.position = collisionCheck;
             dashEffect.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
 
             yield return null;
@@ -76,7 +82,10 @@ public class Dash : MonoBehaviour
             t += Time.deltaTime / dashDuration;
             if (t > 1) { t = 1; dashIsActive = false; }
 
-            transform.position = Vector3.Lerp(playerLocation, targetLocation, t);
+            collisionCheck = Vector3.Lerp(playerLocation, targetLocation, t);
+            if (DashCollisionRayCast(collisionCheck)) { dashIsActive = false; break; }
+
+            transform.position = collisionCheck;
 
             yield return null;
         }
@@ -92,11 +101,21 @@ public class Dash : MonoBehaviour
             t += Time.deltaTime / dashDuration;
             if (t > 1) { t = 1; dashIsActive = false; }
 
-            transform.position = Vector3.Lerp(playerLocation, targetLocation, t);
+            collisionCheck = Vector3.Lerp(playerLocation, targetLocation, t);
+            if (DashCollisionRayCast(collisionCheck)) { dashIsActive = false; break; }
+
+            transform.position = collisionCheck;
 
             yield return null;
         }
         GameObject dashEffectThunder = Instantiate(DashThunderPrefab, transform.position, Quaternion.identity);
         dashEffectThunder.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
     }
+
+    bool DashCollisionRayCast(Vector3 pos)
+    {
+        float colliderRadius = 0.5f;
+        return Physics.CheckSphere(pos, colliderRadius, LayerMask.GetMask("Wall"), QueryTriggerInteraction.Ignore);
+    }
+
 }
