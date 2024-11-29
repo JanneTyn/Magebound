@@ -103,9 +103,12 @@ public class SpellDash : SpellEffect
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GetElementID() == 2 || GetElementID() == 3)
+        if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+            if (GetElementID() == 2 || GetElementID() == 3)
+            {
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+            }
         }
     }
 
