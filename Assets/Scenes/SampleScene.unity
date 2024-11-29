@@ -950,6 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8b7c31d9748d43b316db5d82c751b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1394560586}
   fireVortexPrefab: {fileID: 8849572267102682041, guid: e2d01414a2a537c4a9e64e2996dd4e56, type: 3}
   targetingCirclePrefab: {fileID: 5761501634439072031, guid: 91e0870a96aa14d46ae66abb8906563e, type: 3}
   range: 10
@@ -958,6 +959,11 @@ MonoBehaviour:
     m_Bits: 1024
   pullRadius: 5
   pullForce: 10
+--- !u!4 &1394560586 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8573021367887713382, guid: a833c470dab562a45827b9f6686e2697, type: 3}
+  m_PrefabInstance: {fileID: 8627356881636246513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1409191644
 GameObject:
   m_ObjectHideFlags: 0
