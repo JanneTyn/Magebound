@@ -18,8 +18,12 @@ public class SpellExplosion : MonoBehaviour
                 StartCoroutine(BurningGround(targetLocation, explosion));
                 break;
             case 2:
+                GameObject iceExplosion = Instantiate(ExplosionIcePrefab, playerLocation, Quaternion.identity);
+                iceExplosion.GetComponent<SpellEffect_Explosion_Ice>().SetProjectileDirection(targetLocation, playerLocation);
                 break;
             case 3:
+                GameObject thunderExplosion = Instantiate(ExplosionThunderPrefab, playerLocation, Quaternion.identity);
+                thunderExplosion.GetComponent<SpellEffect_Explosion_Thunder>().SetProjectileDirection(targetLocation, playerLocation);
                 break;
         }
     }  
@@ -30,13 +34,18 @@ public class SpellExplosion : MonoBehaviour
 
         while (explosion.GetComponent<SpellEffect_Explosion_Fire>().explosionFin == false)
         {
-            t += Time.deltaTime;
             yield return null;
         }
         GameObject dashEffect = Instantiate(DashFirePrefab, explosion.transform.position, Quaternion.identity);
         dashEffect.transform.position = new Vector3(explosion.transform.position.x, 0, explosion.transform.position.z);
         StartCoroutine(dashEffect.GetComponent<SpellDash>().TrailDuration());
         dashEffect.GetComponent<BoxCollider>().enabled = true;
+        dashEffect.GetComponent<VisualEffect>().SetFloat("TrailWidth", 4.5f);
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
         explosion.GetComponent<SpellEffect_Explosion_Fire>().groundSet = true;
 
     }

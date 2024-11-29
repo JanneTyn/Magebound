@@ -2,41 +2,33 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
+public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
 {
-    float time = 0;
+    public bool explosionFin = false;
     float explosionDamageDelayTime = 0.3f;
     public float explosionEffectTime = 1f;
-    bool dmgActive = false;
     bool collided = false;
     bool enemyHit = false;
     float boltAliveTime = 0;
-    public float explosionSize = 0;
-    public bool explosionFin = false;
-    public bool groundSet = false;
+    float explosionSize = 0;
     Vector3 projectileDir;
     Vector3 playerLocation;
     private bool directionSet;
-
+    
     // Update is called once per frame
     void Update()
     {
-
         if (directionSet && !collided)
         {
             var step = GetBoltSpeed() * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, projectileDir, step);
             Debug.Log("projectileDir:" + projectileDir);
+            boltAliveTime += Time.deltaTime;
         }
 
         float dist = Vector3.Distance(transform.position, playerLocation);
-        if (dist > 2000) { StartCoroutine(InitializeBurningGround()); collided = true; }
-        else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SetBool("IsExploding", true); collided = true; StartCoroutine(InitializeBurningGround()); }
-
-        if (explosionFin && groundSet)
-        {        
-            Destroy(gameObject);
-        }
+        if (dist > 2000) { StartCoroutine(InitializeIcePillar()); collided = true; }
+        else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SetBool("IsExploding", true); collided = true; StartCoroutine(InitializeIcePillar()); }
     }
 
     public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
@@ -57,7 +49,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 
                 foreach (Collider enemy in enemies)
                 {
-                    if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg)) 
+                    if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
                     }
@@ -66,9 +58,10 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
                         Debug.Log("Damagesystem not found");
                     }
                 }
-                collided = true;             
+                collided = true;
                 GetComponent<VisualEffect>().SetBool("IsExploding", true);
-                StartCoroutine(InitializeBurningGround());
+                
+                StartCoroutine(InitializeIcePillar());
                 enemyHit = true;
             }
             else
@@ -84,20 +77,21 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
         } */
     }
 
-    IEnumerator InitializeBurningGround()
+    IEnumerator InitializeIcePillar()
     {
-
         float t = 0;
-        while (t < explosionEffectTime)
+        float pillarTime = GetComponent<VisualEffect>().GetFloat("SpikeDuration");
+        while (t < pillarTime)
         {
             t += Time.deltaTime;
             yield return null;
         }
         explosionFin = true;
+        Destroy(gameObject);
     }
 
     void SetExplosionArea()
-    {      
+    {
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         float timeMult = boltAliveTime * GetComponent<VisualEffect>().GetFloat("GrowSpeed");
         if (timeMult > 1) timeMult = 1;

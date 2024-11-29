@@ -61,7 +61,6 @@ public class SpellDash : SpellEffect
     IEnumerator IceEffectDuration()
     {
         float effectLife = GetComponent<VisualEffect>().GetFloat("FreezeTime");
-        Debug.Log("effectlife: " + effectLife);
         float t = 0;
         GetComponent<BoxCollider>().enabled = true;
 
@@ -76,7 +75,6 @@ public class SpellDash : SpellEffect
     IEnumerator ThunderEffectDuration()
     {
         float effectLife = GetComponent<VisualEffect>().GetFloat("StunTime");
-        Debug.Log("effectlife: " + effectLife);
         float t = 0;
         GetComponent<BoxCollider>().enabled = true;
 
