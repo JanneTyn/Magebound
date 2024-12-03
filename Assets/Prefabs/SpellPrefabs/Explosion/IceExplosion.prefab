@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   giveStatus: 1
-  statusID: 2
+  statusID: 3
   spellID: 3
   ElementID: 2
   overlappableEffectID: 
@@ -141,6 +141,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   boltSpeed: 5
+  statusDuration: 3
   explosionFin: 0
   explosionEffectTime: 1
 --- !u!65 &3437155261090739278

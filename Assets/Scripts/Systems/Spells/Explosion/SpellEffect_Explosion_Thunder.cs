@@ -12,6 +12,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
     bool collided = false;
     bool enemyHit = false;
     bool shockwaveEnabled = false;
+    bool colliderChanged = false;
     float boltAliveTime = 0;
     float explosionSize = 0;
     Vector3 projectileDir;
@@ -55,7 +56,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
                 {
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
-                        if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
+                        if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), shockwaveEnabled, GetStatusID(), GetStatusDuration(), GetElementID());
                     }
                     else
                     {
@@ -70,7 +71,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
             }
             else
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), shockwaveEnabled, GetStatusID(), GetStatusDuration(), GetElementID());
                 Destroy(gameObject);
             }
         }
@@ -93,11 +94,15 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
         t = 0;
         GetComponent<VisualEffect>().SetBool("IsShockwaving", true);
         explosionSize = GetComponent<VisualEffect>().GetFloat("ShockwaveSize") / 2;
-        GetComponent<BoxCollider>().size = new Vector3(explosionSize, explosionSize, explosionSize);
         shockwaveEnabled = true;
         enemyHit = false;
         while (t < shockwaveTime)
         {
+            if (t > shockwaveTime / 3 && !colliderChanged)
+            {
+                colliderChanged = true;
+                GetComponent<BoxCollider>().size = new Vector3(explosionSize, explosionSize, explosionSize);
+            }
             t += Time.deltaTime;
             yield return null;
         }

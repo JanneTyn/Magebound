@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ebfca1437c0d049b6fb7276cf23d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 25
   giveStatus: 1
   statusID: 4
   spellID: 3
@@ -141,6 +141,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   boltSpeed: 5
+  statusDuration: 3
   explosionFin: 0
   explosionEffectTime: 1
 --- !u!65 &5915424828922997146

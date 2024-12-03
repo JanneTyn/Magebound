@@ -129,15 +129,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  giveStatus: 0
+  giveStatus: 1
   statusID: 4
   spellID: 2
   ElementID: 3
-  projectileSpeed: 8
-  travelDistance: 20
   overlappableEffectID: 
   dashFinished: 0
   trailLifeWait: 0
+  statusDuration: 2
 --- !u!65 &7241805214746910620
 BoxCollider:
   m_ObjectHideFlags: 0

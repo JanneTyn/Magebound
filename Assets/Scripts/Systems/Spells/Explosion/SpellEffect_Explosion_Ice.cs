@@ -51,7 +51,7 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
                 {
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
-                        if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
+                        if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), true, GetStatusID(), GetStatusDuration(), GetElementID());
                     }
                     else
                     {
@@ -66,7 +66,7 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
             }
             else
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, GetStatusID(), GetStatusDuration(), GetElementID());
                 Destroy(gameObject);
             }
         }

@@ -10,6 +10,7 @@ public class SpellDash : SpellEffect
     private bool thunderActivated = false;
     private string isDashingProperty = "IsDashing";
     private float dmgTimer = 0;
+    [SerializeField] private float statusDuration;
     private void Update()
     {
         switch(GetElementID())
@@ -105,7 +106,7 @@ public class SpellDash : SpellEffect
         {
             if (GetElementID() == 2 || GetElementID() == 3)
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, GetStatusID(), statusDuration, GetElementID());
             }
         }
     }
@@ -119,7 +120,7 @@ public class SpellDash : SpellEffect
             {
                 if (other.CompareTag("Enemy"))
                 {
-                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, GetStatusID(), statusDuration, GetElementID());
                 }
                 dmgTimer = 0;
             }
