@@ -4,8 +4,8 @@ using UnityEngine;
 public class ManaSystem : MonoBehaviour
 {
     CharacterStats characterStats;
-    private float maxMana;
-    private float currentMana;
+    [SerializeField] private float maxMana;
+    [SerializeField] private float currentMana;
     [SerializeField] private float passiveManaRegen;
 
     public float manaOnHitRecoverAmmount = 20;
@@ -49,6 +49,15 @@ public class ManaSystem : MonoBehaviour
         manaBar.SetCurrentMana(currentMana);
     }
 
+    public void LevelUp(float maxMana)
+    {
+        this.maxMana += maxMana;
+        currentMana = this.maxMana;
+
+        manaBar.SetMaxMana(this.maxMana);
+        manaBar.SetCurrentMana(this.maxMana);
+    }
+
     IEnumerator PassiveManaRecovery()
     {
         while (currentMana < maxMana)
@@ -64,4 +73,5 @@ public class ManaSystem : MonoBehaviour
 
         manaRecovery = null;
     }
+
 }

@@ -18,6 +18,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int multiplier = 5; // Exponential growth multiplier
     [SerializeField] private float exponent = 1.2f; // Exponential factor (k)
 
+    public float damageIncreaseMultiplier = 0.2f;
+    public float healthIncreaseAmmount = 100f;
+    public float manaIncreaseAmmount = 200f;
+
     private void Start()
     {
         experienceNeeded = CalculateExperienceNeeded(level);
@@ -52,7 +56,9 @@ public class LevelManager : MonoBehaviour
 
         experienceBar.SetExperienceNeeded(experienceNeeded);
 
-        upgradeWindow.OpenUpgradeWindow();
+        //upgradeWindow.OpenUpgradeWindow();
+
+        GetComponent<CharacterStats_PlayerStats>().LevelUp(damageIncreaseMultiplier, healthIncreaseAmmount, manaIncreaseAmmount);
     }
 
     private int CalculateExperienceNeeded(int level)

@@ -306,6 +306,9 @@ MonoBehaviour:
   increment: 20
   multiplier: 5
   exponent: 1.2
+  damageIncreaseMultiplier: 0.2
+  healthIncreaseAmmount: 100
+  manaIncreaseAmmount: 200
 --- !u!114 &-136397113228576530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +341,9 @@ MonoBehaviour:
   electricResistance: 0
   currentElement: 1
   healthBar: {fileID: 0}
+  gameOverScreen: {fileID: 0}
   points: 0
+  damageMultiplier: 1
 --- !u!114 &8445912197333104168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcea0cb3c537d7249bc56314d476af45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxMana: 0
+  currentMana: 0
   passiveManaRegen: 20
   manaOnHitRecoverAmmount: 20
   manaBar: {fileID: 0}
