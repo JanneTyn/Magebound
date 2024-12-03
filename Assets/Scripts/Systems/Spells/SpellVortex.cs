@@ -110,6 +110,7 @@ public class SpellVortex : MonoBehaviour
 
         List<NavMeshAgent> disabledAgents = new List<NavMeshAgent>(); //Keep track of enemy NavMeshAgent disabling & re-enabling
         List<Rigidbody> affectedRigidbodies = new List<Rigidbody>(); //Keep track of enemy Rigidbodies disabling & re-enabling rigidbodies freeze positions
+        HashSet<GameObject> processedEnemies = new HashSet<GameObject>(); //Enemies that have vortex dot already
 
         while (timer < duration)
         {
@@ -129,15 +130,40 @@ public class SpellVortex : MonoBehaviour
                 if (hit.CompareTag("Enemy"))
                 {
                     //int enemyElement = hit.GetComponent<CharacterStats_EnemyStats>().GetCurrentElement();
-                    DamageSystem damageSystem = hit.GetComponent<DamageSystem>();
+                    
                     Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
                     NavMeshAgent agent = hit.GetComponentInChildren<NavMeshAgent>();
+                    GameObject enemy = hit.gameObject;
 
-                    if (damageSystem != null) {
-                        // If the VortexEffect runs for 5 seconds and updates every frame (~60 frames per second), damage is applied approximately 300 times.
-                        //So 0.05f dmg = ~15hp
-                        int vortexElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
-                        damageSystem.CalculateDamage(0.05f, vortexElement);
+                    if (!processedEnemies.Contains(enemy))
+                    {
+                       processedEnemies.Add(enemy);
+                       DamageSystem damageSystem = enemy.GetComponent<DamageSystem>();
+
+                        if (damageSystem != null) {
+                            int vortexElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
+                            int statusID = 0;
+                            switch (vortexElement)
+                            {
+                                case 1: // Fire vortex
+                                    statusID = 1; // Burn
+                                    break;
+                                case 2: // Ice vortex
+                                    statusID = 3; // Chill
+                                    break;
+                                case 3: // Lightning vortex
+                                    statusID = 4; // Stun
+                                    break;
+                                default:
+                                    Debug.LogWarning("Invalid vortex element.");
+                                    break;
+                            }
+
+                            if (statusID != 0) {
+                                damageSystem.CalculateDamage(0, true, statusID, 5f, 10f, vortexElement);
+                            }
+                        }
+
                     }
 
                     if (agent != null && agent.enabled)
@@ -174,6 +200,8 @@ public class SpellVortex : MonoBehaviour
 
             yield return null;
         }
+
+        processedEnemies.Clear();
 
         // Re-enable NavMeshAgents and restore Rigidbody constraints after the vortex effect ends
         RestoreAgentsAndRigidbodies(disabledAgents, affectedRigidbodies);
