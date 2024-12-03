@@ -254,7 +254,7 @@ MonoBehaviour:
   fireResistance: 0
   iceResistance: 0
   electricResistance: 0
-  currentElement: 0
+  currentElement: 3
 --- !u!65 &5083899254915096803
 BoxCollider:
   m_ObjectHideFlags: 0
