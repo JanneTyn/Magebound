@@ -6,6 +6,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
 
     private bool isGlobalCooldownActive = false;
     public float globalCooldownDuration = 2f;
+    CursorTarget cursorTarget;
 
     //Seperate possible extra needed settings for UI
     [System.Serializable]
@@ -19,7 +20,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        cursorTarget = GameObject.Find("PlayerFollow/Camera Pivot/MainCamera").GetComponent<CursorTarget>();
     }
 
     // Update is called once per frame
@@ -28,6 +29,21 @@ public class PlayerAbilitiesInput : MonoBehaviour
         if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.Q))
         {
             GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
+            StartCoroutine(GlobalCooldown());
+        }
+        else if (Input.GetMouseButtonDown(0)) //basic projectile
+        {
+            cursorTarget.AttackPrepare(0);
+            StartCoroutine(GlobalCooldown());
+        }
+        else if (!isGlobalCooldownActive && Input.GetMouseButtonDown(1)) //Dash
+        {
+            cursorTarget.AttackPrepare(1);
+            StartCoroutine(GlobalCooldown());
+        }
+        else if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.E)) //Explosion
+        {
+            cursorTarget.AttackPrepare(2);
             StartCoroutine(GlobalCooldown());
         }
     }
