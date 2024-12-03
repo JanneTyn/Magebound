@@ -8,7 +8,8 @@ public class SpellVortex : MonoBehaviour
     public Transform player;
     //public GameObject fireVortexPrefab;
     public GameObject fireVortexVFX;
-    public GameObject iceVortexPrefab;
+    //public GameObject iceVortexPrefab;
+    public GameObject iceVortexVFX;
     public GameObject electricVortexPrefab;
     public GameObject targetingCirclePrefab; // Visual indicator for targeting
     public float range = 10f;
@@ -45,7 +46,7 @@ public class SpellVortex : MonoBehaviour
                     vortexInstance = Instantiate(fireVortexVFX, targetingCircle.transform.position, Quaternion.identity);
                     break;
                 case 2:
-                    vortexInstance = Instantiate(iceVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
+                    vortexInstance = Instantiate(iceVortexVFX, targetingCircle.transform.position, Quaternion.identity);
                     break;
                 case 3:
                     vortexInstance = Instantiate(electricVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
