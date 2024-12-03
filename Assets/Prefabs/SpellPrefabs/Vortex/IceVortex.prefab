@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1524032513450120629}
   - component: {fileID: 1790300877050309501}
   - component: {fileID: 3439708592619392578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceVortex
   m_TagString: Untagged
   m_Icon: {fileID: 0}

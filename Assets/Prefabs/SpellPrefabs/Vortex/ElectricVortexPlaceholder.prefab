@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3078855397950420367}
   - component: {fileID: 5795188403453933937}
   m_Layer: 0
-  m_Name: ElectricVortex
+  m_Name: ElectricVortexPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

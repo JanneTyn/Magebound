@@ -10,7 +10,8 @@ public class SpellVortex : MonoBehaviour
     public GameObject fireVortexVFX;
     //public GameObject iceVortexPrefab;
     public GameObject iceVortexVFX;
-    public GameObject electricVortexPrefab;
+    //public GameObject electricVortexPrefab;
+    public GameObject lightningVortexVFX;
     public GameObject targetingCirclePrefab; // Visual indicator for targeting
     public float range = 10f;
     public LayerMask groundLayer;
@@ -49,7 +50,7 @@ public class SpellVortex : MonoBehaviour
                     vortexInstance = Instantiate(iceVortexVFX, targetingCircle.transform.position, Quaternion.identity);
                     break;
                 case 3:
-                    vortexInstance = Instantiate(electricVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
+                    vortexInstance = Instantiate(lightningVortexVFX, targetingCircle.transform.position, Quaternion.identity);
                     break;
                 default:
                     Debug.LogWarning("SpellVortex.cs: No vortex instantiated.");
@@ -66,7 +67,6 @@ public class SpellVortex : MonoBehaviour
 
     private void Update()
     {
-        //player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement()
         if (isTargeting)
         {
             UpdateTargetingCircle();
@@ -131,9 +131,16 @@ public class SpellVortex : MonoBehaviour
             {
                 if (hit.CompareTag("Enemy"))
                 {
-                    int enemyElement = hit.GetComponent<CharacterStats_EnemyStats>().GetCurrentElement();
+                    //int enemyElement = hit.GetComponent<CharacterStats_EnemyStats>().GetCurrentElement();
+                    DamageSystem damageSystem = hit.GetComponent<DamageSystem>();
                     Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
                     NavMeshAgent agent = hit.GetComponentInChildren<NavMeshAgent>();
+
+                    if (damageSystem != null) {
+                        // If the VortexEffect runs for 5 seconds and updates every frame (~60 frames per second), damage is applied approximately 300 times.
+                        int vortexElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
+                        damageSystem.CalculateDamage(0.05f, vortexElement);
+                    }
 
                     if (agent != null && agent.enabled)
                     {
