@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.AI;
-
-public class VortexTesting : MonoBehaviour
+public class SpellVortex : MonoBehaviour
 {
     public Transform player;
     public GameObject fireVortexPrefab; // The vortex effect prefab
     public GameObject targetingCirclePrefab; // Visual indicator for targeting
     public float range = 10f;
     public LayerMask groundLayer;
-    public float pullRadius = 5;
+    public float pullRadius = 5f;
     public float pullForce = 10f;
-    public bool isTargeting = false; // Whether the player is in targeting mode or not
 
     private GameObject targetingCircle; // Instance of the targeting circle
     private Vector3 lastValidPosition; // Stores the last valid position for the targeting circle
+    private bool isTargeting = false; // Whether the player is in targeting mode or not
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -46,6 +46,39 @@ public class VortexTesting : MonoBehaviour
         targetingCircle.SetActive(true);
         isTargeting = true;
         lastValidPosition = transform.position;
+    }*/
+
+    public void StartTargeting()
+    {
+        if (targetingCircle == null)
+        {
+            targetingCircle = Instantiate(targetingCirclePrefab);
+        }
+
+        targetingCircle.SetActive(true);
+        isTargeting = true;
+        lastValidPosition = transform.position;
+    }
+
+    public void ConfirmTarget()
+    {
+        if (isTargeting && targetingCircle != null)
+        {
+            // Instantiate the ability prefab at the targeting circle's position
+            GameObject vortexInstance = Instantiate(fireVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
+            StartCoroutine(VortexEffect(vortexInstance));
+            Destroy(vortexInstance, 5f);
+            Destroy(targetingCircle);
+            isTargeting = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (isTargeting)
+        {
+            UpdateTargetingCircle();
+        }
     }
 
     void UpdateTargetingCircle()
@@ -81,19 +114,6 @@ public class VortexTesting : MonoBehaviour
         }
     }
 
-    void ConfirmTarget()
-    {
-        if (targetingCircle != null)
-        {
-            // Instantiate the ability prefab at the targeting circle's position
-            GameObject vortexInstance = Instantiate(fireVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
-            StartCoroutine(VortexEffect(vortexInstance));
-            Destroy(vortexInstance, 5f);
-            Destroy(targetingCircle);
-            isTargeting = false;
-        }
-    }
-
     IEnumerator VortexEffect(GameObject vortexInstance)
     {
         float duration = 5f; // Duration of the vortex effect
@@ -106,26 +126,7 @@ public class VortexTesting : MonoBehaviour
         {
             if (vortexInstance == null)
             {
-                foreach (NavMeshAgent agent in disabledAgents)
-                {
-                    if (agent != null)
-                    {
-                        agent.enabled = true;
-
-                        //Force the agent to recalculate its path
-                        agent.SetDestination(player.position);
-                    }
-                }
-
-                //Restore rigidbody freeze positions
-                foreach (Rigidbody rb in affectedRigidbodies)
-                {
-                    if (rb != null)
-                    {
-                        rb.constraints = RigidbodyConstraints.FreezePosition;
-                    }
-                }
-
+                RestoreAgentsAndRigidbodies(disabledAgents, affectedRigidbodies); //Enemies NavMeshAgents and Rigidbodies
                 yield break;
             }
 
@@ -177,18 +178,21 @@ public class VortexTesting : MonoBehaviour
         }
 
         // Re-enable NavMeshAgents and restore Rigidbody constraints after the vortex effect ends
-        foreach (NavMeshAgent agent in disabledAgents)
+        RestoreAgentsAndRigidbodies(disabledAgents, affectedRigidbodies);
+    }
+
+    private void RestoreAgentsAndRigidbodies(List<NavMeshAgent> agents, List<Rigidbody> rbs)
+    {
+        foreach (NavMeshAgent agent in agents)
         {
             if (agent != null)
             {
                 agent.enabled = true;
-
-                //Force the agent to recalculate its path
                 agent.SetDestination(player.position);
             }
         }
 
-        foreach (Rigidbody rb in affectedRigidbodies)
+        foreach (Rigidbody rb in rbs)
         {
             if (rb != null)
             {
@@ -197,10 +201,8 @@ public class VortexTesting : MonoBehaviour
         }
     }
 
-    //For debugging
-    void OnDrawGizmos()
+    public bool IsTargetingActive()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, pullRadius);
+        return isTargeting;
     }
 }
