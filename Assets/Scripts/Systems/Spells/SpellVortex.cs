@@ -6,7 +6,11 @@ using UnityEngine.AI;
 public class SpellVortex : MonoBehaviour
 {
     public Transform player;
-    public GameObject fireVortexPrefab; // The vortex effect prefab
+    //public GameObject fireVortexPrefab;
+    public GameObject fireVortexVFX;
+    //public GameObject iceVortexPrefab;
+    public GameObject iceVortexVFX;
+    public GameObject electricVortexPrefab;
     public GameObject targetingCirclePrefab; // Visual indicator for targeting
     public float range = 10f;
     public LayerMask groundLayer;
@@ -16,37 +20,6 @@ public class SpellVortex : MonoBehaviour
     private GameObject targetingCircle; // Instance of the targeting circle
     private Vector3 lastValidPosition; // Stores the last valid position for the targeting circle
     private bool isTargeting = false; // Whether the player is in targeting mode or not
-
-    /*void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ActivateTargetingMode();
-        }
-
-        if (isTargeting && Input.GetMouseButtonDown(0))
-        {
-            ConfirmTarget();
-        }
-
-        // Update the targeting circle position if in targeting mode
-        if (isTargeting)
-        {
-            UpdateTargetingCircle();
-        }
-    }
-
-    void ActivateTargetingMode()
-    {
-        if (targetingCircle == null)
-        {
-            targetingCircle = Instantiate(targetingCirclePrefab);
-        }
-
-        targetingCircle.SetActive(true);
-        isTargeting = true;
-        lastValidPosition = transform.position;
-    }*/
 
     public void StartTargeting()
     {
@@ -62,10 +35,28 @@ public class SpellVortex : MonoBehaviour
 
     public void ConfirmTarget()
     {
+        int playerElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
         if (isTargeting && targetingCircle != null)
         {
+            GameObject vortexInstance = null;
             // Instantiate the ability prefab at the targeting circle's position
-            GameObject vortexInstance = Instantiate(fireVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
+            switch (playerElement)
+            {
+                case 1:
+                    vortexInstance = Instantiate(fireVortexVFX, targetingCircle.transform.position, Quaternion.identity);
+                    break;
+                case 2:
+                    vortexInstance = Instantiate(iceVortexVFX, targetingCircle.transform.position, Quaternion.identity);
+                    break;
+                case 3:
+                    vortexInstance = Instantiate(electricVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
+                    break;
+                default:
+                    Debug.LogWarning("SpellVortex.cs: No vortex instantiated.");
+                    break;
+
+            }
+            //GameObject vortexInstance = Instantiate(fireVortexPrefab, targetingCircle.transform.position, Quaternion.identity);
             StartCoroutine(VortexEffect(vortexInstance));
             Destroy(vortexInstance, 5f);
             Destroy(targetingCircle);
@@ -75,6 +66,7 @@ public class SpellVortex : MonoBehaviour
 
     private void Update()
     {
+        //player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement()
         if (isTargeting)
         {
             UpdateTargetingCircle();
@@ -139,6 +131,7 @@ public class SpellVortex : MonoBehaviour
             {
                 if (hit.CompareTag("Enemy"))
                 {
+                    int enemyElement = hit.GetComponent<CharacterStats_EnemyStats>().GetCurrentElement();
                     Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
                     NavMeshAgent agent = hit.GetComponentInChildren<NavMeshAgent>();
 
