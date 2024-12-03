@@ -11,6 +11,11 @@ public abstract class SpellEffect : MonoBehaviour
 
     public int[] overlappableEffectID;
 
+    private void Start()
+    {
+        damage = GameObject.FindWithTag("Player").GetComponent<CharacterStats_PlayerStats>().damageMultiplier * damage;
+    }
+
     public virtual bool CheckOverlap(int otherID)
     {
 

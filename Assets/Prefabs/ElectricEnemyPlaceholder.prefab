@@ -255,6 +255,7 @@ MonoBehaviour:
   iceResistance: 0
   electricResistance: 0
   currentElement: 0
+  scoreWorth: 200
 --- !u!65 &5083899254915096803
 BoxCollider:
   m_ObjectHideFlags: 0

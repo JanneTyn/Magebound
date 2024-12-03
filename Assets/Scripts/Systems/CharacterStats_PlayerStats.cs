@@ -6,6 +6,7 @@ public class CharacterStats_PlayerStats : CharacterStats
     public HealthBar healthBar;
     public GameOverFade gameOverScreen;
     public int points;
+    public float damageMultiplier = 1.0f;
 
     private void Start()
     {
@@ -30,6 +31,17 @@ public class CharacterStats_PlayerStats : CharacterStats
         {
             DeathSequence();
         }
+    }
+
+    public void LevelUp(float damageMultiplier, float maxHealth, float maxMana)
+    {
+        this.damageMultiplier += damageMultiplier;
+
+        SetMaxHealth(GetMaxHealth() + maxHealth);
+        SetCurrentHealth(GetMaxHealth());
+        healthBar.SetCurrentHealth(GetCurrentHealth());
+
+        GetComponent<ManaSystem>().LevelUp(maxMana);
     }
 
     private void DeathSequence()
