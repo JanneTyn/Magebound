@@ -1,29 +1,66 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class StatusManager : MonoBehaviour, IStatusVariables
 {
     public float speed { get; set; }
+
+    private Coroutine burnCoroutine;
+    private Coroutine freezeCoroutine;
+    private Coroutine chillCoroutine;
+    private Coroutine stunCoroutine;
+
+    private bool isBurning;
+    private bool isChilled;
     public void Activate(int statusID, float duration)
     {
         switch (statusID)
         {
             //Burning
             case 01:
-                StartCoroutine(ApplyBurn(duration));
+                if(burnCoroutine == null)
+                {
+                    burnCoroutine = StartCoroutine(ApplyBurn(duration));
+                }
+
+                if (burnCoroutine != null && !isBurning)
+                {
+                    StopCoroutine(burnCoroutine);
+                    burnCoroutine = StartCoroutine(ApplyBurn(duration));
+                }
+
                 break;
+
             //Freeze
             case 02:
-                ApplyFreeze(duration);
+                if (freezeCoroutine == null)
+                {
+                    freezeCoroutine = StartCoroutine(ApplyFreeze(duration));
+                }
                 break;
+
             //Chill
             case 03:
-                ApplyChill(duration);
+                if (chillCoroutine == null)
+                {
+                    chillCoroutine = StartCoroutine(ApplyChill(duration));
+                }
+
+                if (chillCoroutine != null && !isChilled)
+                {
+                    StopCoroutine(chillCoroutine);
+                    chillCoroutine = StartCoroutine(ApplyChill(duration));
+                }
+
                 break;
             //Stun
             case 04:
-                ApplyStun(duration);
+                if (stunCoroutine == null)
+                {
+                    stunCoroutine = StartCoroutine(ApplyStun(duration));
+                }
                 break;
 
             default:
@@ -38,19 +75,44 @@ public class StatusManager : MonoBehaviour, IStatusVariables
         {
             //Burning
             case 01:
-                StartCoroutine(ApplyBurn(duration, damage));
+                if (burnCoroutine == null)
+                {
+                    burnCoroutine = StartCoroutine(ApplyBurn(duration));
+                }
+
+                if (burnCoroutine != null && !isBurning)
+                {
+                    StopCoroutine(burnCoroutine);
+                    burnCoroutine = StartCoroutine(ApplyBurn(duration));
+                }
                 break;
             //Freeze
             case 02:
-                ApplyFreeze(duration);
+                if (freezeCoroutine == null)
+                {
+                    freezeCoroutine = StartCoroutine(ApplyFreeze(duration));
+                }
+
                 break;
             //Chill
             case 03:
-                ApplyChill(duration);
+                if (chillCoroutine == null)
+                {
+                    chillCoroutine = StartCoroutine(ApplyChill(duration));
+                }
+
+                if (chillCoroutine != null && !isChilled)
+                {
+                    StopCoroutine(chillCoroutine);
+                    chillCoroutine = StartCoroutine(ApplyChill(duration));
+                }
                 break;
             //Stun
             case 04:
-                ApplyStun(duration);
+                if (stunCoroutine == null)
+                {
+                    stunCoroutine = StartCoroutine(ApplyStun(duration));
+                }
                 break;
 
             default:
@@ -63,14 +125,24 @@ public class StatusManager : MonoBehaviour, IStatusVariables
     {
         float elapsedTime = 0;
 
+        if (!isBurning)
+        {
+            isBurning = true;
+        }
+
         while (elapsedTime < duration)
         {
-            
-            this.gameObject.GetComponent<DamageSystem>().CalculateDamage(10, 1);
 
             yield return new WaitForSeconds(1f);
 
+            this.gameObject.GetComponent<DamageSystem>().CalculateDamage(10, 1);
+
             elapsedTime += 1f;
+
+            if (isBurning)
+            {
+                isBurning = false;
+            }
         }
     }
 
@@ -78,19 +150,30 @@ public class StatusManager : MonoBehaviour, IStatusVariables
     {
         float elapsedTime = 0;
 
+        if (!isBurning)
+        {
+            isBurning = true;
+        }
+
         while (elapsedTime < duration)
         {
-            this.gameObject.GetComponent<DamageSystem>().CalculateDamage(damage, 1);
 
             yield return new WaitForSeconds(1f);
 
+            this.gameObject.GetComponent<DamageSystem>().CalculateDamage(damage, 1);
+
             elapsedTime += 1f;
+
+            if (isBurning)
+            {
+                isBurning = false;
+            }
         }
     }
 
 
 
-    private void ApplyFreeze(float duration)
+    private IEnumerator ApplyFreeze(float duration)
     {
         if (this.gameObject.CompareTag("Player"))
         {
@@ -101,9 +184,11 @@ public class StatusManager : MonoBehaviour, IStatusVariables
         {
             StartCoroutine(Freeze<EnemyAI>(duration));
         }
+
+        yield return null;
     }
 
-    private void ApplyChill(float duration)
+    private IEnumerator ApplyChill(float duration)
     {
         if (this.gameObject.CompareTag("Player"))
         {
@@ -114,7 +199,7 @@ public class StatusManager : MonoBehaviour, IStatusVariables
             StartCoroutine(Chill<NavMeshAgentWrapper>(duration));
 
         }
-
+        yield return null;
     }
 
     private IEnumerator Chill<T>(float duration) where T : Behaviour, IStatusVariables
@@ -132,7 +217,7 @@ public class StatusManager : MonoBehaviour, IStatusVariables
         }
     }
 
-    private void ApplyStun(float duration)
+    private IEnumerator ApplyStun(float duration)
     {
         if (this.gameObject.CompareTag("Player"))
         {
@@ -143,6 +228,8 @@ public class StatusManager : MonoBehaviour, IStatusVariables
         {
             StartCoroutine(Stun<EnemyAI>(duration));
         }
+        yield return null;
+
     }
 
 
