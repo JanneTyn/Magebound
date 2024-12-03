@@ -34,10 +34,9 @@ public class PlayerAbilitiesInput : MonoBehaviour
             GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
             StartCoroutine(GlobalCooldown());
         }
-        else if (Input.GetKeyDown(KeyCode.F))
+        else if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.F))
         {
             spellVortex.StartTargeting();
-            StartCoroutine(GlobalCooldown());
         }
         else if (!isGlobalCooldownActive && spellVortex != null && spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0))
         {
