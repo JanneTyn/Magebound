@@ -14,6 +14,7 @@ public class CharacterStats_EnemyStats : CharacterStats
     {
         float healthScalingFactor = 1 + (GameManager.Instance.totalScore / (scoreWorth * 10f)) * healthMultiplier;
         SetMaxHealth(GetMaxHealth() * healthScalingFactor);
+        SetCurrentHealth(GetMaxHealth());
 
         float damageScalingFactor = 1 + Mathf.Sqrt(GameManager.Instance.totalScore / (scoreWorth * 10f)) * damageMultiplier;
         GetComponent<EnemyAttack>().damage *= damageScalingFactor;
