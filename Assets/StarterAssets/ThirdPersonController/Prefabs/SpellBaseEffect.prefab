@@ -66,7 +66,7 @@ MonoBehaviour:
   ExplosionFirePrefab: {fileID: 8567131400130850514, guid: a5da36f900a742d478294b91404c1e6e, type: 3}
   ExplosionIcePrefab: {fileID: 7890301266860189124, guid: 675fb047a226c724d9cc8508f0a5923c, type: 3}
   ExplosionThunderPrefab: {fileID: 5465650907320309770, guid: c1d37c16f64e0f6438506db09bb20c50, type: 3}
-  DashFirePrefab: {fileID: 1979670671004471724, guid: c10358af85b41844b9c1fc08acbb2504, type: 3}
+  DashFirePrefab: {fileID: 1979670671004471724, guid: 9b92acd3b2d240440a4f924c88940013, type: 3}
 --- !u!114 &3323136716434047821
 MonoBehaviour:
   m_ObjectHideFlags: 0
