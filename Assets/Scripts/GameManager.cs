@@ -4,9 +4,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private int totalScore;
+    public int totalScore;
 
-    public Score uiScore;
+    [SerializeField] private Score uiScore;
 
     private void Awake()
     {

@@ -7,6 +7,19 @@ public class CharacterStats_EnemyStats : CharacterStats
 {
     public int scoreWorth = 200;
 
+    [SerializeField] private float healthMultiplier = 0.2f;
+    [SerializeField] private float damageMultiplier = 0.5f;
+
+    private void Start()
+    {
+        float healthScalingFactor = 1 + (GameManager.Instance.totalScore / (scoreWorth * 10f)) * healthMultiplier;
+        SetMaxHealth(GetMaxHealth() * healthScalingFactor);
+
+        float damageScalingFactor = 1 + Mathf.Sqrt(GameManager.Instance.totalScore / (scoreWorth * 10f)) * damageMultiplier;
+        GetComponent<EnemyAttack>().damage *= damageScalingFactor;
+
+    }
+
     public override void ApplyDamage(float damage)
     {
         SetCurrentHealth(GetCurrentHealth() - damage);

@@ -13,6 +13,8 @@ public abstract class EnemyAttack : MonoBehaviour
     public Vector3 attackSize = new Vector3(1f, 1f, 2f);
     public Vector3 attackCenterOffset = new Vector3(0f, 1f, 0f);
 
+    public float damage = 50f;
+
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
