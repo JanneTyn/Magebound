@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
 {
@@ -8,14 +9,17 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
     public float explosionSize = 5;
     float timer = 0;
     bool delayPassed = false;
+    bool explosionActive = false;
     SphereCollider areaEffect;
     MeshRenderer areaRender;
+    VisualEffect vfx;
     [SerializeField] private Material red;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         areaEffect = GetComponentInChildren<SphereCollider>();
         areaRender = GetComponentInChildren<MeshRenderer>();
+        vfx = GetComponent<VisualEffect>();
     }
 
     // Update is called once per frame
@@ -25,8 +29,6 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
         if (timer > delay && !delayPassed) 
         { 
             delayPassed = true;
-            areaEffect.enabled = true;
-            areaRender.material = red;
             Collider[] enemies = Physics.OverlapSphere(transform.position, explosionSize);
 
             foreach (Collider enemy in enemies)
@@ -42,11 +44,16 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
             }
             StartCoroutine(DestroyAfterEffect());
         }
+        else if (timer > delay - 0.2f && !explosionActive)
+        {
+            explosionActive = true;
+            vfx.SetBool("IsExploding", true);
+        }
     }
 
     IEnumerator DestroyAfterEffect()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 }
