@@ -6,11 +6,8 @@ using UnityEngine.AI;
 public class SpellVortex : MonoBehaviour
 {
     public Transform player;
-    //public GameObject fireVortexPrefab;
     public GameObject fireVortexVFX;
-    //public GameObject iceVortexPrefab;
     public GameObject iceVortexVFX;
-    //public GameObject electricVortexPrefab;
     public GameObject lightningVortexVFX;
     public GameObject targetingCirclePrefab; // Visual indicator for targeting
     public float range = 10f;
@@ -138,6 +135,7 @@ public class SpellVortex : MonoBehaviour
 
                     if (damageSystem != null) {
                         // If the VortexEffect runs for 5 seconds and updates every frame (~60 frames per second), damage is applied approximately 300 times.
+                        //So 0.05f dmg = ~15hp
                         int vortexElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
                         damageSystem.CalculateDamage(0.05f, vortexElement);
                     }
@@ -190,13 +188,13 @@ public class SpellVortex : MonoBehaviour
                 agent.enabled = true;
                 agent.SetDestination(player.position);
             }
-        }
 
-        foreach (Rigidbody rb in rbs)
-        {
-            if (rb != null)
+            foreach (Rigidbody rb in rbs)
             {
-                rb.constraints = RigidbodyConstraints.FreezePosition;
+                if (rb != null)
+                {
+                    rb.constraints = RigidbodyConstraints.FreezePosition;
+                }
             }
         }
     }
