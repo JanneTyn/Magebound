@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7936675705994974584}
   - component: {fileID: 2190913598244950547}
   - component: {fileID: 2182111763750690051}
+  - component: {fileID: 3323136716434047821}
   m_Layer: 0
   m_Name: SpellBaseEffect
   m_TagString: Untagged
@@ -66,3 +67,18 @@ MonoBehaviour:
   ExplosionIcePrefab: {fileID: 7890301266860189124, guid: 675fb047a226c724d9cc8508f0a5923c, type: 3}
   ExplosionThunderPrefab: {fileID: 5465650907320309770, guid: c1d37c16f64e0f6438506db09bb20c50, type: 3}
   DashFirePrefab: {fileID: 1979670671004471724, guid: c10358af85b41844b9c1fc08acbb2504, type: 3}
+--- !u!114 &3323136716434047821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058666511257578218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da63fd060bf5f2439676d1e3378bd48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrystalShardFirePrefab: {fileID: 2857221427175401981, guid: 740d0a3a18a001742b55d75da57092f5, type: 3}
+  CrystalShardIcePrefab: {fileID: 0}
+  CrystalShardThunderPrefab: {fileID: 0}

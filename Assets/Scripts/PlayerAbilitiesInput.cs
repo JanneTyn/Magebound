@@ -58,6 +58,11 @@ public class PlayerAbilitiesInput : MonoBehaviour
             cursorTarget.AttackPrepare(2);
             StartCoroutine(GlobalCooldown());
         }
+        else if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.R)) //Shard
+        {
+            cursorTarget.AttackPrepare(3);
+            StartCoroutine(GlobalCooldown());
+        }
     }
 
     private void FixedUpdate()

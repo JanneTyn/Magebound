@@ -10,6 +10,7 @@ public class CursorTarget : MonoBehaviour
     public float rotationLockTime = 0.3f;
     private SpellBaseEffect spellEffect;
     private SpellExplosion spellExplosion;
+    private SpellShard spellShard;
     private GameObject player;
     private Vector3 attackTarget;
     private Camera cam;
@@ -24,6 +25,7 @@ public class CursorTarget : MonoBehaviour
         cam = GetComponent<Camera>();
         spellEffect = GameObject.Find("SpellBaseEffect").GetComponent<SpellBaseEffect>();
         spellExplosion = GameObject.Find("SpellBaseEffect").GetComponent<SpellExplosion>();
+        spellShard = GameObject.Find("SpellBaseEffect").GetComponent<SpellShard>();
         player = GameObject.Find("Player");
     }
 
@@ -58,6 +60,10 @@ public class CursorTarget : MonoBehaviour
                     break;
                 case 2: //explosion
                     spellExplosion.InitializeExplosion(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                    break;
+                case 3: //shard
+                    fixedPoint.y = 0.4f;
+                    spellShard.InitializeShard(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
                     break;
             }
         }
