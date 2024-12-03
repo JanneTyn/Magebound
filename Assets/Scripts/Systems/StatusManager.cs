@@ -65,10 +65,12 @@ public class StatusManager : MonoBehaviour, IStatusVariables
 
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
-            this.gameObject.GetComponent<DamageSystem>().CalculateDamage(10, 1);
             
-            yield return null;
+            this.gameObject.GetComponent<DamageSystem>().CalculateDamage(10, 1);
+
+            yield return new WaitForSeconds(1f);
+
+            elapsedTime += 1f;
         }
     }
 
@@ -78,10 +80,11 @@ public class StatusManager : MonoBehaviour, IStatusVariables
 
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
             this.gameObject.GetComponent<DamageSystem>().CalculateDamage(damage, 1);
 
-            yield return null;
+            yield return new WaitForSeconds(1f);
+
+            elapsedTime += 1f;
         }
     }
 
