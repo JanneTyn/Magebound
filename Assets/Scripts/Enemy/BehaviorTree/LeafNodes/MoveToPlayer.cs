@@ -14,15 +14,24 @@ public class MoveToPlayer : BTNode
 
     public override NodeState Evaluate()
     {
-        agent.SetDestination(player.position);
-
-        if (Vector3.Distance(agent.transform.position, player.position) <= agent.stoppingDistance)
+        // Check if the NavMeshAgent is enabled and on a valid NavMesh
+        if (agent.enabled && agent.isOnNavMesh)
         {
-            state = NodeState.SUCCESS;
+            agent.SetDestination(player.position);
+
+            if (Vector3.Distance(agent.transform.position, player.position) <= agent.stoppingDistance)
+            {
+                state = NodeState.SUCCESS;
+            }
+            else
+            {
+                state = NodeState.RUNNING;
+            }
         }
         else
         {
-            state = NodeState.RUNNING;
+            Debug.LogWarning($"MoveToPlayer: NavMeshAgent for {agent.gameObject.name} is not valid (enabled: {agent.enabled}, onNavMesh: {agent.isOnNavMesh}).");
+            state = NodeState.FAILURE;
         }
         return state;
     }
