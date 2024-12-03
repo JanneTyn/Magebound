@@ -30,7 +30,6 @@ public class MoveToPlayer : BTNode
         }
         else
         {
-            Debug.LogWarning($"MoveToPlayer: NavMeshAgent for {agent.gameObject.name} is not valid (enabled: {agent.enabled}, onNavMesh: {agent.isOnNavMesh}).");
             state = NodeState.FAILURE;
         }
         return state;
