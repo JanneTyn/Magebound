@@ -29,14 +29,14 @@ public class CursorTarget : MonoBehaviour
 
     private void Update()
     {
-        ray = cam.ScreenPointToRay(Input.mousePosition);
+        /*ray = cam.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
         if (Input.GetMouseButtonDown(0)) AttackPrepare(0);
         else if (Input.GetMouseButtonDown(1)) AttackPrepare(1);
-        else if (Input.GetKeyDown(KeyCode.E)) AttackPrepare(2);
+        else if (Input.GetKeyDown(KeyCode.E)) AttackPrepare(2); */
     }
 
-    void AttackPrepare(int attackID)
+    public void AttackPrepare(int attackID)
     {
         if (!CheckForTarget())
         {
@@ -76,7 +76,6 @@ public class CursorTarget : MonoBehaviour
 
             yield return null;
         }
-
     }
 
     bool CheckForTarget()
@@ -90,14 +89,10 @@ public class CursorTarget : MonoBehaviour
             if (hit.collider.CompareTag("Ground"))
             {
                 fixedPoint = hit.point;
+                Debug.Log("HIT.POINT: " + hit.point);
                 return true;
             }
         }
-
         return false;
-
     }
-
-    
-
 }

@@ -6,6 +6,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
 
     private bool isGlobalCooldownActive = false;
     public float globalCooldownDuration = 2f;
+    CursorTarget cursorTarget;
 
     //Seperate possible extra needed settings for UI
     [System.Serializable]
@@ -21,6 +22,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        cursorTarget = GameObject.Find("PlayerFollow/Camera Pivot/MainCamera").GetComponent<CursorTarget>();
         spellVortex = GetComponent<SpellVortex>();
     }
 
@@ -32,21 +34,31 @@ public class PlayerAbilitiesInput : MonoBehaviour
             GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
             StartCoroutine(GlobalCooldown());
         }
-
-        if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.F))
+        else if (Input.GetKeyDown(KeyCode.F))
         {
             spellVortex.StartTargeting();
+            StartCoroutine(GlobalCooldown());
         }
-
-        if (!isGlobalCooldownActive && spellVortex != null  && spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) {
+        else if (!isGlobalCooldownActive && spellVortex != null && spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0))
+        {
             spellVortex.ConfirmTarget();
             StartCoroutine(GlobalCooldown());
         }
-
-        /*else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0))
+        else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) //basic projectile
         {
-            //Players basic attack
-        }*/
+            cursorTarget.AttackPrepare(0);
+            StartCoroutine(GlobalCooldown());
+        }
+        else if (!isGlobalCooldownActive && Input.GetMouseButtonDown(1)) //Dash
+        {
+            cursorTarget.AttackPrepare(1);
+            StartCoroutine(GlobalCooldown());
+        }
+        else if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.E)) //Explosion
+        {
+            cursorTarget.AttackPrepare(2);
+            StartCoroutine(GlobalCooldown());
+        }
     }
 
     private void FixedUpdate()
