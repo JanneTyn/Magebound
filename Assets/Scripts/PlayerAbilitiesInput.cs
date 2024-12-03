@@ -15,11 +15,13 @@ public class PlayerAbilitiesInput : MonoBehaviour
     }
     public UISettings uiSettings;
 
+    private SpellVortex spellVortex;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        spellVortex = GetComponent<SpellVortex>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,21 @@ public class PlayerAbilitiesInput : MonoBehaviour
             GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
             StartCoroutine(GlobalCooldown());
         }
+
+        if (!isGlobalCooldownActive && Input.GetKeyDown(KeyCode.F))
+        {
+            spellVortex.StartTargeting();
+        }
+
+        if (!isGlobalCooldownActive && spellVortex != null  && spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) {
+            spellVortex.ConfirmTarget();
+            StartCoroutine(GlobalCooldown());
+        }
+
+        /*else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0))
+        {
+            //Players basic attack
+        }*/
     }
 
     private void FixedUpdate()
