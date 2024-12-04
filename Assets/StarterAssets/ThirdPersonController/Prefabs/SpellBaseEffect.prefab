@@ -81,4 +81,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CrystalShardFirePrefab: {fileID: 2857221427175401981, guid: 740d0a3a18a001742b55d75da57092f5, type: 3}
   CrystalShardIcePrefab: {fileID: 2857221427175401981, guid: e7fed2d2309183f4fa251303058be5f6, type: 3}
-  CrystalShardThunderPrefab: {fileID: 0}
+  CrystalShardThunderPrefab: {fileID: 2857221427175401981, guid: f538076d9497c064ea4aaefe0768de55, type: 3}

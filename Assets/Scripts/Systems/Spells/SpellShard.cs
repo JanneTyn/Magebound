@@ -20,7 +20,6 @@ public class SpellShard : MonoBehaviour
                 break;
             case 3:
                 GameObject thundershard = Instantiate(CrystalShardThunderPrefab, targetLocation, Quaternion.identity);
-                thundershard.GetComponent<SpellEffect_Explosion_Thunder>().SetProjectileDirection(targetLocation, playerLocation);
                 break;
         }
     }

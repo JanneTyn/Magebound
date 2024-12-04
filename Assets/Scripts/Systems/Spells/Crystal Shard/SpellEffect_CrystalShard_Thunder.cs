@@ -1,13 +1,12 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpellEffect_CrystalShard_Ice : SpellEffect_WorldEffect
+public class SpellEffect_CrystalShard_Thunder : SpellEffect_WorldEffect
 {
     public float shardDuration = 3;
     public float explosionSize = 5;
     float timer = 0;
-    float secs = 0;
+    float secs = 1f;
     bool delayPassed = false;
     SphereCollider areaEffect;
     MeshRenderer areaRender;
@@ -22,7 +21,7 @@ public class SpellEffect_CrystalShard_Ice : SpellEffect_WorldEffect
 
     // Update is called once per frame
     void Update()
-    {       
+    {
         if (timer < shardDuration)
         {
             delayPassed = true;
@@ -36,14 +35,14 @@ public class SpellEffect_CrystalShard_Ice : SpellEffect_WorldEffect
                 {
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
-                        if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), true, GetStatusID(), 0.45f, GetElementID());
+                        if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), true, GetStatusID(), 1, GetElementID());
                     }
                     else
                     {
                         Debug.Log("Damagesystem not found");
                     }
                 }
-                secs += 0.5f;
+                secs++;
             }
         }
         else
