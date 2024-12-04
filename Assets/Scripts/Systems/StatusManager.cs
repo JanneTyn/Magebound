@@ -53,7 +53,6 @@ public class StatusManager : MonoBehaviour, IStatusVariables
                     StopCoroutine(chillCoroutine);
                     chillCoroutine = StartCoroutine(ApplyChill(duration));
                 }
-
                 break;
             //Stun
             case 04:
@@ -77,7 +76,7 @@ public class StatusManager : MonoBehaviour, IStatusVariables
             case 01:
                 if (burnCoroutine == null)
                 {
-                    burnCoroutine = StartCoroutine(ApplyBurn(duration));
+                    burnCoroutine = StartCoroutine(ApplyBurn(duration, damage));
                 }
 
                 if (burnCoroutine != null && !isBurning)
@@ -144,6 +143,8 @@ public class StatusManager : MonoBehaviour, IStatusVariables
                 isBurning = false;
             }
         }
+
+        burnCoroutine = null;
     }
 
     private IEnumerator ApplyBurn(float duration, float damage)
@@ -169,6 +170,8 @@ public class StatusManager : MonoBehaviour, IStatusVariables
                 isBurning = false;
             }
         }
+
+        burnCoroutine = null;
     }
 
 
@@ -207,13 +210,25 @@ public class StatusManager : MonoBehaviour, IStatusVariables
         T component = this.GetComponent<T>();
         float originalSpeed = component.speed;
 
+        if (!isChilled)
+        {
+            isChilled = true;
+        }
+
         if (component != null)
         {
-            component.speed = originalSpeed / 10;
+            component.speed = originalSpeed / 2;
 
             yield return new WaitForSeconds(duration);
 
             component.speed = originalSpeed;
+
+            isChilled = false;
+
+            chillCoroutine = null;
+        } else
+        {
+            Debug.Log("Chill Component = null");
         }
     }
 
@@ -257,6 +272,8 @@ public class StatusManager : MonoBehaviour, IStatusVariables
             {
                 navAgent.isStopped = false;
             }
+
+            freezeCoroutine = null;
         }
     }
     private IEnumerator Stun<T>(float duration) where T : Behaviour
@@ -300,6 +317,8 @@ public class StatusManager : MonoBehaviour, IStatusVariables
             {
                 navAgent.isStopped = false;
             }
+
+            stunCoroutine = null;
         }
     }
 

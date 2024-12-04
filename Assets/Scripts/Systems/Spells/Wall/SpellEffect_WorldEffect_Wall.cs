@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
 {
     private GameObject parentObject;
+    public float statusDuration;
     public float length;
     public float size;
 
@@ -42,7 +43,21 @@ public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+            if (GetGiveStatus())
+            {
+                if(GetDamage() > 0.1f)
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), statusDuration, GetDamage(), GetElementID());
+                } else
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), statusDuration, GetElementID());
+                }
+            }
+            else
+            {
+                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+            }
+
         } 
         else if (other.gameObject.CompareTag("SpellEffect"))
         {

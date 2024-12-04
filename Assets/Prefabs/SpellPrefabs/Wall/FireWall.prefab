@@ -163,6 +163,7 @@ MonoBehaviour:
   ElementID: 1
   overlappableEffectID: 65000000c90000002d010000
   duration: 10
+  statusDuration: 0
   length: 3.1191907
   size: 5
 --- !u!54 &2873441533755381967
