@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
 {
@@ -11,13 +12,16 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
 
     public override void Activate(int spellID)
     {
+        VisualEffect visualEffect = GetComponent<VisualEffect>();
+
         switch (spellID)
         {
             case 104:
-                this.SetIsExplosive(true);
+                SetIsExplosive(true);
+                visualEffect.SetBool("FireCharged", true);
                 break;
             case 304:
-                this.SetIsOverCharged(true);
+                SetIsOverCharged(true);
                 break;
         }
     }
