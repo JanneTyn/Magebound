@@ -3885,7 +3885,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615003}
   m_ExposedName: ShockwaveScale
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:
@@ -4134,7 +4134,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615013}
   m_ExposedName: ShockwaveDelay
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
@@ -4215,7 +4215,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615015}
   m_ExposedName: ShockwaveDuration
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
