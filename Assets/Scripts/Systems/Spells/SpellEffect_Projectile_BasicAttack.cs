@@ -64,8 +64,17 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                 }
             } else
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
-                Destroy(gameObject);
+                if (GetIsOverCharged())
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, 1, GetOVerChargeBurnDuration(), GetOverChargeBurnDamage(), 1);
+                }
+                else
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                    Destroy(gameObject);
+                }
+
+
             }
         }
         else if (other.CompareTag("SpellEffect"))
