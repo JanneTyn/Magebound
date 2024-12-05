@@ -40,7 +40,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
         }
         else if (!isGlobalCooldownActive && spellVortex != null && spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0))
         {
-            spellVortex.ConfirmTarget();
+            spellVortex.PrepareAttackAnim();
             StartCoroutine(GlobalCooldown());
         }
         else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) //basic projectile

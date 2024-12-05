@@ -66,8 +66,8 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
                         Debug.Log("Damagesystem not found");
                     }
                 }
-                collided = true;             
-                GetComponent<VisualEffect>().SetBool("IsExploding", true);
+                collided = true;
+                GetComponent<VisualEffect>().SendEvent("OnExplode");
                 StartCoroutine(InitializeBurningGround());
                 enemyHit = true;
             }
