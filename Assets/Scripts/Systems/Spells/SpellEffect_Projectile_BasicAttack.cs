@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
 {
@@ -11,13 +12,16 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
 
     public override void Activate(int spellID)
     {
+        VisualEffect visualEffect = GetComponent<VisualEffect>();
+
         switch (spellID)
         {
             case 104:
-                this.SetIsExplosive(true);
+                SetIsExplosive(true);
+                visualEffect.SetBool("FireCharged", true);
                 break;
             case 304:
-                this.SetIsOverCharged(true);
+                SetIsOverCharged(true);
                 break;
         }
     }
@@ -60,8 +64,17 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                 }
             } else
             {
-                other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
-                Destroy(gameObject);
+                if (GetIsOverCharged())
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, 1, GetOVerChargeBurnDuration(), GetOverChargeBurnDamage(), 1);
+                }
+                else
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                    Destroy(gameObject);
+                }
+
+
             }
         }
         else if (other.CompareTag("SpellEffect"))

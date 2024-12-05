@@ -1,7 +1,6 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class Dash : MonoBehaviour
 {

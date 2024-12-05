@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using UnityEngine;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class DamageSystem : MonoBehaviour
 {

@@ -151,12 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
-  giveStatus: 0
-  statusID: 0
+  giveStatus: 1
+  statusID: 4
   spellID: 304
   ElementID: 3
   overlappableEffectID: 65000000c90000002d010000
   duration: 10
+  statusDuration: 3
   length: 3
   size: 5
 --- !u!54 &8727888268362598561
