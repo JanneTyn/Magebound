@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour, IStatusVariables
     private bool leftMovement = false;
     private Vector3 newLoc;
     private Dash dash;
+    Animator anim;
 
 
     void Start()
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour, IStatusVariables
         playerFollow = GameObject.Find("PlayerFollow");
         rb = GetComponent<Rigidbody>();
         dash = GetComponent<Dash>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -38,27 +40,32 @@ public class PlayerMovement : MonoBehaviour, IStatusVariables
     {
         if (!dash.dashIsActive)
         {
+            anim.SetBool("Walking", false);
             newLoc = new Vector3();
             if (UnityEngine.Input.GetKey("w"))
             {
                 transform.position += Vector3.forward * Time.deltaTime * speed;
                 newLoc += Vector3.forward;
+                anim.SetBool("Walking", true);
             }
             else if (UnityEngine.Input.GetKey("s"))
             {
                 transform.position -= Vector3.forward * Time.deltaTime * speed;
                 newLoc -= Vector3.forward;
+                anim.SetBool("Walking", true);
             }
 
             if (UnityEngine.Input.GetKey("a"))
             {
                 transform.position -= Vector3.right * Time.deltaTime * speed;
                 newLoc += -Vector3.right;
+                anim.SetBool("Walking", true);
             }
             else if (UnityEngine.Input.GetKey("d"))
             {
                 transform.position += Vector3.right * Time.deltaTime * speed;
                 newLoc += Vector3.right;
+                anim.SetBool("Walking", true);
             }
             transform.LookAt(transform.position + newLoc);          
         }

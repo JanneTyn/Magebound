@@ -64,7 +64,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
                     }
                 }
                 collided = true;
-                GetComponent<VisualEffect>().SetBool("IsExploding", true);
+                GetComponent<VisualEffect>().SendEvent("OnExplode");
 
                 if (!shockwaveEnabled) StartCoroutine(InitializeThunderShockwave());
                 enemyHit = true;

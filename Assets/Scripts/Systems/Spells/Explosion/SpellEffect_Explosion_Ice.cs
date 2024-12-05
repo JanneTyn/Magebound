@@ -59,7 +59,7 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
                     }
                 }
                 collided = true;
-                GetComponent<VisualEffect>().SetBool("IsExploding", true);
+                GetComponent<VisualEffect>().SendEvent("OnExplode");
                 
                 StartCoroutine(InitializeIcePillar());
                 enemyHit = true;

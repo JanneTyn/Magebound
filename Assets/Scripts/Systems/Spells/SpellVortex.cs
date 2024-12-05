@@ -31,8 +31,13 @@ public class SpellVortex : MonoBehaviour
         lastValidPosition = transform.position;
     }
 
-    public void ConfirmTarget()
+    public void PrepareAttackAnim()
     {
+        StartCoroutine(GetComponent<PlayerAnimations>().InitializeAttackAnimation(targetingCircle.transform.position, 5));
+    }
+
+    public void ConfirmTarget()
+    {       
         int playerElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
         if (isTargeting && targetingCircle != null)
         {

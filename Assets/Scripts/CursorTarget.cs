@@ -48,39 +48,96 @@ public class CursorTarget : MonoBehaviour
         else
         {
             Debug.Log("Ground target hit");
-            switch (attackID)
+            if (attackID == 1) { InitializeAttack(1); }
+            else
             {
-                case 0: //projectile
-                    spellEffect.InitializeProjectile(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
-                    StartCoroutine(RotationLockOnTarget(fixedPoint));
-                    break;
-                case 1: //Dash
-                    fixedPoint.y = player.transform.position.y;
-                    player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
-                    break;
-                case 2: //explosion
-                    spellExplosion.InitializeExplosion(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
-                    break;
-                case 3: //shard
-                    fixedPoint.y = 0.4f;
-                    spellShard.InitializeShard(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
-                    break;
+                StartCoroutine(player.GetComponent<PlayerAnimations>().InitializeAttackAnimation(fixedPoint, attackID));
             }
         }
     }
 
-    IEnumerator RotationLockOnTarget(Vector3 targetLoc)
+    IEnumerator RotationLockOnTarget(Vector3 targetLoc, int attackID)
     {
-        var t = 0f;
+        // Adjust the target location to the player's level
+        AdjustTargetLocation(ref targetLoc);
+
+        // Initiate attack animation
+        StartAttackAnimation(attackID);
+
+        // Duration of the attack
+        float attackTime = 2f;
+        Debug.Log("attacktime: " + attackTime);
+
+        // Perform rotation and attack initialization during the attack duration
+        yield return RotateAndAttack(targetLoc, attackID, attackTime);
+
+        // Reset animation state
+        ResetAttackAnimation();
+    }
+
+    void AdjustTargetLocation(ref Vector3 targetLoc)
+    {
         targetLoc.y = player.transform.position.y;
         player.transform.LookAt(targetLoc);
-        Quaternion rotation = player.transform.rotation;
-        while (t < rotationLockTime)
+    }
+
+    void StartAttackAnimation(int attackID)
+    {
+        var animator = player.GetComponentInChildren<Animator>();
+        if (attackID == 0)
+            animator.SetBool("BasicAttackShot", true);
+        else
+            animator.SetBool("SkillAttack", true);
+    }
+
+    IEnumerator RotateAndAttack(Vector3 targetLoc, int attackID, float attackTime)
+    {
+        float elapsedTime = 0f;
+        bool attackInitialized = false;
+
+        while (elapsedTime < attackTime)
         {
-            t += Time.deltaTime;
-            player.transform.rotation = rotation;
+            elapsedTime += Time.deltaTime;
+
+            // Continuously rotate towards the target
+            player.transform.LookAt(targetLoc);
+
+            // Initialize the attack at the delay
+            if (elapsedTime > 0.5f && !attackInitialized)
+            {
+                attackInitialized = true;
+                InitializeAttack(attackID);
+            }
 
             yield return null;
+        }
+    }
+
+    void ResetAttackAnimation()
+    {
+        var animator = player.GetComponentInChildren<Animator>();
+        animator.SetBool("BasicAttackShot", false);
+        animator.SetBool("SkillAttack", false);
+    }
+
+    void InitializeAttack(int attackID)
+    {
+        switch (attackID)
+        {
+            case 0: //projectile
+                spellEffect.InitializeProjectile(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());          
+                break;
+            case 1: //Dash
+                fixedPoint.y = player.transform.position.y;
+                player.GetComponent<Dash>().InitializeDash(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                break;
+            case 2: //explosion
+                spellExplosion.InitializeExplosion(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                break;
+            case 3: //shard
+                fixedPoint.y = 0.4f;
+                spellShard.InitializeShard(player.transform.position, fixedPoint, player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement());
+                break;
         }
     }
 
