@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class Ability_Wall : MonoBehaviour
 {
@@ -37,7 +38,12 @@ public class Ability_Wall : MonoBehaviour
             //midpoint += direction.normalized * 1f;
         }
 
-        switch(elementID)
+        StartCoroutine(GetComponent<PlayerAnimations>().InitializeAttackAnimation(spawnPosition, 4));
+    }
+
+    public void InitializeWall(int elementID) 
+    {
+        switch (elementID)
         {
             case 1:
 
@@ -56,7 +62,7 @@ public class Ability_Wall : MonoBehaviour
                 iceWall.size = 5;
 
                 break;
-            
+
             case 3:
 
                 //Spawn electric wall and set its size

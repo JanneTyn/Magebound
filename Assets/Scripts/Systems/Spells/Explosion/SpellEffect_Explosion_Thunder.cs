@@ -33,7 +33,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
 
         float dist = Vector3.Distance(transform.position, playerLocation);
         if (dist > 2000) { StartCoroutine(InitializeThunderShockwave()); collided = true; }
-        else if (transform.position == projectileDir) { GetComponent<VisualEffect>().SetBool("IsExploding", true); collided = true; StartCoroutine(InitializeThunderShockwave()); }
+        else if (transform.position == projectileDir) { GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeThunderShockwave()); }
     }
 
     public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
@@ -64,7 +64,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
                     }
                 }
                 collided = true;
-                GetComponent<VisualEffect>().SetBool("IsExploding", true);
+                GetComponent<VisualEffect>().SendEvent("OnExplode");
 
                 if (!shockwaveEnabled) StartCoroutine(InitializeThunderShockwave());
                 enemyHit = true;

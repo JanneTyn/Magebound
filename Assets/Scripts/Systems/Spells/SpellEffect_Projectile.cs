@@ -12,6 +12,12 @@ public class SpellEffect_Projectile : SpellEffect
     [SerializeField] private float projectileSpeed = 8;
     [SerializeField] private float travelDistance = 20;
 
+    private void Start()
+    {
+        base.BaseStart();
+        overChargeBurnDamage = GameObject.FindWithTag("Player").GetComponent<CharacterStats_PlayerStats>().damageMultiplier * overChargeBurnDamage;
+    }
+
     public override void Activate(int o)
     {
         throw new System.NotImplementedException();
