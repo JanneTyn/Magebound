@@ -7,6 +7,8 @@ public abstract class SpellEffect : MonoBehaviour
     [SerializeField] private int statusID;
     [SerializeField] private int spellID;
     [SerializeField] private int ElementID;
+    [SerializeField] private float manaRecoveryAmmount;
+    ManaSystem manasystem;
 
 
     public int[] overlappableEffectID;
@@ -14,6 +16,7 @@ public abstract class SpellEffect : MonoBehaviour
     protected virtual void BaseStart()
     {
         damage = GameObject.FindWithTag("Player").GetComponent<CharacterStats_PlayerStats>().damageMultiplier * damage;
+        manasystem = GameObject.FindWithTag("Player").GetComponent<ManaSystem>();
     }
 
     private void Start()
@@ -42,6 +45,8 @@ public abstract class SpellEffect : MonoBehaviour
 
     public abstract void Activate(int spellID);
 
+    public virtual ManaSystem GetManaSystem() { return manasystem; }
+    public virtual float GetManaRecoveryAmmount() { return manaRecoveryAmmount; }
     public virtual int GetSpellID() { return spellID; }
     public virtual float GetDamage() { return damage; }
     public virtual bool GetGiveStatus() { return giveStatus; }

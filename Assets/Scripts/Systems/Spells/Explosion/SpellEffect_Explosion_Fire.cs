@@ -31,7 +31,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 
         float dist = Vector3.Distance(transform.position, playerLocation);
         if (dist > 2000) { StartCoroutine(InitializeBurningGround()); collided = true; }
-        else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SetBool("IsExploding", true); collided = true; StartCoroutine(InitializeBurningGround()); }
+        else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeBurningGround()); }
 
         if (explosionFin && groundSet)
         {        
@@ -60,6 +60,14 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg)) 
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                     }
                     else
                     {

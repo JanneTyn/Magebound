@@ -26,6 +26,8 @@ public class ManaSystem : MonoBehaviour
         manaBar.SetCurrentMana(currentMana);
     }
 
+    public float GetMana() { return currentMana; }
+
     public void UseMana(float manaAmmount) 
     { 
         currentMana -= manaAmmount;
@@ -43,6 +45,15 @@ public class ManaSystem : MonoBehaviour
     public void GainMana()
     {
         currentMana += manaOnHitRecoverAmmount;
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
+
+        //Update UI
+        manaBar.SetCurrentMana(currentMana);
+    }
+
+    public void GainMana(float manaRecoveryAmmount)
+    {
+        currentMana += manaRecoveryAmmount;
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
         //Update UI

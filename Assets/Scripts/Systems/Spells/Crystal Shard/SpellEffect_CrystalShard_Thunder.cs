@@ -36,6 +36,14 @@ public class SpellEffect_CrystalShard_Thunder : SpellEffect_WorldEffect
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), true, GetStatusID(), 1, GetElementID());
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                     }
                     else
                     {

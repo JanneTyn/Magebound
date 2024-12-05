@@ -28,7 +28,7 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
 
         float dist = Vector3.Distance(transform.position, playerLocation);
         if (dist > 2000) { StartCoroutine(InitializeIcePillar()); collided = true; }
-        else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SetBool("IsExploding", true); collided = true; StartCoroutine(InitializeIcePillar()); }
+        else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeIcePillar()); }
     }
 
     public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
@@ -52,6 +52,14 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), true, GetStatusID(), GetStatusDuration(), GetElementID());
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                     }
                     else
                     {
