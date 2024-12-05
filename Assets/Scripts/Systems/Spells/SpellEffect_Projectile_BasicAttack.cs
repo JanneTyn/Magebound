@@ -10,6 +10,7 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
     Vector3 playerLocation;
     private bool directionSet;
 
+
     public override void Activate(int spellID)
     {
         VisualEffect visualEffect = GetComponent<VisualEffect>();
@@ -63,11 +64,27 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                     if (GetIsOverCharged())
                     {
                         other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, 1, GetOVerChargeBurnDuration(), GetOverChargeBurnDamage(), 1);
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                         Destroy(gameObject);
                     }
                     else
                     {
                         other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                         Destroy(gameObject);
                     }
                 }
@@ -76,11 +93,27 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                 if (GetIsOverCharged())
                 {
                     other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, 1, GetOVerChargeBurnDuration(), GetOverChargeBurnDamage(), 1);
+                    if (GetManaRecoveryAmmount() > 0.1f)
+                    {
+                        GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                    }
+                    else
+                    {
+                        GetManaSystem().GainMana();
+                    }
                     Destroy(gameObject);
                 }
                 else
                 {
                     other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                    if (GetManaRecoveryAmmount() > 0.1f)
+                    {
+                        GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                    }
+                    else
+                    {
+                        GetManaSystem().GainMana();
+                    }
                     Destroy(gameObject);
                 }
 

@@ -179,6 +179,7 @@ MonoBehaviour:
   statusID: 0
   spellID: 201
   ElementID: 2
+  manaRecoveryAmmount: 50
   overlappableEffectID: 
   lifetime: 0
   isExplosive: 0

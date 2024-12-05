@@ -57,6 +57,14 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), shockwaveEnabled, GetStatusID(), GetStatusDuration(), GetElementID());
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                     }
                     else
                     {

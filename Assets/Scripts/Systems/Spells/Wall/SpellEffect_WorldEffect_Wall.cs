@@ -48,14 +48,39 @@ public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
                 if(GetDamage() > 0.1f)
                 {
                     other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), statusDuration, GetDamage(), GetElementID());
+                    if(GetManaRecoveryAmmount() > 0.1f)
+                    {
+                        GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                    }
+                    else
+                    {
+                        GetManaSystem().GainMana();
+                    }
+                    
                 } else
                 {
                     other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetGiveStatus(), GetStatusID(), statusDuration, GetElementID());
+                    if (GetManaRecoveryAmmount() > 0.1f)
+                    {
+                        GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                    }
+                    else
+                    {
+                        GetManaSystem().GainMana();
+                    }
                 }
             }
             else
             {
                 other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), GetElementID());
+                if (GetManaRecoveryAmmount() > 0.1f)
+                {
+                    GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                }
+                else
+                {
+                    GetManaSystem().GainMana();
+                }
             }
 
         } 

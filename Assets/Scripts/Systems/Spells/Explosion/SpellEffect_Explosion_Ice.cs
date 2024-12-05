@@ -52,6 +52,14 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
                     if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), true, GetStatusID(), GetStatusDuration(), GetElementID());
+                        if (GetManaRecoveryAmmount() > 0.1f)
+                        {
+                            GetManaSystem().GainMana(GetManaRecoveryAmmount());
+                        }
+                        else
+                        {
+                            GetManaSystem().GainMana();
+                        }
                     }
                     else
                     {
