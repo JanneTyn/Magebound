@@ -46,7 +46,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
         else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) //basic projectile
         {
             cursorTarget.AttackPrepare(0);
-            StartCoroutine(GlobalCooldown());
+            //StartCoroutine(GlobalCooldown());
         }
         else if (!isGlobalCooldownActive && Input.GetMouseButtonDown(1)) //Dash
         {
