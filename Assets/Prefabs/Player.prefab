@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: -3541707250020787797}
   - component: {fileID: 4515676706132983167}
   - component: {fileID: 296985875734391505}
+  - component: {fileID: 7024476211291677695}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -347,6 +348,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 0}
   points: 0
   damageMultiplier: 1
+  playerDead: 0
 --- !u!114 &8445912197333104168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +425,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalCooldownDuration: 1
+  wallManaCost: 200
+  vortexManaCost: 200
+  dashManaCost: 200
+  explosionManaCost: 200
+  shardManaCost: 200
   uiSettings:
     skillIconsParent: {fileID: 0}
 --- !u!114 &217135097968322971
@@ -494,6 +501,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f64fceaf28c25499a06b2e5f1657db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7024476211291677695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777497927225088024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef100605a4c2d24f8d3269f027dcd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8573021367887713382}
+  fireVortexVFX: {fileID: 6754325552709864378, guid: a6d17d2068a0a0248af8ffa3b5193f63, type: 3}
+  iceVortexVFX: {fileID: 5807620652789127988, guid: 11e6dd3faaf10d14aad74414e628b83b, type: 3}
+  lightningVortexVFX: {fileID: 4937332490464090657, guid: 567af54666410bf44a3fca1f44ff495a, type: 3}
+  targetingCirclePrefab: {fileID: 5761501634439072031, guid: 91e0870a96aa14d46ae66abb8906563e, type: 3}
+  range: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  pullRadius: 5
+  pullForce: 10
 --- !u!1 &4730023678267145898
 GameObject:
   m_ObjectHideFlags: 0

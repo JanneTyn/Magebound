@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class CharacterStats_PlayerStats : CharacterStats
     public GameOverFade gameOverScreen;
     public int points;
     public float damageMultiplier = 1.0f;
+    public bool playerDead = false;
 
     private void Start()
     {
@@ -29,7 +31,7 @@ public class CharacterStats_PlayerStats : CharacterStats
 
         if (GetCurrentHealth() <= 0)
         {
-            DeathSequence();
+            StartDeathAnimation();
         }
     }
 
@@ -44,10 +46,24 @@ public class CharacterStats_PlayerStats : CharacterStats
         GetComponent<ManaSystem>().LevelUp(maxMana);
     }
 
-    private void DeathSequence()
+    private void StartDeathAnimation()
     {
-        //TODO:
-        //Death animation
+        StartCoroutine(DeathAnimation());
+    }
+
+    IEnumerator DeathAnimation()
+    {
+        GetComponentInChildren<Animator>().Play("Dead", 0);
+        playerDead = true;
+
+        yield return new WaitForEndOfFrame();
+
+        while ((GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Dead") &&
+            GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f))
+        {
+            yield return null;
+        }
+
         gameOverScreen.SetUI(true);
 
         Destroy(gameObject);

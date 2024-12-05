@@ -9,14 +9,17 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
     public float explosionEffectTime = 1f;
     bool dmgActive = false;
     bool collided = false;
-    bool enemyHit = false;
+    bool exploded = false;
     float boltAliveTime = 0;
     public float explosionSize = 0;
+    public float groundDamage = 5;
     public bool explosionFin = false;
     public bool groundSet = false;
     Vector3 projectileDir;
     Vector3 playerLocation;
     private bool directionSet;
+    private float dmgTimer = 0;
+
 
     // Update is called once per frame
     void Update()
@@ -26,6 +29,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
         {
             var step = GetBoltSpeed() * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, projectileDir, step);
+            boltAliveTime += Time.deltaTime;
             Debug.Log("projectileDir:" + projectileDir);
         }
 
@@ -33,8 +37,8 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
         if (dist > 2000) { StartCoroutine(InitializeBurningGround()); collided = true; }
         else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeBurningGround()); }
 
-        if (explosionFin && groundSet)
-        {        
+        if (explosionFin)
+        {
             Destroy(gameObject);
         }
     }
@@ -48,7 +52,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !enemyHit)
+        if (other.CompareTag("Enemy") && !exploded)
         {
             if (GetIsExplosive())
             {
@@ -57,7 +61,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 
                 foreach (Collider enemy in enemies)
                 {
-                    if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg)) 
+                    if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                     {
                         if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
                         if (GetManaRecoveryAmmount() > 0.1f)
@@ -77,7 +81,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
                 collided = true;
                 GetComponent<VisualEffect>().SendEvent("OnExplode");
                 StartCoroutine(InitializeBurningGround());
-                enemyHit = true;
+
             }
             else
             {
@@ -92,11 +96,28 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
         } */
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (GetElementID() == 1)
+        {
+            dmgTimer += Time.deltaTime;
+            if (dmgTimer >= 0.5f)
+            {
+                if (other.CompareTag("Enemy"))
+                {
+                    other.GetComponent<DamageSystem>().CalculateDamage(groundDamage, true, GetStatusID(), GetStatusDuration(), GetElementID());
+                }
+                dmgTimer = 0;
+            }
+        }
+    }
+
     IEnumerator InitializeBurningGround()
     {
-
+        exploded = true;
         float t = 0;
-        while (t < explosionEffectTime)
+        float life = GetComponent<VisualEffect>().GetFloat("GroundLife") - 1;
+        while (t < life)
         {
             t += Time.deltaTime;
             yield return null;
@@ -105,13 +126,15 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
     }
 
     void SetExplosionArea()
-    {      
+    {
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         float timeMult = boltAliveTime * GetComponent<VisualEffect>().GetFloat("GrowSpeed");
         if (timeMult > 1) timeMult = 1;
-        explosionSize = Mathf.Lerp(GetComponent<VisualEffect>().GetFloat("ExplosionSizeMin"), GetComponent<VisualEffect>().GetFloat("ExplosionSizeMax"), timeMult);
+        explosionSize = Mathf.Lerp(GetComponent<VisualEffect>().GetFloat("ExplosionSizeMin") + 1, GetComponent<VisualEffect>().GetFloat("ExplosionSizeMax"), timeMult);
+        Debug.Log("Explosionsize: " + explosionSize);
 
         GetComponent<BoxCollider>().size = new Vector3(explosionSize, explosionSize, explosionSize);
         GetComponent<BoxCollider>().center = new Vector3(0, 0, 0);
     }
+    
 }

@@ -15,7 +15,7 @@ public class SpellExplosion : MonoBehaviour
             case 1:
                 GameObject explosion = Instantiate(ExplosionFirePrefab, playerLocation, Quaternion.identity);
                 explosion.GetComponent<SpellEffect_Explosion_Fire>().SetProjectileDirection(targetLocation, playerLocation);
-                StartCoroutine(BurningGround(targetLocation, explosion));
+                //StartCoroutine(BurningGround(targetLocation, explosion));
                 break;
             case 2:
                 GameObject iceExplosion = Instantiate(ExplosionIcePrefab, playerLocation, Quaternion.identity);

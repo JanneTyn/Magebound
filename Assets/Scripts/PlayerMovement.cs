@@ -38,38 +38,45 @@ public class PlayerMovement : MonoBehaviour, IStatusVariables
     // Update is called once per frame
     void Update()
     {
-        if (!dash.dashIsActive)
+        if (!GetComponent<CharacterStats_PlayerStats>().playerDead)
         {
-            anim.SetBool("Walking", false);
-            newLoc = new Vector3();
-            if (UnityEngine.Input.GetKey("w"))
+            if (!dash.dashIsActive)
             {
-                transform.position += Vector3.forward * Time.deltaTime * speed;
-                newLoc += Vector3.forward;
-                anim.SetBool("Walking", true);
-            }
-            else if (UnityEngine.Input.GetKey("s"))
-            {
-                transform.position -= Vector3.forward * Time.deltaTime * speed;
-                newLoc -= Vector3.forward;
-                anim.SetBool("Walking", true);
-            }
+                anim.SetBool("Walking", false);
+                Vector3 newLoc = Vector3.zero;
 
-            if (UnityEngine.Input.GetKey("a"))
-            {
-                transform.position -= Vector3.right * Time.deltaTime * speed;
-                newLoc += -Vector3.right;
-                anim.SetBool("Walking", true);
+                // Collect input directions
+                if (UnityEngine.Input.GetKey("w"))
+                {
+                    newLoc += Vector3.forward;
+                    anim.SetBool("Walking", true);
+                }
+                if (UnityEngine.Input.GetKey("s"))
+                {
+                    newLoc -= Vector3.forward;
+                    anim.SetBool("Walking", true);
+                }
+                if (UnityEngine.Input.GetKey("a"))
+                {
+                    newLoc -= Vector3.right;
+                    anim.SetBool("Walking", true);
+                }
+                if (UnityEngine.Input.GetKey("d"))
+                {
+                    newLoc += Vector3.right;
+                    anim.SetBool("Walking", true);
+                }
+
+                // Normalize movement vector to ensure consistent speed in all directions
+                if (newLoc != Vector3.zero)
+                {
+                    newLoc.Normalize();
+                    transform.position += newLoc * Time.deltaTime * speed;
+                    transform.LookAt(transform.position + newLoc);
+                }
             }
-            else if (UnityEngine.Input.GetKey("d"))
-            {
-                transform.position += Vector3.right * Time.deltaTime * speed;
-                newLoc += Vector3.right;
-                anim.SetBool("Walking", true);
-            }
-            transform.LookAt(transform.position + newLoc);          
+            playerFollow.transform.position = transform.position;
         }
-        playerFollow.transform.position = transform.position;
     }
 
     private void FixedUpdate()
