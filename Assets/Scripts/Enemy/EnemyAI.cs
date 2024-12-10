@@ -38,6 +38,24 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+        {
+            if (animator.parameters != null && AnimatorHasParameter(animator, "IsDead"))
+            {
+                if (animator.GetBool("IsDead"))
+                {
+                    //Stop behavior tree evaluation if enemy is dead
+                    return;
+                }
+            }
+
+            if (!AnimatorHasParameter(animator, "IsDead"))
+            {
+                Debug.LogWarning("Animator is missing parameter 'IsDead' on object: " + gameObject.name);
+            }
+        }
+
         if (currentBehaviorTree != null)
         {
             BTNode.NodeState state = currentBehaviorTree.Evaluate();
@@ -56,6 +74,18 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log("AI failed to perform action.");
             }
         }
+    }
+
+    //For checking if an Animator has a specific parameter
+    private bool AnimatorHasParameter(Animator animator, string paramName)
+    {
+        foreach (var param in animator.parameters) {
+            if (param.name == paramName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void BuildBehaviorTree()

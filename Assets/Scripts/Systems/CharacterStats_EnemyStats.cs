@@ -10,6 +10,8 @@ public class CharacterStats_EnemyStats : CharacterStats
     [SerializeField] private float healthMultiplier = 0.2f;
     [SerializeField] private float damageMultiplier = 0.5f;
 
+    private EnemyDeathHandler deathHandler;
+
     private void Start()
     {
         float healthScalingFactor = 1 + (GameManager.Instance.totalScore / (scoreWorth * 10f)) * healthMultiplier;
@@ -19,6 +21,7 @@ public class CharacterStats_EnemyStats : CharacterStats
         float damageScalingFactor = 1 + Mathf.Sqrt(GameManager.Instance.totalScore / (scoreWorth * 10f)) * damageMultiplier;
         GetComponent<EnemyAttack>().damage *= damageScalingFactor;
 
+        deathHandler = GetComponent<EnemyDeathHandler>();
     }
 
     public override void ApplyDamage(float damage)
@@ -35,13 +38,9 @@ public class CharacterStats_EnemyStats : CharacterStats
     {
         GameManager.Instance.increaseScore(scoreWorth); //Keep this at the top of sequence unless something needs to happen before score update
 
-        Destroy(gameObject);
-        if (transform.parent != null)
+        if (deathHandler != null)
         {
-            Destroy(transform.parent.gameObject);
+            deathHandler.HandleDeath();
         }
-
-        Debug.Log("Enemy died!");
-        
     }
 }
