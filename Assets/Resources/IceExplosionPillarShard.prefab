@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4183167213045856839, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+  - {fileID: 2100000, guid: c91a0b7f3984a634396ed1a30812cc65, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,14 +117,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3886744552167550135}
-  - component: {fileID: -4770488849208324750}
-  - component: {fileID: -7941942516220551621}
-  - component: {fileID: 8086582544960471966}
-  - component: {fileID: 159520678216203105}
-  - component: {fileID: -737654320679112117}
-  m_Layer: 0
-  m_Name: IceShard
-  m_TagString: SpellEffect
+  - component: {fileID: 894632016952225758}
+  - component: {fileID: 3097709456813748054}
+  - component: {fileID: 7967626645795895313}
+  - component: {fileID: -2231653294979532236}
+  - component: {fileID: -3117988898859979126}
+  m_Layer: 8
+  m_Name: IceExplosionPillarShard
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ Transform:
   - {fileID: 5154109377667586552}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4770488849208324750
+--- !u!114 &894632016952225758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,22 +155,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2857221427175401981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5159086f6f4c40449b876d6ed9df7427, type: 3}
+  m_Script: {fileID: 11500000, guid: dd28ed82a3bb2a640bf6dc65188fe53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  giveStatus: 1
-  statusID: 2
+  damage: 25
+  giveStatus: 0
+  statusID: 0
   spellID: 6
-  ElementID: 2
-  manaRecoveryAmmount: 0
+  ElementID: 1
+  manaRecoveryAmmount: 20
   overlappableEffectID: 
   duration: 0
-  shardDuration: 3
-  explosionSize: 2.5
-  red: {fileID: 0}
-  statusDuration: 1
---- !u!2083052967 &-7941942516220551621
+  delay: 4
+  explosionSize: 1.25
+  red: {fileID: 2100000, guid: ed46f4de076e9194cbc7b7becfdeefb6, type: 2}
+--- !u!2083052967 &3097709456813748054
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +177,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2857221427175401981}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 20ea79006a8d6b343b2775c324bfcbd7, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: f3210e541020e2643b10157b5a70bf25, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -187,7 +186,16 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 5
+        m_Name: ExplosionSize
+        m_Overridden: 1
+      - m_Value: 3
+        m_Name: SpikeScale
+        m_Overridden: 1
+      - m_Value: 3
+        m_Name: ShardScale
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -207,8 +215,11 @@ VisualEffect:
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
---- !u!73398921 &8086582544960471966
+      m_Array:
+      - m_Value: 0
+        m_Name: Supercharged
+        m_Overridden: 0
+--- !u!73398921 &7967626645795895313
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
@@ -251,28 +262,7 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &159520678216203105
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2857221427175401981}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-737654320679112117
+--- !u!54 &-2231653294979532236
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,7 +272,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -296,9 +286,30 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 2
+--- !u!65 &-3117988898859979126
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857221427175401981}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 3072
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 192
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01, y: 0.01, z: 0.01}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!1 &6994077403803280297
 GameObject:
   m_ObjectHideFlags: 0

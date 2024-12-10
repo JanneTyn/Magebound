@@ -17,6 +17,7 @@ public class SpellEffect_CrystalShard_Thunder : SpellEffect_WorldEffect
     {
         areaEffect = GetComponentInChildren<SphereCollider>();
         areaRender = GetComponentInChildren<MeshRenderer>();
+        SetManaSystem(GameObject.Find("Player").GetComponent<ManaSystem>());
     }
 
     // Update is called once per frame

@@ -183,7 +183,7 @@ MonoBehaviour:
   spellID: 301
   ElementID: 3
   manaRecoveryAmmount: 50
-  overlappableEffectID: 
+  overlappableEffectID: cb000000
   lifetime: 0
   isExplosive: 0
   isOverCharged: 0

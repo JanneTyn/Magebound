@@ -8,6 +8,7 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
     public float delay = 5;
     public float explosionSize = 5;
     float timer = 0;
+    float finalDmg;
     bool delayPassed = false;
     bool explosionActive = false;
     SphereCollider areaEffect;
@@ -20,6 +21,7 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
         areaEffect = GetComponentInChildren<SphereCollider>();
         areaRender = GetComponentInChildren<MeshRenderer>();
         vfx = GetComponent<VisualEffect>();
+        SetManaSystem(GameObject.Find("Player").GetComponent<ManaSystem>());
     }
 
     // Update is called once per frame
@@ -35,7 +37,11 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
             {
                 if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                 {
-                    if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
+                    if (GetComponent<VisualEffect>().GetBool("Supercharged")) { finalDmg = GetDamage() * 2; Debug.Log("supercharge hit"); }
+                    else finalDmg = GetDamage();
+
+                    if (enemy.tag == "Enemy") dmg.CalculateDamage(finalDmg, GetElementID());
+
                     if (GetManaRecoveryAmmount() > 0.1f)
                     {
                         GetManaSystem().GainMana(GetManaRecoveryAmmount());

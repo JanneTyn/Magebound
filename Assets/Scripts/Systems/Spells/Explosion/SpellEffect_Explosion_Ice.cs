@@ -31,6 +31,54 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
         else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeIcePillar()); }
     }
 
+    public override void Activate(int spellID)
+    {
+        VisualEffect visualEffect = GetComponent<VisualEffect>();
+
+        switch (spellID)
+        {
+
+            case 101: //overlap with fire basic attack
+
+                GameObject pillarShard = Resources.Load<GameObject>("IceExplosionPillarShard");
+
+                for (int i = 0; i < 361;)
+                {
+                    GameObject spawnedPillarShard = Instantiate(pillarShard, transform.position, Quaternion.Euler(0, Random.Range(i - 20, i- 20), 0));
+                    
+                    Rigidbody shardRb = spawnedPillarShard.GetComponent<Rigidbody>();
+
+                    if(shardRb != null)
+                    {
+                        Vector3 flingDirection = spawnedPillarShard.transform.forward;
+                        Vector3 arcDirection = flingDirection + Vector3.up * Random.Range(0.5f, 1.5f);
+
+                        shardRb.AddForce(arcDirection * Random.Range(3f, 6f), ForceMode.Impulse);
+                    }
+
+                    i += 90;
+
+                    
+                }
+
+                Destroy(gameObject);
+
+                break;
+            case 301: //overlap with electric basic attack
+
+                GameObject pillarProjectile = Resources.Load<GameObject>("IceExplosionPillarProjectile");
+                for (int i = 0; i < 361;)
+                {
+                    Instantiate(pillarProjectile, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.Euler(0, i, 0));
+                    i += 45;
+                }
+                
+
+                break;
+
+        }
+    }
+
     public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
     {
         projectileDir = dir;
@@ -87,6 +135,8 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
 
     IEnumerator InitializeIcePillar()
     {
+        GetComponent<BoxCollider>().size = new Vector3(1, 20, 1);
+
         float t = 0;
         float pillarTime = GetComponent<VisualEffect>().GetFloat("SpikeDuration");
         while (t < pillarTime)

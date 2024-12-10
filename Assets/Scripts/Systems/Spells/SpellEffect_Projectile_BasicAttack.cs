@@ -23,6 +23,7 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                 break;
             case 304:
                 SetIsOverCharged(true);
+                visualEffect.SetBool("ShockCharged", true);
                 break;
         }
     }
@@ -122,8 +123,13 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
         }
         else if (other.CompareTag("SpellEffect"))
         {
+
             otherSpellEffect = other.GetComponent<SpellEffect>();
-            CheckOverlap(other.GetComponent<SpellEffect>().GetSpellID());
+            if (CheckOverlap(otherSpellEffect.GetSpellID()))
+            {
+                otherSpellEffect.Activate(GetSpellID());
+                Destroy(gameObject);
+            }
         }
     }
 

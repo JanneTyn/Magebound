@@ -9,6 +9,7 @@ public class PlayerAnimations : MonoBehaviour
     private SpellExplosion spellExplosion;
     private SpellShard spellShard;
     private Vector3 fixedPoint;
+    bool attackActive = false;
     private void Start()
     {
         spellEffect = GameObject.Find("SpellBaseEffect").GetComponent<SpellBaseEffect>();
@@ -18,6 +19,8 @@ public class PlayerAnimations : MonoBehaviour
     public IEnumerator InitializeAttackAnimation(Vector3 targetLoc, int attackID)
     {
         fixedPoint = targetLoc;
+
+        if (attackActive) yield break;
 
         // Adjust the target location to the player's level
         AdjustTargetLocation(ref targetLoc);
@@ -55,6 +58,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         float elapsedTime = 0f;
         bool attackInitialized = false;
+        attackActive = true;
 
         while (elapsedTime < attackTime)
         {
@@ -79,6 +83,7 @@ public class PlayerAnimations : MonoBehaviour
         var animator = GetComponentInChildren<Animator>();
         animator.SetBool("BasicAttackShot", false);
         animator.SetBool("SkillAttack", false);
+        attackActive = false;
     }
 
     void InitializeAttack(int attackID)
