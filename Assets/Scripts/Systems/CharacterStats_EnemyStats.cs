@@ -37,6 +37,7 @@ public class CharacterStats_EnemyStats : CharacterStats
     private void DeathSequence()
     {
         GameManager.Instance.increaseScore(scoreWorth); //Keep this at the top of sequence unless something needs to happen before score update
+        GameManager.Instance.RemoveEnemy(gameObject);
 
         if (deathHandler != null)
         {

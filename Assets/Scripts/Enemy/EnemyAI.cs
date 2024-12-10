@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent;
     private EnemyAttack enemyAttack;
+    public GameObject playerObject;
 
     private BTNode currentBehaviorTree;
 
@@ -20,8 +21,18 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         enemyAttack = GetComponent<EnemyAttack>();
-        GameObject playerObject = GameObject.FindWithTag("Player");
 
+        GameManager.Instance.AddEnemy(gameObject);
+
+        if (GameObject.FindWithTag("Player").GetComponent<StatusManager>().isObscured)
+        {
+            playerObject = null;
+        }else
+        {
+            playerObject = GameObject.FindWithTag("Player");
+        }
+
+            
         if (playerObject != null )
         {
             player = playerObject.transform;

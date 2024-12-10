@@ -7,6 +7,9 @@ public class StatusManager : MonoBehaviour, IStatusVariables
 {
     public float speed { get; set; }
 
+    public bool isObscured = false; 
+
+
     private Coroutine burnCoroutine;
     private Coroutine freezeCoroutine;
     private Coroutine chillCoroutine;
