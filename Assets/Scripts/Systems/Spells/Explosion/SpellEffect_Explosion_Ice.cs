@@ -31,6 +31,34 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
         else if (transform.position == projectileDir) { SetExplosionArea(); GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeIcePillar()); }
     }
 
+    public override void Activate(int spellID)
+    {
+        VisualEffect visualEffect = GetComponent<VisualEffect>();
+
+        switch (spellID)
+        {
+
+            case 101: //overlap with fire basic attack
+                
+
+                break;
+            case 301: //overlap with electric basic attack
+
+                Debug.Log("Spawning projectiles (ICE PILLAR)");
+
+                GameObject pillarProjectile = Resources.Load<GameObject>("IceExplosionPillarProjectile");
+                for (int i = 0; i < 361;)
+                {
+                    Instantiate(pillarProjectile, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.Euler(0, i, 0));
+                    i += 45;
+                }
+                
+
+                break;
+
+        }
+    }
+
     public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
     {
         projectileDir = dir;
@@ -87,6 +115,8 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
 
     IEnumerator InitializeIcePillar()
     {
+        GetComponent<BoxCollider>().size = new Vector3(1, 20, 1);
+
         float t = 0;
         float pillarTime = GetComponent<VisualEffect>().GetFloat("SpikeDuration");
         while (t < pillarTime)

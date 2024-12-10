@@ -161,6 +161,7 @@ MonoBehaviour:
   statusID: 0
   spellID: 6
   ElementID: 1
+  manaRecoveryAmmount: 20
   overlappableEffectID: 
   duration: 0
   delay: 4

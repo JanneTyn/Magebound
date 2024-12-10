@@ -20,6 +20,7 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
         areaEffect = GetComponentInChildren<SphereCollider>();
         areaRender = GetComponentInChildren<MeshRenderer>();
         vfx = GetComponent<VisualEffect>();
+        SetManaSystem(GameObject.Find("Player").GetComponent<ManaSystem>());
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class SpellEffect_CrystalShard_Fire : SpellEffect_WorldEffect
                 if (enemy.TryGetComponent<DamageSystem>(out DamageSystem dmg))
                 {
                     if (enemy.tag == "Enemy") dmg.CalculateDamage(GetDamage(), GetElementID());
+
                     if (GetManaRecoveryAmmount() > 0.1f)
                     {
                         GetManaSystem().GainMana(GetManaRecoveryAmmount());

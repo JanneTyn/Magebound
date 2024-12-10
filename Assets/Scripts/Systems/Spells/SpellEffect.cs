@@ -53,4 +53,6 @@ public abstract class SpellEffect : MonoBehaviour
     public virtual int GetStatusID() { return statusID; }
     public virtual int GetElementID() { return ElementID; }
 
+    public virtual void SetManaSystem(ManaSystem mana) { manasystem = mana; }
+
 }
