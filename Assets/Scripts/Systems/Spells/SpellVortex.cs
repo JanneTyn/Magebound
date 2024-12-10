@@ -19,6 +19,7 @@ public class SpellVortex : MonoBehaviour
     private GameObject targetingCircle; // Instance of the targeting circle
     private Vector3 lastValidPosition; // Stores the last valid position for the targeting circle
     private bool isTargeting = false; // Whether the player is in targeting mode or not
+    int playerElement;
 
     public void StartTargeting()
     {
@@ -39,7 +40,7 @@ public class SpellVortex : MonoBehaviour
 
     public void ConfirmTarget()
     {       
-        int playerElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
+        playerElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
         if (isTargeting && targetingCircle != null)
         {
             GameObject vortexInstance = null;
@@ -147,9 +148,8 @@ public class SpellVortex : MonoBehaviour
                        DamageSystem damageSystem = enemy.GetComponent<DamageSystem>();
 
                         if (damageSystem != null) {
-                            int vortexElement = player.GetComponent<CharacterStats_PlayerStats>().GetCurrentElement();
                             int statusID = 0;
-                            switch (vortexElement)
+                            switch (playerElement)
                             {
                                 case 1: // Fire vortex
                                     statusID = 1; // Burn
@@ -166,7 +166,7 @@ public class SpellVortex : MonoBehaviour
                             }
 
                             if (statusID != 0) {
-                                damageSystem.CalculateDamage(0, true, statusID, 5f, 10f, vortexElement);
+                                damageSystem.CalculateDamage(0, true, statusID, 5f, 10f, playerElement);
                             }
                         }
 
@@ -208,9 +208,12 @@ public class SpellVortex : MonoBehaviour
                     {
                         Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
 
-                        shard.GetComponent<VisualEffect>().SetBool("Supercharged", true);
-                        shard.GetComponent<VisualEffect>().SetFloat("ExplosionSize", 20);
-                        shard.explosionSize = 10;
+                        if (playerElement == 3)
+                        {
+                            shard.GetComponent<VisualEffect>().SetBool("Supercharged", true);
+                            shard.GetComponent<VisualEffect>().SetFloat("ExplosionSize", 20);
+                            shard.explosionSize = 10;
+                        }
 
                         if (rb != null)
                         {
