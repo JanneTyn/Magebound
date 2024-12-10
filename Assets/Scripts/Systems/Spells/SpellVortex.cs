@@ -204,15 +204,34 @@ public class SpellVortex : MonoBehaviour
                 }
                 else if (hit.CompareTag("SpellEffect"))
                 {
-                    Debug.Log("Spell found");
                     if (hit.TryGetComponent<SpellEffect_CrystalShard_Fire>(out SpellEffect_CrystalShard_Fire shard))
                     {
                         Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
-                        Debug.Log("Fireshard found");
 
                         shard.GetComponent<VisualEffect>().SetBool("Supercharged", true);
                         shard.GetComponent<VisualEffect>().SetFloat("ExplosionSize", 20);
                         shard.explosionSize = 10;
+
+                        if (rb != null)
+                        {
+                            //Remove rigidbody constraints so the vortex pull effext is possible
+                            if (!affectedRigidbodies.Contains(rb))
+                            {
+                                affectedRigidbodies.Add(rb);
+                                rb.constraints = RigidbodyConstraints.FreezePositionY;
+                            }
+
+                            Vector3 directionToCenter = (vortexInstance.transform.position - rb.position).normalized;
+                            Vector3 tangentialDirection = Vector3.Cross(directionToCenter, Vector3.up).normalized;
+                            float spinForce = Mathf.Lerp(pullForce * 0.5f, 0, Vector3.Distance(vortexInstance.transform.position, rb.position) / pullRadius);
+                            rb.AddForce(tangentialDirection * spinForce, ForceMode.Acceleration);
+                            rb.AddForce(directionToCenter * (pullForce * 0.1f), ForceMode.Acceleration);
+                            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, 3f);
+                        }
+                    }
+                    else if (hit.TryGetComponent<SpellEffect_CrystalShard_Ice>(out SpellEffect_CrystalShard_Ice iceshard) || hit.TryGetComponent<SpellEffect_CrystalShard_Thunder>(out SpellEffect_CrystalShard_Thunder thundershard))
+                    {
+                        Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
 
                         if (rb != null)
                         {
