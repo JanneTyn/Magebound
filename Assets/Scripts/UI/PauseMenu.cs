@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu; 
 
     private bool pauseMenuIsActive = false;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -23,6 +24,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
+
                 Time.timeScale = 1; //Continue Game
                 foreach (GameObject go in toDisable)
                 {
@@ -46,7 +48,6 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenuButton()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 

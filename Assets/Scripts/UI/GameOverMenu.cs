@@ -8,13 +8,12 @@ public class GameOverMenu : MonoBehaviour
 
     public void RestartButton()
     {
-        Time.timeScale = 1f;
+        GameManager.Instance.DestroyGameManager();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenuButton()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 }

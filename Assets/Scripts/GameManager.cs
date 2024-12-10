@@ -18,7 +18,17 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Persist through scenes
+    }
+
+    private void Start()
+    {
+        totalScore = 0;
+        Time.timeScale = 1;
+    }
+
+    public void DestroyGameManager()
+    {
+        Destroy(this.gameObject);
     }
 
     public void increaseScore(int scoreIncrease)
