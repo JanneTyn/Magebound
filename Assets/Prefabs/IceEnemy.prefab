@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2492363315657465945}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IceEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -40,6 +40,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2492363315657465945}
     m_Modifications:
+    - target: {fileID: -9205971836906992541, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -80,13 +84,101 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8549534466970831342, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8325758251553527753, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7984375478991593520, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6545322539746189703, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6106526789064493260, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4409378987130153934, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4003058960504407726, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2192193172676600763, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -925488506720065498, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -922269552797565547, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 208496358681587360, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 236559573721893010, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
       propertyPath: m_Name
       value: MageBound ICE CHAR V3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415331255739340458, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889845536035263057, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517824389512738541, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3545025847783179587, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747935188172436071, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322119414905213271, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669555098966012983, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071347142360962664, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7250859034429873565, guid: 70f3d7fdca2cea446af6881154bfc68a, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

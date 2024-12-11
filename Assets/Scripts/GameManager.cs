@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void RemoveEnemy(GameObject enemy)
     {
         enemies.Remove(enemy);
+        Instantiate(Resources.Load("ExperienceDrop"), enemy.transform.position, Quaternion.identity);
     }
 
     public void ReEngageEnemies()
