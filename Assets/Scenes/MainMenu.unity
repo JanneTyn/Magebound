@@ -1410,8 +1410,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 887016e43873e254cb4d73415b10e41c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 887016e43873e254cb4d73415b10e41c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1707,6 +1707,7 @@ MonoBehaviour:
   fireAudio: {fileID: 983777156}
   iceAudio: {fileID: 983777155}
   electricAudio: {fileID: 983777154}
+  gameStarted: 0
 --- !u!4 &983777159
 Transform:
   m_ObjectHideFlags: 0
