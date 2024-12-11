@@ -29,8 +29,8 @@ public class PlayerAnimations : MonoBehaviour
         StartAttackAnimation(attackID);
 
         // Duration of the attack
-        float attackTime = 1f;
-        Debug.Log("attacktime: " + attackTime);
+        float attackTime = 2f;
+        if (attackID == 0) attackTime = 1f;
 
         // Perform rotation and attack initialization during the attack duration
         yield return RotateAndAttack(targetLoc, attackID, attackTime);
