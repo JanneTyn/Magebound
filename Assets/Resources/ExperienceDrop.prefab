@@ -122,4 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  experienceAmmount: 100
+  experienceAmmount: 29
+  pointAmmount: 420

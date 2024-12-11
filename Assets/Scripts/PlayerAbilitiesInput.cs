@@ -42,7 +42,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
                 manaSystem.UseMana(wallManaCost);
-                StartCoroutine(GlobalCooldown());
+                StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (vortexManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.F)) //Vortex
             {
@@ -52,7 +52,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 spellVortex.PrepareAttackAnim();
                 manaSystem.UseMana(vortexManaCost);
-                StartCoroutine(GlobalCooldown());
+                StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (vortexManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && spellVortex != null && spellVortex.IsTargetingActive() && Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
             {
@@ -67,19 +67,19 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 cursorTarget.AttackPrepare(1);
                 manaSystem.UseMana(dashManaCost);
-                StartCoroutine(GlobalCooldown());
+                StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (explosionManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.E)) //Explosion
             {
                 cursorTarget.AttackPrepare(2);
                 manaSystem.UseMana(explosionManaCost);
-                StartCoroutine(GlobalCooldown());
+                StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (shardManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.R)) //Shard
             {
                 cursorTarget.AttackPrepare(3);
                 manaSystem.UseMana(shardManaCost);
-                StartCoroutine(GlobalCooldown());
+                StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
         }
     }
@@ -88,32 +88,35 @@ public class PlayerAbilitiesInput : MonoBehaviour
     {
 
         //To Change Elements
-        if (!isGlobalCooldownActive && Input.GetKey("1"))
+        if (!isGlobalCooldownActive && Input.GetKey("1")) //Fire
         {
+            AudioManager.Instance.SwitchAudio(1, 1f);
             GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(1);
             uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(1);
-            StartCoroutine(GlobalCooldown());
+            StartCoroutine(GlobalCooldown(1));
         }
-        if (!isGlobalCooldownActive && Input.GetKey("2"))
+        if (!isGlobalCooldownActive && Input.GetKey("2")) //Ice
         {
+            AudioManager.Instance.SwitchAudio(2, 1f);
             GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(2);
             uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(2);
-            StartCoroutine(GlobalCooldown());
+            StartCoroutine(GlobalCooldown(1));
         }
-        if (!isGlobalCooldownActive && Input.GetKey("3"))
+        if (!isGlobalCooldownActive && Input.GetKey("3")) //Electric
         {
+            AudioManager.Instance.SwitchAudio(3, 1f);
             GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(3);
             uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(3);
-            StartCoroutine(GlobalCooldown());
+            StartCoroutine(GlobalCooldown(1));
         }
 
     }
 
-    private IEnumerator GlobalCooldown()
+    private IEnumerator GlobalCooldown(float duration)
     {
         isGlobalCooldownActive = true;
-        uiSettings.skillIconsParent.GetComponent<SkillIconParent>().StartGlobalCooldown(globalCooldownDuration);
-        yield return new WaitForSeconds(globalCooldownDuration);
+        uiSettings.skillIconsParent.GetComponent<SkillIconParent>().StartGlobalCooldown(duration);
+        yield return new WaitForSeconds(duration);
         isGlobalCooldownActive = false;
     }
 }
