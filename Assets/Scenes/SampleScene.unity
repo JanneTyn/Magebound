@@ -1200,6 +1200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalScore: 0
+  enemies: []
+  player: {fileID: 0}
   uiScore: {fileID: 225764703}
 --- !u!4 &1734019847
 Transform:
@@ -1485,7 +1487,7 @@ PrefabInstance:
     - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
       propertyPath: fireEnemyPrefab
       value: 
-      objectReference: {fileID: 3266664533847300665, guid: 35ade1d0afbde8d438a165eb1ebecc56, type: 3}
+      objectReference: {fileID: 5536876837444178676, guid: 60dea65520b47db44860b84128e244dc, type: 3}
     - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
       propertyPath: spawnpointsObject
       value: 
