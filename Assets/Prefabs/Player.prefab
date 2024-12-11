@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 4515676706132983167}
   - component: {fileID: 296985875734391505}
   - component: {fileID: 7024476211291677695}
+  - component: {fileID: 3524919812704023761}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd7dfd702717e0488283f013538dbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isObscured: 0
 --- !u!114 &-5930579397375356152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,6 +526,29 @@ MonoBehaviour:
     m_Bits: 1024
   pullRadius: 5
   pullForce: 10
+--- !u!114 &3524919812704023761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777497927225088024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef100605a4c2d24f8d3269f027dcd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8573021367887713382}
+  fireVortexVFX: {fileID: 6754325552709864378, guid: a6d17d2068a0a0248af8ffa3b5193f63, type: 3}
+  iceVortexVFX: {fileID: 5807620652789127988, guid: 11e6dd3faaf10d14aad74414e628b83b, type: 3}
+  lightningVortexVFX: {fileID: 4937332490464090657, guid: 567af54666410bf44a3fca1f44ff495a, type: 3}
+  targetingCirclePrefab: {fileID: 5761501634439072031, guid: 91e0870a96aa14d46ae66abb8906563e, type: 3}
+  range: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  pullRadius: 5
+  pullForce: 10
 --- !u!1 &4730023678267145898
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6516119239225296918, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 6516119239225296918, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: m_LocalRotation.x
@@ -622,7 +647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6516119239225296918, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 6516119239225296918, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: m_LocalRotation.z
@@ -634,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6516119239225296918, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6516119239225296918, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -667,7 +692,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5763233125117841316}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 9897f551851e5bf41a30479efca3e6fe, type: 3}
   m_Controller: {fileID: 9100000, guid: 9a6fbe992590ba343977dca42a20add7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

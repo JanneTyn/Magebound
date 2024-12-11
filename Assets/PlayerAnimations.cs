@@ -48,6 +48,7 @@ public class PlayerAnimations : MonoBehaviour
     void StartAttackAnimation(int attackID)
     {
         var animator = GetComponentInChildren<Animator>();
+        animator.SetLayerWeight(1, 1.0f);
         if (attackID == 0)
             animator.SetBool("BasicAttackShot", true);
         else
@@ -83,6 +84,7 @@ public class PlayerAnimations : MonoBehaviour
         var animator = GetComponentInChildren<Animator>();
         animator.SetBool("BasicAttackShot", false);
         animator.SetBool("SkillAttack", false);
+        animator.SetLayerWeight(1, 0f);
         attackActive = false;
     }
 
