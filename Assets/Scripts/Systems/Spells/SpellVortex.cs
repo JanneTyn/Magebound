@@ -253,9 +253,16 @@ public class SpellVortex : MonoBehaviour
                             rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, 3f);
                         }
                     }
+                    else if (hit.TryGetComponent<SpellEffect_Explosion_Ice>(out SpellEffect_Explosion_Ice iceExplosion))
+                    {
+                        Destroy(iceExplosion.gameObject);
+                        Vector3 spawnPosition = new Vector3(vortexInstance.transform.position.x, vortexInstance.transform.position.y + 1, vortexInstance.transform.position.z);
+                        Instantiate(Resources.Load<GameObject>("Synergies/SteamCloud"), spawnPosition, Quaternion.identity);
+                        Destroy(vortexInstance);
+                    }
                     else
                     {
-                        Debug.Log("No valid synergy");
+                        Debug.Log("No valid synergy found");
                     }
                 }
             }

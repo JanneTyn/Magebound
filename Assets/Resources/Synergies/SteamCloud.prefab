@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4193773909580939390}
   - component: {fileID: 3949345095242760537}
   - component: {fileID: -410508871538978167}
+  - component: {fileID: -5310117223896201396}
   m_Layer: 0
   m_Name: SteamCloud
   m_TagString: Untagged
@@ -130,9 +131,29 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5310117223896201396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902568536113103548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5816f16721aacd4468e580a6443a859a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  giveStatus: 0
+  statusID: 0
+  spellID: 107
+  ElementID: 1
+  manaRecoveryAmmount: 10
+  overlappableEffectID: 
+  duration: 10

@@ -22,7 +22,7 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
         {
             var step = GetBoltSpeed() * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, projectileDir, step);
-            Debug.Log("projectileDir:" + projectileDir);
+            //Debug.Log("projectileDir:" + projectileDir);
             boltAliveTime += Time.deltaTime;
         }
 
@@ -126,11 +126,13 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
                 Destroy(gameObject);
             }
         }
-        /* else if (other.CompareTag("SpellEffect"))
+        else if (other.CompareTag("SpellEffect"))
         {
-            otherSpellEffect = other.GetComponent<SpellEffect>();
-            CheckOverlap(other.GetComponent<SpellEffect>().GetSpellID());
-        } */
+           if(CheckOverlap(other.GetComponent<SpellEffect>().GetSpellID()))
+           {
+                //Currently nothing
+           }
+        }
     }
 
     IEnumerator InitializeIcePillar()

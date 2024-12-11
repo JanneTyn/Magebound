@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     public int totalScore;
 
     public List<GameObject> enemies = new List<GameObject>();
+
+    public GameObject player;
 
     [SerializeField] private Score uiScore;
 
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
     {
         totalScore = 0;
         Time.timeScale = 1;
+        player = GameObject.FindWithTag("Player");
     }
 
     public void DestroyGameManager()
@@ -55,8 +59,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject enemy in enemies)
         {
-            enemy.GetComponent<EnemyAI>().playerObject = GameObject.FindWithTag("Player");
-            enemy.GetComponent<EnemyAI>().player = enemy.GetComponent<EnemyAI>().playerObject.transform;
+            player.GetComponent<StatusManager>().isObscured = false;
+            enemy.GetComponent<NavMeshAgent>().isStopped = false;
         }
 
     }
@@ -65,8 +69,9 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject enemy in enemies)
         {
-            enemy.GetComponent<EnemyAI>().playerObject = null;
-            enemy.GetComponent<EnemyAI>().player = null;
+            player.GetComponent<StatusManager>().isObscured = true;
+            enemy.GetComponent<NavMeshAgent>().isStopped = true;
+
         }
     }
 }

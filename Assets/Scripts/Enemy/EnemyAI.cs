@@ -23,19 +23,19 @@ public class EnemyAI : MonoBehaviour
         enemyAttack = GetComponent<EnemyAttack>();
 
         GameManager.Instance.AddEnemy(gameObject);
+ 
 
-        if (GameObject.FindWithTag("Player").GetComponent<StatusManager>().isObscured)
-        {
-            playerObject = null;
-        }else
-        {
-            playerObject = GameObject.FindWithTag("Player");
-        }
-
+        playerObject = GameObject.FindWithTag("Player");
+       
             
         if (playerObject != null )
         {
             player = playerObject.transform;
+
+            if (playerObject.GetComponent<StatusManager>().isObscured)
+            {
+                gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+            }
         }
         else
         {
@@ -97,6 +97,16 @@ public class EnemyAI : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void SetDetectionRange(float detectionRange)
+    {
+        this.detectionRange = detectionRange;
+    }
+
+    public void SetAttackRange(float attackRange)
+    {
+        this.attackRange = attackRange;
     }
 
     void BuildBehaviorTree()
