@@ -54,6 +54,10 @@ public class PlayerAbilitiesInput : MonoBehaviour
                 manaSystem.UseMana(vortexManaCost);
                 StartCoroutine(GlobalCooldown());
             }
+            else if (vortexManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && spellVortex != null && spellVortex.IsTargetingActive() && Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
+            {
+                spellVortex.CancelTargeting();
+            }
             else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) //basic projectile
             {
                 cursorTarget.AttackPrepare(0);

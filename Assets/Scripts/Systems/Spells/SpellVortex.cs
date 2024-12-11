@@ -110,6 +110,16 @@ public class SpellVortex : MonoBehaviour
         }
     }
 
+    public void CancelTargeting()
+    {
+        if (targetingCircle != null)
+        {
+            Destroy(targetingCircle);
+        }
+
+        isTargeting = false;
+    }
+
     IEnumerator VortexEffect(GameObject vortexInstance)
     {
         float duration = 10f; // Duration of the vortex effect
