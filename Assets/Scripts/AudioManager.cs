@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource fireAudio;
     [SerializeField] private AudioSource iceAudio;
     [SerializeField] private AudioSource electricAudio;
+    private int currentID = 1;
+    public bool gameStarted = false;
 
     private void Awake()
     {
@@ -25,8 +27,46 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        fireAudio.volume = 0;
+        iceAudio.volume = 0;
+        electricAudio.volume = 0;
+    }
+
+    public void StartGame()
+    {
+        fireAudio.volume = mainAudio.volume;
+        gameStarted = true;
+    }
+
+    public void AudioVolume(float volume)
+    {
+        if (!gameStarted)
+        {
+            mainAudio.volume = volume;
+        }
+        else
+        {
+            mainAudio.volume = volume;
+            SwitchAudio(currentID, 0.5f);
+        }
+    }
+
+    public void RestartAudio()
+    {
+        mainAudio.time = 0;
+        fireAudio.time = 0;
+        iceAudio.time = 0;
+        electricAudio.time = 0;
+
+        SwitchAudio(currentID, 0.5f);
+    }
+
     public void SwitchAudio(int id, float fadeTime)
     {
+        currentID = id;
+
         switch(id)
         {
             case 1:

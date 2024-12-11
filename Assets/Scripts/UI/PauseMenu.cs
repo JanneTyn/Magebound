@@ -48,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenuButton()
     {
+        AudioManager.Instance.gameStarted = false;
         SceneManager.LoadScene("MainMenu");
     }
 
