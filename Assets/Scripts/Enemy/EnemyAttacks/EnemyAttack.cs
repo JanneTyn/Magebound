@@ -14,6 +14,7 @@ public abstract class EnemyAttack : MonoBehaviour
     public Vector3 attackCenterOffset = new Vector3(0f, 1f, 0f);
 
     public float damage = 50f;
+    protected bool canAttack = true;
 
     protected virtual void Start()
     {
@@ -33,7 +34,7 @@ public abstract class EnemyAttack : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (player != null)
+        if (player != null && canAttack)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -45,10 +46,23 @@ public abstract class EnemyAttack : MonoBehaviour
 
     }
 
+    public void SetCanAttack(bool state)
+    {
+        canAttack = state;
+
+        //Stop any ongoing attack animation
+        if (!canAttack && animator != null)
+        {
+            animator.ResetTrigger("Attack");
+        }
+    }
+
     public virtual void Attack()
     {
-        TriggerAttackAnimation();
-        lastAttackTime = Time.time;
+        if (canAttack) {
+            TriggerAttackAnimation();
+            lastAttackTime = Time.time;
+        }
     }
 
     protected void TriggerAttackAnimation()

@@ -128,12 +128,14 @@ public class SpellVortex : MonoBehaviour
         List<NavMeshAgent> disabledAgents = new List<NavMeshAgent>(); //Keep track of enemy NavMeshAgent disabling & re-enabling
         List<Rigidbody> affectedRigidbodies = new List<Rigidbody>(); //Keep track of enemy Rigidbodies disabling & re-enabling rigidbodies freeze positions
         HashSet<GameObject> processedEnemies = new HashSet<GameObject>(); //Enemies that have vortex dot already
+        List<EnemyAttack> affectedEnemies = new List<EnemyAttack>(); //Keep track of enemies' attack states
 
         while (timer < duration)
         {
             if (vortexInstance == null)
             {
                 RestoreAgentsAndRigidbodies(disabledAgents, affectedRigidbodies); //Enemies NavMeshAgents and Rigidbodies
+                RestoreEnemyAttackStates(affectedEnemies);
                 yield break;
             }
 
@@ -150,14 +152,25 @@ public class SpellVortex : MonoBehaviour
                     
                     Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
                     NavMeshAgent agent = hit.GetComponentInChildren<NavMeshAgent>();
+                    EnemyAttack enemyAttack = hit.GetComponent<EnemyAttack>();
                     GameObject enemy = hit.gameObject;
 
                     if (!processedEnemies.Contains(enemy))
                     {
                        processedEnemies.Add(enemy);
-                       DamageSystem damageSystem = enemy.GetComponent<DamageSystem>();
 
-                        if (damageSystem != null) {
+                       //Disable enemy attack behavior while in vortex
+                       if (enemyAttack != null)
+                       {
+                            enemyAttack.SetCanAttack(false);
+                            if (!affectedEnemies.Contains(enemyAttack))
+                            {
+                                affectedEnemies.Add(enemyAttack);
+                            }
+                       }
+
+                       DamageSystem damageSystem = enemy.GetComponent<DamageSystem>();
+                       if (damageSystem != null) {
                             int statusID = 0;
                             switch (playerElement)
                             {
@@ -284,6 +297,8 @@ public class SpellVortex : MonoBehaviour
 
         // Re-enable NavMeshAgents and restore Rigidbody constraints after the vortex effect ends
         RestoreAgentsAndRigidbodies(disabledAgents, affectedRigidbodies);
+        //Restore attack states
+        RestoreEnemyAttackStates(affectedEnemies);
     }
 
     private void RestoreAgentsAndRigidbodies(List<NavMeshAgent> agents, List<Rigidbody> rbs)
@@ -302,6 +317,17 @@ public class SpellVortex : MonoBehaviour
                 {
                     rb.constraints = RigidbodyConstraints.FreezePosition;
                 }
+            }
+        }
+    }
+
+    private void RestoreEnemyAttackStates(List<EnemyAttack> enemies)
+    {
+        foreach(var enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.SetCanAttack(true);
             }
         }
     }
