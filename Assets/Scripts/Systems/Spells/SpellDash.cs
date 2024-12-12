@@ -25,6 +25,7 @@ public class SpellDash : SpellEffect
                 ThunderStun();
                 break;
         }
+        dmgTimer += Time.deltaTime;
     }
 
     private void FireTrail()
@@ -115,14 +116,15 @@ public class SpellDash : SpellEffect
     {
         if (GetElementID() == 1)
         {
-            dmgTimer += Time.deltaTime;
-            if (dmgTimer >= 0.5f)
+            if (other.CompareTag("Enemy"))
             {
-                if (other.CompareTag("Enemy"))
+                if (other.GetComponent<EnemyAI>().fireTrailDmgCooldown < 0)
                 {
                     other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, GetStatusID(), statusDuration, GetElementID());
+                    other.GetComponent<EnemyAI>().fireTrailDmgCooldown = 0.5f;
                 }
-                dmgTimer = 0;
+                other.GetComponent<EnemyAI>().fireTrailDmgCooldown -= Time.deltaTime;
+
             }
         }
     }

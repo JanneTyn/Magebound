@@ -10,6 +10,8 @@ public class CharacterStats_EnemyStats : CharacterStats
     [SerializeField] private float healthMultiplier = 0.2f;
     [SerializeField] private float damageMultiplier = 0.5f;
 
+    private bool isDead = false;
+
     private EnemyDeathHandler deathHandler;
 
     private void Start()
@@ -46,6 +48,10 @@ public class CharacterStats_EnemyStats : CharacterStats
 
     private void DeathSequence()
     {
+        if (isDead)
+        {
+            return;
+        }
         GameManager.Instance.increaseScore(scoreWorth); //Keep this at the top of sequence unless something needs to happen before score update
         GameManager.Instance.RemoveEnemy(gameObject);
 
@@ -53,5 +59,8 @@ public class CharacterStats_EnemyStats : CharacterStats
         {
             deathHandler.HandleDeath();
         }
+
+        isDead = true;
+
     }
 }

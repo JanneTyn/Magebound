@@ -6,6 +6,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
 
     private bool isGlobalCooldownActive = false;
     public float globalCooldownDuration = 2f;
+    public float dashCooldownDuration = 3f;
     public float wallManaCost = 200f;
     public float vortexManaCost = 200f;
     public float dashManaCost = 200f;
@@ -67,7 +68,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 cursorTarget.AttackPrepare(1);
                 manaSystem.UseMana(dashManaCost);
-                StartCoroutine(GlobalCooldown(globalCooldownDuration));
+                StartCoroutine(GlobalCooldown(dashCooldownDuration));
             }
             else if (explosionManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.E)) //Explosion
             {

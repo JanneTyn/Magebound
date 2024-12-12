@@ -58,10 +58,12 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
         {
             if (GetIsExplosive())
             {
+
                 Collider[] enemies = Physics.OverlapSphere(transform.position, GetExplosionRadius(), GetExplosionLayer());
 
                 foreach (Collider enemy in enemies)
                 {
+                    
                     if (GetIsOverCharged())
                     {
                         other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, 1, GetOVerChargeBurnDuration(), GetOverChargeBurnDamage(), 1);
@@ -72,8 +74,7 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                         else
                         {
                             GetManaSystem().GainMana();
-                        }
-                        Destroy(gameObject);
+                        }                   
                     }
                     else
                     {
@@ -85,10 +86,10 @@ public class SpellEffect_Projectile_BasicAttack : SpellEffect_Projectile
                         else
                         {
                             GetManaSystem().GainMana();
-                        }
-                        Destroy(gameObject);
-                    }
+                        }  
+                    }  
                 }
+                Destroy(gameObject);
             } else
             {
                 if (GetIsOverCharged())

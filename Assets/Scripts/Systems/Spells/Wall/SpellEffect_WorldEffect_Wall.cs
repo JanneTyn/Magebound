@@ -15,6 +15,7 @@ public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
     {
         parentObject = this.gameObject;
         SpawnWall(length, size);
+        SetManaSystem(GameObject.Find("Player").GetComponent<ManaSystem>());
     }
 
     public void SpawnWall(float length, float size)
