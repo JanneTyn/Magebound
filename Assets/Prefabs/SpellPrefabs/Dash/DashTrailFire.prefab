@@ -52,7 +52,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 6
+        m_Name: TrailLife
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -149,11 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19afdb8fd6ea0940a4d0244741ee5e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 3
   giveStatus: 1
   statusID: 1
   spellID: 2
   ElementID: 1
+  manaRecoveryAmmount: 0
   overlappableEffectID: 
   dashFinished: 0
   trailLifeWait: 0
