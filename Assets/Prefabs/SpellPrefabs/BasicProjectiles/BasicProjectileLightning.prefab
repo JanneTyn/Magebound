@@ -189,9 +189,9 @@ MonoBehaviour:
   isOverCharged: 0
   overChargeBurnDamage: 10
   overChargeBurnDuration: 3
-  explosionRadius: 0
+  explosionRadius: 5
   explosionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   projectileSpeed: 8
   travelDistance: 20

@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             mainAudio.volume = volume;
-            SwitchAudio(currentID, 0.5f);
+            SwitchAudio(currentID, 0.01f);
         }
     }
 
@@ -60,7 +60,23 @@ public class AudioManager : MonoBehaviour
         iceAudio.time = 0;
         electricAudio.time = 0;
 
-        SwitchAudio(currentID, 0.5f);
+        SetAudio(currentID, mainAudio.volume);
+    }
+
+    private void SetAudio(int id, float volume)
+    {
+        switch(id)
+        {
+            case 1:
+                fireAudio.volume = volume;
+                break;
+            case 2:
+                iceAudio.volume = volume;
+                break;
+            case 3:
+                electricAudio.volume = volume;
+                break;
+        }
     }
 
     public void SwitchAudio(int id, float fadeTime)
