@@ -89,28 +89,21 @@ public class PlayerAbilitiesInput : MonoBehaviour
     {
 
         //To Change Elements
-        if (!isGlobalCooldownActive && Input.GetKey("1")) //Fire
-        {
-            AudioManager.Instance.SwitchAudio(1, 1f);
-            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(1);
-            uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(1);
-            StartCoroutine(GlobalCooldown(1));
-        }
-        if (!isGlobalCooldownActive && Input.GetKey("2")) //Ice
-        {
-            AudioManager.Instance.SwitchAudio(2, 1f);
-            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(2);
-            uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(2);
-            StartCoroutine(GlobalCooldown(1));
-        }
-        if (!isGlobalCooldownActive && Input.GetKey("3")) //Electric
-        {
-            AudioManager.Instance.SwitchAudio(3, 1f);
-            GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(3);
-            uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(3);
-            StartCoroutine(GlobalCooldown(1));
-        }
+        if (!isGlobalCooldownActive && Input.GetKey("1")) ChangeElemenent(1, 1f, 1f); //Fire
+        if (!isGlobalCooldownActive && Input.GetKey("2")) ChangeElemenent(2, 1f, 1f); //Ice
+        if (!isGlobalCooldownActive && Input.GetKey("3")) ChangeElemenent(3, 1f, 1f); //Electric
 
+    }
+
+    private void ChangeElemenent(int elementID, float audioSwitchDuration, float globalCooldownDuration)
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SwitchAudio(elementID, audioSwitchDuration);
+        }
+        GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(elementID);
+        uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(elementID);
+        StartCoroutine(GlobalCooldown(globalCooldownDuration));
     }
 
     private IEnumerator GlobalCooldown(float duration)
