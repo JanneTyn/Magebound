@@ -28,6 +28,16 @@ public class CharacterStats_EnemyStats : CharacterStats
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
 
+        //Trigger the damage flash effect
+        DamageFlash damageFlash = GetComponent<DamageFlash>();
+        if (damageFlash != null) {
+            StartCoroutine(damageFlash.EFlash());
+        }
+        else
+        {
+            Debug.LogWarning("CharacterStats_EnemyStats.cs: No DamageFlash component found");
+        }
+
         if (GetCurrentHealth() <= 0)
         {
             DeathSequence();
