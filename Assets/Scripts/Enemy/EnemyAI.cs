@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour
     public float detectionRange = 100f;
     public float rotationSpeed = 5;
     public float attackRange = 3f;
+    public float fireTrailDmgCooldown = 0f;
 
     void Start()
     {
@@ -85,6 +86,8 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log("AI failed to perform action.");
             }
         }
+
+        fireTrailDmgCooldown -= Time.deltaTime;
     }
 
     //For checking if an Animator has a specific parameter
