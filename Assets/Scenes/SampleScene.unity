@@ -1426,7 +1426,7 @@ PrefabInstance:
     - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
       propertyPath: iceEnemyPrefab
       value: 
-      objectReference: {fileID: 8155449686368741564, guid: 2cbf9a0f0c255c346a3682ff31adff0f, type: 3}
+      objectReference: {fileID: 7079270899438464180, guid: 2cbf9a0f0c255c346a3682ff31adff0f, type: 3}
     - target: {fileID: 3662590760825397805, guid: 49a99e5b363203941a86872cfd1ef9c5, type: 3}
       propertyPath: fireEnemyPrefab
       value: 
