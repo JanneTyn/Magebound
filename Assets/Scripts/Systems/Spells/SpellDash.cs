@@ -122,8 +122,7 @@ public class SpellDash : SpellEffect
                 {
                     other.GetComponent<DamageSystem>().CalculateDamage(GetDamage(), true, GetStatusID(), statusDuration, GetElementID());
                     other.GetComponent<EnemyAI>().fireTrailDmgCooldown = 0.5f;
-                }
-                other.GetComponent<EnemyAI>().fireTrailDmgCooldown -= Time.deltaTime;
+                }          
 
             }
         }
