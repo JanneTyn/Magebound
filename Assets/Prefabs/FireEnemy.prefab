@@ -349,6 +349,7 @@ MonoBehaviour:
   detectionRange: 100
   rotationSpeed: 5
   attackRange: 3
+  fireTrailDmgCooldown: 0
 --- !u!195 &3717453453454815048
 NavMeshAgent:
   m_ObjectHideFlags: 0
