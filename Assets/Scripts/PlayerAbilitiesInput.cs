@@ -45,6 +45,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
                 manaSystem.UseMana(wallManaCost);
+                playerAudioHandler.PlayWall();
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (vortexManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.F)) //Vortex

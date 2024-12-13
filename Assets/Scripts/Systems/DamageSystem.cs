@@ -4,10 +4,13 @@ using UnityEngine;
 public class DamageSystem : MonoBehaviour
 {
     CharacterStats characterStats;
+    [SerializeField] AudioClip[] takeDamageAudioClip;
+    AudioSource audioSource;
 
     private void Start()
     {
         characterStats = GetComponent<CharacterStats>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     public void CalculateDamage(float damage, int elementID)
@@ -15,12 +18,14 @@ public class DamageSystem : MonoBehaviour
         float finalDamage = calculateElementalDamage(damage, elementID);
 
         characterStats.ApplyDamage(finalDamage);
+        PlayTakeDamageAudio();
     }
     public void CalculateDamage(float damage, bool applyStatus, int statusID, float statusDuration, int elementID)
     {
         float finalDamage = calculateElementalDamage(damage, elementID);
 
         characterStats.ApplyDamage(finalDamage);
+        PlayTakeDamageAudio();
 
         if (applyStatus)
         {
@@ -32,6 +37,7 @@ public class DamageSystem : MonoBehaviour
         float finalDamage = calculateElementalDamage(damage, elementID);
 
         characterStats.ApplyDamage(finalDamage);
+        PlayTakeDamageAudio();
 
         if (applyStatus)
         {
@@ -68,4 +74,15 @@ public class DamageSystem : MonoBehaviour
 
         return finalDamage;
     }
+
+    private void PlayTakeDamageAudio()
+    {
+        if(takeDamageAudioClip != null)
+        {
+            audioSource.clip = takeDamageAudioClip[Random.Range(0, takeDamageAudioClip.Length)];
+            audioSource.Play();
+        }
+    }
+
+
 }

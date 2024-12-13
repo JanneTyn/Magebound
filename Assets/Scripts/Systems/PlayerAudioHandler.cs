@@ -5,6 +5,7 @@ public class PlayerAudioHandler : MonoBehaviour
 {
     [SerializeField] AudioSource[] basicAttack;
     [SerializeField] AudioSource explosionAttack;
+    [SerializeField] AudioSource wallAttack;
 
     private AudioSource selectedBasicAttack;
     private bool basicAttackIsPlaying = false;
@@ -25,10 +26,12 @@ public class PlayerAudioHandler : MonoBehaviour
 
     public void PlayExplosion()
     {
-        if (!explosionAttack.isPlaying)
-        {
             explosionAttack.Play();
-        }
+    }
+
+    public void PlayWall()
+    {
+        explosionAttack.Play();
     }
 
     IEnumerator BasicAttackIsPlaying()
