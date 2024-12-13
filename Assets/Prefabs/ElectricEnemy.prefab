@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2116278643744086361}
   m_Layer: 7
   m_Name: ElectricEnemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,6 +373,7 @@ MonoBehaviour:
   detectionRange: 100
   rotationSpeed: 5
   attackRange: 3
+  fireTrailDmgCooldown: 0
 --- !u!195 &2447341072177995609
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3179868f1cab9ff42973567587894760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
-  rotationSpeed: 4
+  movementSpeed: 6
+  rotationSpeed: 6
 --- !u!54 &7335057862543348853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -425,8 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c817890a5f2874898a1f7899a9097a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalCooldownDuration: 1
-  dashCooldownDuration: 3
+  globalCooldownDuration: 0.5
+  dashCooldownDuration: 0.5
   wallManaCost: 200
   vortexManaCost: 200
   dashManaCost: 200

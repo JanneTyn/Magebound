@@ -15,7 +15,7 @@ public class SpellEffect_Explosion_Ice_projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            GetComponent<DamageSystem>().CalculateDamage(damage, 3);
+            other.GetComponent<DamageSystem>().CalculateDamage(damage, 3);
         }
     }
 }
