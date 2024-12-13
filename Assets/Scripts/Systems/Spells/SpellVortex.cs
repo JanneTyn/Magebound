@@ -143,18 +143,26 @@ public class SpellVortex : MonoBehaviour
 
             // Find all objects within the pull radius
             Collider[] hitColliders = Physics.OverlapSphere(vortexInstance.transform.position, pullRadius);
+            HashSet<GameObject> currentAffectedEnemies = new HashSet<GameObject>();
 
             foreach (Collider hit in hitColliders)
             {
                 if (hit.CompareTag("Enemy"))
                 {
-                    //int enemyElement = hit.GetComponent<CharacterStats_EnemyStats>().GetCurrentElement();
-                    
+                    GameObject enemy = hit.gameObject;
+                    currentAffectedEnemies.Add(enemy);
+                    var enemyStats = hit.GetComponent<CharacterStats_EnemyStats>();
+
+                    if (enemyStats != null && enemyStats.IsDead())
+                    {
+                        // Skip dead enemies
+                        continue;
+                    }
+
                     Rigidbody rb = hit.GetComponentInChildren<Rigidbody>();
                     NavMeshAgent agent = hit.GetComponentInChildren<NavMeshAgent>();
                     EnemyAttack enemyAttack = hit.GetComponent<EnemyAttack>();
-                    GameObject enemy = hit.gameObject;
-
+                    
                     if (!processedEnemies.Contains(enemy))
                     {
                        processedEnemies.Add(enemy);
@@ -192,18 +200,29 @@ public class SpellVortex : MonoBehaviour
                                 damageSystem.CalculateDamage(0, true, statusID, 5f, 10f, playerElement);
                             }
                         }
-
                     }
 
-                    if (agent != null && agent.enabled)
+                    if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
                     {
                         // Disable the NavMeshAgent temporarily for the pull effect
-                        agent.enabled = false;
+                        //agent.enabled = false;
 
-                        //Add the enemy to the list if not already added
+                        agent.isStopped = true;
+
+                        // Add the agent to the list if not already added
                         if (!disabledAgents.Contains(agent))
                         {
                             disabledAgents.Add(agent);
+                        }
+
+                        Vector3 directionToCenter = (vortexInstance.transform.position - agent.transform.position).normalized;
+                        Vector3 tangentialDirection = Vector3.Cross(directionToCenter, Vector3.up).normalized;
+                        float spinForce = Mathf.Lerp(pullForce * 0.2f, 0, Vector3.Distance(vortexInstance.transform.position, agent.transform.position) / pullRadius);
+                        Vector3 vortexForce = tangentialDirection * spinForce + directionToCenter * (pullForce * 0.1f);
+                        agent.velocity = vortexForce;
+                        if (agent.velocity.magnitude > 3f)
+                        {
+                            agent.velocity = agent.velocity.normalized * 3f;
                         }
                     }
 
@@ -292,6 +311,23 @@ public class SpellVortex : MonoBehaviour
                     }
                 }
             }
+            List<NavMeshAgent> toRestore = new List<NavMeshAgent>();
+            foreach (NavMeshAgent agent in disabledAgents)
+            {
+                if (agent != null && (!currentAffectedEnemies.Contains(agent.gameObject) || Vector3.Distance(agent.transform.position, vortexInstance.transform.position) > pullRadius))
+                {
+                    // Agent is outside the vortex or no longer in range
+                    agent.isStopped = false;
+                    agent.velocity = Vector3.zero;
+                    agent.SetDestination(player.position);
+                    toRestore.Add(agent);
+                }
+            }
+
+            foreach (NavMeshAgent restoredAgent in toRestore)
+            {
+                disabledAgents.Remove(restoredAgent);
+            }
 
             yield return null;
         }
@@ -308,10 +344,23 @@ public class SpellVortex : MonoBehaviour
     {
         foreach (NavMeshAgent agent in agents)
         {
-            if (agent != null)
+            /*if (agent != null)
             {
                 agent.enabled = true;
                 agent.SetDestination(player.position);
+            }*/
+
+            if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
+            {
+                try
+                {
+                    agent.isStopped = false; // Resume normal pathfinding
+                    agent.velocity = Vector3.zero; // Clear any residual velocity
+                    agent.SetDestination(player.position); // Recalculate path if needed
+                }
+                catch (System.Exception e) {
+                    Debug.LogWarning($"Error restoring NavMeshAgent: {agent.gameObject.name}. Exception: {e.Message}");
+                }
             }
 
             foreach (Rigidbody rb in rbs)
