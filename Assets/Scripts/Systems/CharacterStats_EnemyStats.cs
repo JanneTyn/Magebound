@@ -1,4 +1,6 @@
 using System.Collections;
+using System.ComponentModel;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,5 +64,10 @@ public class CharacterStats_EnemyStats : CharacterStats
 
         isDead = true;
 
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
