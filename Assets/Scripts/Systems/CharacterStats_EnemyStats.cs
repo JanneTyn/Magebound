@@ -32,7 +32,7 @@ public class CharacterStats_EnemyStats : CharacterStats
 
         //Trigger the damage flash effect
         DamageFlash damageFlash = GetComponent<DamageFlash>();
-        if (damageFlash != null) {
+        if (damageFlash != null && damage != 0) {
             StartCoroutine(damageFlash.EFlash());
         }
         else

@@ -424,8 +424,8 @@ MonoBehaviour:
   currentHealth: 100
   maxMana: 0
   fireResistance: 0
-  iceResistance: 0
-  electricResistance: 0
+  iceResistance: -1
+  electricResistance: 1
   currentElement: 0
   scoreWorth: 200
   healthMultiplier: 0.2
