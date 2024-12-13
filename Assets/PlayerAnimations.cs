@@ -29,7 +29,7 @@ public class PlayerAnimations : MonoBehaviour
         StartAttackAnimation(attackID);
 
         // Duration of the attack
-        float attackTime = 2f;
+        float attackTime = 1.5f;
         if (attackID == 0) attackTime = 1f;
 
         // Perform rotation and attack initialization during the attack duration
