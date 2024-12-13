@@ -313,7 +313,7 @@ MonoBehaviour:
   exponent: 1.2
   damageIncreaseMultiplier: 0.2
   healthIncreaseAmmount: 100
-  manaIncreaseAmmount: 200
+  manaIncreaseAmmount: 10
 --- !u!114 &-136397113228576530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,11 +427,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   globalCooldownDuration: 1.5
   dashCooldownDuration: 1.5
-  wallManaCost: 10
-  vortexManaCost: 20
-  dashManaCost: 5
-  explosionManaCost: 15
-  shardManaCost: 25
+  wallManaCost: 20
+  vortexManaCost: 40
+  dashManaCost: 10
+  explosionManaCost: 30
+  shardManaCost: 50
   uiSettings:
     skillIconsParent: {fileID: 0}
 --- !u!114 &217135097968322971
