@@ -14,7 +14,9 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
     Vector3 projectileDir;
     Vector3 playerLocation;
     private bool directionSet;
-    
+    [SerializeField] private AudioSource explosionImpactSound;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -152,6 +154,7 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
 
     void SetExplosionArea()
     {
+        explosionImpactSound.Play();
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         float timeMult = boltAliveTime * GetComponent<VisualEffect>().GetFloat("GrowSpeed");
         if (timeMult > 1) timeMult = 1;

@@ -19,6 +19,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
     Vector3 playerLocation;
     private bool directionSet;
     private float dmgTimer = 0;
+    [SerializeField] private AudioSource explosionImpactSound;
 
 
     // Update is called once per frame
@@ -114,6 +115,7 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 
     IEnumerator InitializeBurningGround()
     {
+        explosionImpactSound.Play();
         exploded = true;
         float t = 0;
         float life = GetComponent<VisualEffect>().GetFloat("GroundLife") - 1;

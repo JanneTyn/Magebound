@@ -17,6 +17,16 @@ public class StatusManager : MonoBehaviour, IStatusVariables
 
     private bool isBurning;
     private bool isChilled;
+
+    [SerializeField] AudioClip burnSound;
+    AudioSource audio;
+
+
+    private void Start()
+    {
+        audio = this.gameObject.GetComponent<AudioSource>();
+    }
+
     public void Activate(int statusID, float duration)
     {
         switch (statusID)
@@ -141,6 +151,15 @@ public class StatusManager : MonoBehaviour, IStatusVariables
 
             elapsedTime += 1f;
 
+            if (burnSound != null)
+            {
+                if (Random.Range(0, 100) < 10)
+                {
+                audio.clip = burnSound;
+                audio.Play();
+                }
+            }
+
             if (isBurning)
             {
                 isBurning = false;
@@ -167,6 +186,15 @@ public class StatusManager : MonoBehaviour, IStatusVariables
             this.gameObject.GetComponent<DamageSystem>().CalculateDamage(damage, 1);
 
             elapsedTime += 1f;
+
+            if (burnSound != null)
+            {
+                if (Random.Range(0, 100) < 10)
+                {
+                    audio.clip = burnSound;
+                    audio.Play();
+                }
+            }
 
             if (isBurning)
             {

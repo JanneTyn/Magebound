@@ -12,6 +12,8 @@ public class PlayerAbilitiesInput : MonoBehaviour
     public float dashManaCost = 200f;
     public float explosionManaCost = 200f;
     public float shardManaCost = 200f;
+
+    [SerializeField] private PlayerAudioHandler playerAudioHandler;
     CursorTarget cursorTarget;
     ManaSystem manaSystem;
 
@@ -62,6 +64,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             else if (!spellVortex.IsTargetingActive() && Input.GetMouseButtonDown(0)) //basic projectile
             {
                 cursorTarget.AttackPrepare(0);
+                playerAudioHandler.PlayBasicAttack();
                 //StartCoroutine(GlobalCooldown());
             }
             else if (dashManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetMouseButtonDown(1)) //Dash
@@ -74,6 +77,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 cursorTarget.AttackPrepare(2);
                 manaSystem.UseMana(explosionManaCost);
+                playerAudioHandler.PlayExplosion();
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (shardManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.R)) //Shard

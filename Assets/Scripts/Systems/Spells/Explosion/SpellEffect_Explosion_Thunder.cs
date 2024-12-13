@@ -18,7 +18,8 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
     Vector3 projectileDir;
     Vector3 playerLocation;
     private bool directionSet;
-
+    [SerializeField] private AudioSource explosionImpactSound;
+    private bool impactSoundPlayed = false;
 
     // Update is called once per frame
     void Update()
@@ -34,6 +35,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
         float dist = Vector3.Distance(transform.position, playerLocation);
         if (dist > 2000) { StartCoroutine(InitializeThunderShockwave()); collided = true; }
         else if (transform.position == projectileDir) { GetComponent<VisualEffect>().SendEvent("OnExplode"); collided = true; StartCoroutine(InitializeThunderShockwave()); }
+        
     }
 
     public void SetProjectileDirection(Vector3 dir, Vector3 playerLoc)
@@ -92,6 +94,12 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
 
     IEnumerator InitializeThunderShockwave()
     {
+        if(!impactSoundPlayed)
+        {
+            explosionImpactSound.Play();
+            impactSoundPlayed = true;
+        }
+
         float t = 0;
         float shockwaveTime = GetComponent<VisualEffect>().GetFloat("ShockwaveDuration");
         while (t < explosionDamageDelayTime)
@@ -115,6 +123,7 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
             yield return null;
         }
         explosionFin = true;
+
         Destroy(gameObject);
     }
 
