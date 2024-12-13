@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   currentHealth: 1000
-  maxMana: 1000
+  maxMana: 100
   fireResistance: 0
   iceResistance: 0
   electricResistance: 0
@@ -410,8 +410,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMana: 0
   currentMana: 0
-  passiveManaRegen: 20
-  manaOnHitRecoverAmmount: 20
+  passiveManaRegen: 1
+  manaOnHitRecoverAmmount: 5
   manaBar: {fileID: 0}
 --- !u!114 &7366495836035966625
 MonoBehaviour:
@@ -425,13 +425,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c817890a5f2874898a1f7899a9097a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalCooldownDuration: 0.5
-  dashCooldownDuration: 0.5
-  wallManaCost: 200
-  vortexManaCost: 200
-  dashManaCost: 200
-  explosionManaCost: 200
-  shardManaCost: 200
+  globalCooldownDuration: 1.5
+  dashCooldownDuration: 1.5
+  wallManaCost: 10
+  vortexManaCost: 20
+  dashManaCost: 5
+  explosionManaCost: 15
+  shardManaCost: 25
   uiSettings:
     skillIconsParent: {fileID: 0}
 --- !u!114 &217135097968322971

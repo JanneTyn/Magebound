@@ -2257,6 +2257,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 592648641}
     - target: {fileID: 7366495836035966625, guid: a833c470dab562a45827b9f6686e2697, type: 3}
+      propertyPath: dashCooldownDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366495836035966625, guid: a833c470dab562a45827b9f6686e2697, type: 3}
+      propertyPath: globalCooldownDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366495836035966625, guid: a833c470dab562a45827b9f6686e2697, type: 3}
       propertyPath: uiSettings.skillIconsParent
       value: 
       objectReference: {fileID: 1813569060}
