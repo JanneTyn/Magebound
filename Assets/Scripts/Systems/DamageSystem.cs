@@ -53,12 +53,12 @@ public class DamageSystem : MonoBehaviour
 
             // Ice
             case 02:
-                finalDamage -= finalDamage * characterStats.GetFireResistance();
+                finalDamage -= finalDamage * characterStats.GetIceResistance();
                 break;
 
             //Electric
             case 03:
-                finalDamage -= finalDamage * characterStats.GetFireResistance();
+                finalDamage -= finalDamage * characterStats.GetElectricResistance();
                 break;
 
             default:
