@@ -19,7 +19,7 @@ public abstract class EnemyAttack : MonoBehaviour
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         if (player == null)
         {
