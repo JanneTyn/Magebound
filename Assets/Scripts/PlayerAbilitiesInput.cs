@@ -5,8 +5,8 @@ public class PlayerAbilitiesInput : MonoBehaviour
 {
 
     private bool isGlobalCooldownActive = false;
-    public float globalCooldownDuration = 2f;
-    public float dashCooldownDuration = 3f;
+    public float globalCooldownDuration = 1.5f;
+    public float dashCooldownDuration = 2f;
     public float wallManaCost = 200f;
     public float vortexManaCost = 200f;
     public float dashManaCost = 200f;

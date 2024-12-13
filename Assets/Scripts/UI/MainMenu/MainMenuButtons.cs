@@ -10,7 +10,6 @@ public class MainMenuButtons : MonoBehaviour
     public void StartButton()
     {
         AudioManager.Instance.StartGame();
-        AudioManager.Instance.RestartAudio();
         SceneManager.LoadScene("SampleScene");        
     }
 

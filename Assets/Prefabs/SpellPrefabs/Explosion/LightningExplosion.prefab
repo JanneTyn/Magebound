@@ -52,7 +52,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.6
+        m_Name: GrowSpeed
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -72,7 +75,10 @@ VisualEffect:
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: IsExploding
+        m_Overridden: 1
 --- !u!73398921 &5412806057859866306
 VFXRenderer:
   serializedVersion: 1
@@ -133,6 +139,7 @@ MonoBehaviour:
   statusID: 4
   spellID: 3
   ElementID: 3
+  manaRecoveryAmmount: 0
   overlappableEffectID: 
   explosionRadius: 2
   isExplosive: 1
