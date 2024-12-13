@@ -81,26 +81,31 @@ public class AudioManager : MonoBehaviour
 
     public void SwitchAudio(int id, float fadeTime)
     {
-        currentID = id;
 
-        switch(id)
+       if(currentID != id)
         {
-            case 1:
-                StartCoroutine(FadeOut(iceAudio, fadeTime));
-                StartCoroutine(FadeOut(electricAudio, fadeTime));
-                StartCoroutine(FadeIn(fireAudio, fadeTime));
-                break;
-            case 2:
-                StartCoroutine(FadeOut(fireAudio, fadeTime));
-                StartCoroutine(FadeOut(electricAudio, fadeTime));
-                StartCoroutine(FadeIn(iceAudio, fadeTime));
-                break;
-            case 3:
-                StartCoroutine(FadeOut(fireAudio, fadeTime));
-                StartCoroutine(FadeOut(iceAudio, fadeTime));
-                StartCoroutine(FadeIn(electricAudio, fadeTime));
-                break;
+            switch (id)
+            {
+                case 1:
+                    StartCoroutine(FadeOut(iceAudio, fadeTime));
+                    StartCoroutine(FadeOut(electricAudio, fadeTime));
+                    StartCoroutine(FadeIn(fireAudio, fadeTime));
+                    break;
+                case 2:
+                    StartCoroutine(FadeOut(fireAudio, fadeTime));
+                    StartCoroutine(FadeOut(electricAudio, fadeTime));
+                    StartCoroutine(FadeIn(iceAudio, fadeTime));
+                    break;
+                case 3:
+                    StartCoroutine(FadeOut(fireAudio, fadeTime));
+                    StartCoroutine(FadeOut(iceAudio, fadeTime));
+                    StartCoroutine(FadeIn(electricAudio, fadeTime));
+                    break;
+            }
+
+            currentID = id;
         }
+
     }
 
     private IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
