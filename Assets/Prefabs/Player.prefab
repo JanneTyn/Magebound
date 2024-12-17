@@ -439,6 +439,10 @@ MonoBehaviour:
   dashManaCost: 10
   explosionManaCost: 30
   shardManaCost: 50
+  fireClothes: {fileID: 2100000, guid: 1281b264fdbffc04488f206d1e0132ed, type: 2}
+  iceClothes: {fileID: 2100000, guid: e7c00399540d2d04382192e9cf458b16, type: 2}
+  electricClothes: {fileID: 2100000, guid: 17c303cc2ca12a14ba8ad45d259218ea, type: 2}
+  currentMat: {fileID: 0}
   playerAudioHandler: {fileID: 4588540149696643504}
   uiSettings:
     skillIconsParent: {fileID: 0}
@@ -1146,7 +1150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7518704086924768521}
   - component: {fileID: 4090604870348706144}
-  - component: {fileID: 1546086526422191150}
+  - component: {fileID: 8661653353362433274}
   m_Layer: 6
   m_Name: Player Spot Light
   m_TagString: Untagged
@@ -1234,7 +1238,7 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!114 &1546086526422191150
+--- !u!114 &8661653353362433274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1276,7 +1280,7 @@ PrefabInstance:
     - target: {fileID: 1936922901493341749, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: a6d4d6b43dd62b64d8a4fc7ea687dc91, type: 2}
+      objectReference: {fileID: 2100000, guid: 1281b264fdbffc04488f206d1e0132ed, type: 2}
     - target: {fileID: 1936922901493341749, guid: 02f475cc089e9e14cb03b9e5bb838eb5, type: 3}
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
