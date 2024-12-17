@@ -357,6 +357,14 @@ public class SpellVortex : MonoBehaviour
                     agent.isStopped = false; // Resume normal pathfinding
                     agent.velocity = Vector3.zero; // Clear any residual velocity
                     agent.SetDestination(player.position); // Recalculate path if needed
+
+                    //Set Animator "IsMoving" parameter
+                    Animator animator = agent.GetComponentInChildren<Animator>();
+                    if (animator != null)
+                    {
+                        bool isMoving = agent.velocity.magnitude > 0.1f;
+                        animator.SetBool("IsMoving", isMoving);
+                    }
                 }
                 catch (System.Exception e) {
                     Debug.LogWarning($"Error restoring NavMeshAgent: {agent.gameObject.name}. Exception: {e.Message}");
