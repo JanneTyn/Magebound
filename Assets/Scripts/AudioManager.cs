@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource iceAudio;
     [SerializeField] private AudioSource electricAudio;
     private int currentID = 1;
+    public float playerVolume = 1;
+    public float effectVolume = 1;
     public bool gameStarted = false;
 
     private void Awake()

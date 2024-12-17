@@ -21,6 +21,11 @@ public class PlayerAudioHandler : MonoBehaviour
     {
         if (!basicAttackIsPlaying)
         {
+            foreach (AudioSource audio in basicAttack)
+            {
+                AudioVolume(audio);
+            }
+
             StartCoroutine(BasicAttackIsPlaying());
         }
 
@@ -28,26 +33,31 @@ public class PlayerAudioHandler : MonoBehaviour
 
     public void PlayExplosion()
     {
+        AudioVolume(explosionAttack);
         explosionAttack.Play();
     }
 
     public void PlayWall()
     {
+        AudioVolume(wallAndCrystalShardAttack);
         wallAndCrystalShardAttack.Play();
     }
 
     public void PlayCrystalShard()
     {
+        AudioVolume(wallAndCrystalShardAttack);
         wallAndCrystalShardAttack.Play();
     }  
 
     public void PlayNotEnoughMana()
     {
+        AudioVolume(notEnoughMana);
         notEnoughMana.Play();
     }
 
     public void PlayDash()
     {
+        AudioVolume(dash);
         dash.Play();
     }
 
@@ -63,5 +73,13 @@ public class PlayerAudioHandler : MonoBehaviour
 
         selectedBasicAttack = basicAttack[Random.Range(0, basicAttack.Length)];
         basicAttackIsPlaying = false;
+    }
+    private void AudioVolume(AudioSource audioSource)
+    {
+        //Very inefficent way to do this...
+        if(AudioManager.Instance != null)
+        {
+            audioSource.volume = AudioManager.Instance.playerVolume;
+        }
     }
 }

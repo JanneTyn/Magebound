@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1790300877050309501}
   - component: {fileID: 3439708592619392578}
   - component: {fileID: 814592583535482240}
+  - component: {fileID: -6072983098164362436}
   m_Layer: 10
   m_Name: IceVortex
   m_TagString: Untagged
@@ -130,7 +131,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a9deea1ed06e67049a71be7fc039d2d3, type: 3}
   m_Resource: {fileID: 8300000, guid: a9deea1ed06e67049a71be7fc039d2d3, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -215,3 +216,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6072983098164362436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5807620652789127988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e84677447e2f714b8fc22b08e86afbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 814592583535482240}

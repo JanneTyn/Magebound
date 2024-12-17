@@ -13,6 +13,14 @@ public class SpellEffect_WorldEffect_Wall : SpellEffect_WorldEffect
 
     private void Start()
     {
+        if(gameObject.TryGetComponent<AudioSource>(out AudioSource audioSource))
+        {
+            if(AudioManager.Instance != null)
+            {
+                audioSource.volume = AudioManager.Instance.effectVolume;
+                audioSource.Play();
+            }
+        }
         parentObject = this.gameObject;
         SpawnWall(length, size);
         SetManaSystem(GameObject.Find("Player").GetComponent<ManaSystem>());
