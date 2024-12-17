@@ -12,6 +12,10 @@ public class PlayerAbilitiesInput : MonoBehaviour
     public float dashManaCost = 200f;
     public float explosionManaCost = 200f;
     public float shardManaCost = 200f;
+    public Material fireClothes;
+    public Material iceClothes;
+    public Material electricClothes;
+    public Material currentMat;
 
     [SerializeField] private PlayerAudioHandler playerAudioHandler;
     CursorTarget cursorTarget;
@@ -45,6 +49,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 GetComponent<Ability_Wall>().ActivateAbility(GetComponent<CharacterStats>().GetCurrentElement());
                 manaSystem.UseMana(wallManaCost);
+                UIAbilityPressed(0);
                 playerAudioHandler.PlayWall();
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
@@ -56,6 +61,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             {
                 spellVortex.PrepareAttackAnim();
                 manaSystem.UseMana(vortexManaCost);
+                UIAbilityPressed(2);
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (vortexManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && spellVortex != null && spellVortex.IsTargetingActive() && Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
@@ -79,12 +85,14 @@ public class PlayerAbilitiesInput : MonoBehaviour
                 cursorTarget.AttackPrepare(2);
                 manaSystem.UseMana(explosionManaCost);
                 playerAudioHandler.PlayExplosion();
+                UIAbilityPressed(1);
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
             else if (shardManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.R)) //Shard
             {
                 cursorTarget.AttackPrepare(3);
                 manaSystem.UseMana(shardManaCost);
+                UIAbilityPressed(3);
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
         }
@@ -108,6 +116,26 @@ public class PlayerAbilitiesInput : MonoBehaviour
         }
         GetComponent<CharacterStats_PlayerStats>().SetCurrentElement(elementID);
         uiSettings.skillIconsParent.GetComponent<SkillIconParent>().ChangeElement(elementID);
+        ChangeClothColor(elementID);
+    }
+
+    private void UIAbilityPressed(int id)
+    {
+        switch(id)
+        {
+            case 0: //Wall
+                StartCoroutine(uiSettings.skillIconsParent.GetComponent<SkillIconParent>().skillIcons[0].GetComponent<SkillIcon>().Pressed());
+                break;
+            case 1: //Explosion
+                StartCoroutine(uiSettings.skillIconsParent.GetComponent<SkillIconParent>().skillIcons[1].GetComponent<SkillIcon>().Pressed());
+                break;
+            case 2: //Vortex
+                StartCoroutine(uiSettings.skillIconsParent.GetComponent<SkillIconParent>().skillIcons[2].GetComponent<SkillIcon>().Pressed());
+                break;
+            case 3: //Crystal Shard
+                StartCoroutine(uiSettings.skillIconsParent.GetComponent<SkillIconParent>().skillIcons[3].GetComponent<SkillIcon>().Pressed());
+                break;
+        }
     }
 
     private IEnumerator GlobalCooldown(float duration)
@@ -116,5 +144,25 @@ public class PlayerAbilitiesInput : MonoBehaviour
         uiSettings.skillIconsParent.GetComponent<SkillIconParent>().StartGlobalCooldown(duration);
         yield return new WaitForSeconds(duration);
         isGlobalCooldownActive = false;
+    }
+
+    void ChangeClothColor(int elementID)
+    {
+        switch (elementID) 
+        {
+            case 1:
+                currentMat = fireClothes;
+                break;
+            case 2:
+                currentMat = iceClothes;
+                break;
+            case 3:
+                currentMat = electricClothes;
+                break;
+        }
+
+        Material[] mats = transform.Find("MB Player Unity V1/P_RT_HEAD.001").GetComponent<SkinnedMeshRenderer>().materials;
+        mats[2] = currentMat;
+        transform.Find("MB Player Unity V1/P_RT_HEAD.001").GetComponent<SkinnedMeshRenderer>().materials = mats;
     }
 }

@@ -45,6 +45,24 @@ public class SkillIcon : MonoBehaviour
         
     }
 
+    public IEnumerator Pressed()
+    {
+        Color originalColor = image.color;
+
+        float h, s, v;
+        Color.RGBToHSV(originalColor, out h, out s, out v);
+        v *= 0.2f;
+
+        image.color = Color.HSVToRGB(h, s, v);
+
+        while(v < 1)
+        {
+            v += Time.deltaTime * 1;
+            image.color = Color.HSVToRGB(h, s, v);
+            yield return null;
+        }
+    }
+
     public IEnumerator CoolDown(float duration)
     {
         slider.value = 0;

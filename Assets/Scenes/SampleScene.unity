@@ -955,6 +955,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1019056181586122014, guid: a61f253a75db08e4b948081db8db62db, type: 3}
   m_PrefabInstance: {fileID: 350046193517770707}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &989703403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8181382312490154968, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+  m_PrefabInstance: {fileID: 3154639920270267052}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1575016623 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 979682295213704324, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
@@ -1108,6 +1113,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1695068046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 155081014887985509, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+  m_PrefabInstance: {fileID: 3154639920270267052}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1734019845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,6 +2168,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7646548302528751989, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+      propertyPath: 'skillIcons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 989703403}
+    - target: {fileID: 7646548302528751989, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+      propertyPath: 'skillIcons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1695068046}
     - target: {fileID: 7881503156148015215, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
       propertyPath: m_Name
       value: Canvas
