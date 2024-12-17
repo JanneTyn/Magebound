@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public float playerVolume = 1;
     public float effectVolume = 1;
     public bool gameStarted = false;
+    public bool GamePaused = false;
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             mainAudio.volume = volume;
-            SwitchAudio(currentID, 0.01f);
+            SetAudio(currentID, volume);
         }
     }
 
