@@ -96,9 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2833921094e2742839226c1a070e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeDamageAudioClip:
-  - {fileID: 8300000, guid: 8cfea089476e34649b3a4528fd0a67af, type: 3}
-  - {fileID: 8300000, guid: 635939b2e7de0c245b5506de71b17362, type: 3}
+  takeDamageAudioClip: []
 --- !u!114 &659493665664955862
 MonoBehaviour:
   m_ObjectHideFlags: 0
