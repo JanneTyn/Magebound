@@ -1174,7 +1174,7 @@ MonoBehaviour:
   - {fileID: 4733137926563324823}
   - {fileID: 1212765544715932197}
   explosionAttack: {fileID: 6437150460972870150}
-  wallAttack: {fileID: 8672288411103000250}
+  wallAndCrystalShardAttack: {fileID: 8672288411103000250}
   notEnoughMana: {fileID: 4410067103340021156}
 --- !u!1 &4730023678267145898
 GameObject:

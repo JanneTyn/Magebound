@@ -6,6 +6,8 @@ public class SkillIcon : MonoBehaviour
 {
     public Slider slider;
     public Image image;
+    private float h, s ,v;
+
 
     public void ChangeImageColor(int elementID)
     {
@@ -15,6 +17,7 @@ public class SkillIcon : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString("#FF6500", out Color OrangeColor))
                 {
                     image.color = OrangeColor;
+                    Color.RGBToHSV(OrangeColor, out h, out s, out v);
                 }
                 else
                 {
@@ -25,6 +28,7 @@ public class SkillIcon : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString("#10CBFF", out Color BlueColor))
                 {
                     image.color = BlueColor;
+                    Color.RGBToHSV(BlueColor, out h, out s, out v);
                 }
                 else
                 {
@@ -35,6 +39,7 @@ public class SkillIcon : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString("#8D10FF", out Color PurpleColor))
                 {
                     image.color = PurpleColor;
+                    Color.RGBToHSV(PurpleColor, out h, out s, out v);
                 }
                 else
                 {
@@ -49,16 +54,16 @@ public class SkillIcon : MonoBehaviour
     {
         Color originalColor = image.color;
 
-        float h, s, v;
-        Color.RGBToHSV(originalColor, out h, out s, out v);
-        v *= 0.2f;
+        float tempV = v;
+        Color.RGBToHSV(originalColor, out h, out s, out tempV);
+        tempV *= 0.2f;
 
-        image.color = Color.HSVToRGB(h, s, v);
+        image.color = Color.HSVToRGB(h, s, tempV);
 
-        while(v < 1)
+        while(tempV < 1)
         {
-            v += Time.deltaTime * 1;
-            image.color = Color.HSVToRGB(h, s, v);
+            tempV += Time.deltaTime * 1;
+            image.color = Color.HSVToRGB(h, s, tempV);
             yield return null;
         }
     }
