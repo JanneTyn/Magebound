@@ -72,7 +72,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.5
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   attackSize: {x: 2.5, y: 2.5, z: 2.5}
   attackCenterOffset: {x: 0, y: 1, z: 0}
   damage: 50
