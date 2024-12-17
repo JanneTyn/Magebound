@@ -18,6 +18,8 @@ public class MoveToPlayer : BTNode
         if (agent.enabled && agent.isOnNavMesh)
         {
             agent.SetDestination(player.position);
+            bool isMoving = agent.velocity.magnitude > 0.1f; //Check movement
+            agent.GetComponentInChildren<Animator>().SetBool("IsMoving", isMoving);
 
             if (Vector3.Distance(agent.transform.position, player.position) <= agent.stoppingDistance)
             {
