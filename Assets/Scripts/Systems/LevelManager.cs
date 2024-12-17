@@ -7,10 +7,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int level = 1; //Current Level
     [SerializeField] private int experienceNeeded = 50; //Experience needed for next level
     [SerializeField] private int currentExperience = 0; //Accumulated xp
+    [SerializeField] private AudioClip levelUpSound;
+    private AudioSource audioSource;
 
     public ExperienceBar experienceBar;
     public LevelText levelText;
     public UpgradeWindow upgradeWindow;
+    
 
     // Variables for the XP formula
     [SerializeField] private int baseXP = 50; // Base XP for level 1
@@ -25,6 +28,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         experienceNeeded = CalculateExperienceNeeded(level);
+        audioSource = GetComponent<AudioSource>();
 
         //Set Start values and Level to UI
         experienceBar.SetExperienceNeeded(experienceNeeded);
@@ -59,6 +63,7 @@ public class LevelManager : MonoBehaviour
         //upgradeWindow.OpenUpgradeWindow();
 
         GetComponent<CharacterStats_PlayerStats>().LevelUp(damageIncreaseMultiplier, healthIncreaseAmmount, manaIncreaseAmmount);
+        audioSource.PlayOneShot(levelUpSound, 1f);
     }
 
     private int CalculateExperienceNeeded(int level)
