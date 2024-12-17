@@ -32,7 +32,7 @@ public class PlayerAudioHandler : MonoBehaviour
 
     public void PlayWall()
     {
-        explosionAttack.Play();
+        wallAndCrystalShardAttack.Play();
     }
 
     public void PlayCrystalShard()
