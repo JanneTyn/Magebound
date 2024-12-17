@@ -96,7 +96,11 @@ public class SpellEffect_Explosion_Thunder : SpellEffect_Explosive
     {
         if(!impactSoundPlayed)
         {
-            explosionImpactSound.Play();
+            if (AudioManager.Instance != null)
+            {
+                explosionImpactSound.volume = AudioManager.Instance.effectVolume;
+                explosionImpactSound.Play();
+            }
             impactSoundPlayed = true;
         }
 
