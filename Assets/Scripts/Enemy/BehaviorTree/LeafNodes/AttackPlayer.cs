@@ -11,7 +11,7 @@ public class AttackPlayer : BTNode
 
     public override NodeState Evaluate()
     {
-        enemyAttack.Attack();
+        //enemyAttack.Attack();
 
         state = NodeState.SUCCESS;
         return state;
