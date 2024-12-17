@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class EnemyAttack : MonoBehaviour
 {
     protected float attackRange = 2f;
-    protected float  attackCooldown = 3f;
+    protected float  attackCooldown = 1f;
     protected float lastAttackTime = 0f;
 
     protected Transform player;
@@ -73,9 +73,9 @@ public abstract class EnemyAttack : MonoBehaviour
 
     protected virtual IEnumerator CheckForPlayerInAttackArea()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         Vector3 attackCenter = transform.position + attackCenterOffset;
-        Collider[] hitColliders = Physics.OverlapBox(attackCenter, attackSize / 2, Quaternion.identity, playerLayerMask);
+        Collider[] hitColliders = Physics.OverlapBox(attackCenter, attackSize, Quaternion.identity, playerLayerMask);
 
         foreach (var hitCollider in hitColliders)
         {
