@@ -83,8 +83,10 @@ public class DamageSystem : MonoBehaviour
             {
                 if (takeDamageAudioClip.Length != 0)
                 {
-                    audioSource.clip = takeDamageAudioClip[Random.Range(0, takeDamageAudioClip.Length)];
-                    audioSource.Play();
+                    if (AudioManager.Instance != null)
+                    {
+                        audioSource.PlayOneShot(takeDamageAudioClip[Random.Range(0, takeDamageAudioClip.Length)], AudioManager.Instance.playerVolume);
+                    }
                 }
             }
         }
