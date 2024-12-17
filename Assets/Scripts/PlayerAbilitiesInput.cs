@@ -88,13 +88,31 @@ public class PlayerAbilitiesInput : MonoBehaviour
                 UIAbilityPressed(1);
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
             }
-            else if (shardManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.R)) //Shard
+            else if (shardManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetKeyDown(KeyCode.R)) //CrystalShard
             {
                 cursorTarget.AttackPrepare(3);
                 manaSystem.UseMana(shardManaCost);
+                playerAudioHandler.PlayCrystalShard();
                 UIAbilityPressed(3);
                 StartCoroutine(GlobalCooldown(globalCooldownDuration));
+            }//Time for massive if not enough mana else if
+            else if (Input.GetKeyDown(KeyCode.Q) && wallManaCost > manaSystem.GetMana())
+            {
+                playerAudioHandler.PlayNotEnoughMana();
             }
+            else if (Input.GetKeyDown(KeyCode.F) && vortexManaCost > manaSystem.GetMana())
+            {
+                playerAudioHandler.PlayNotEnoughMana();
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && explosionManaCost > manaSystem.GetMana())
+            {
+                playerAudioHandler.PlayNotEnoughMana();
+            }
+            else if (Input.GetKeyDown(KeyCode.R) && shardManaCost > manaSystem.GetMana())
+            {
+                playerAudioHandler.PlayNotEnoughMana();
+            }
+
         }
     }
 
