@@ -6,6 +6,7 @@ public class PlayerAudioHandler : MonoBehaviour
     [SerializeField] AudioSource[] basicAttack;
     [SerializeField] AudioSource explosionAttack;
     [SerializeField] AudioSource wallAndCrystalShardAttack;
+    [SerializeField] AudioSource dash;
     [SerializeField] AudioSource notEnoughMana;
 
     private AudioSource selectedBasicAttack;
@@ -43,6 +44,11 @@ public class PlayerAudioHandler : MonoBehaviour
     public void PlayNotEnoughMana()
     {
         notEnoughMana.Play();
+    }
+
+    public void PlayDash()
+    {
+        dash.Play();
     }
 
     IEnumerator BasicAttackIsPlaying()

@@ -9,9 +9,12 @@ public class CharacterStats_PlayerStats : CharacterStats
     public int points;
     public float damageMultiplier = 1.0f;
     public bool playerDead = false;
+    [SerializeField] AudioClip deathAudioClip;
+    AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         //Set Start values for UI
         healthBar.SetMaxHealth(GetMaxHealth());
         healthBar.SetCurrentHealth(GetCurrentHealth());
@@ -54,7 +57,12 @@ public class CharacterStats_PlayerStats : CharacterStats
     IEnumerator DeathAnimation()
     {
         GetComponentInChildren<Animator>().Play("Dead", 0);
+        if(!playerDead)
+        {
+            audioSource.PlayOneShot(deathAudioClip);
+        }
         playerDead = true;
+        
 
         yield return new WaitForEndOfFrame();
 

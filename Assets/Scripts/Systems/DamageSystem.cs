@@ -77,7 +77,18 @@ public class DamageSystem : MonoBehaviour
 
     private void PlayTakeDamageAudio()
     {
-        if(takeDamageAudioClip.Length != 0)
+        if (gameObject.CompareTag("Player"))
+        {
+            if (!GetComponent<CharacterStats_PlayerStats>().playerDead)
+            {
+                if (takeDamageAudioClip.Length != 0)
+                {
+                    audioSource.clip = takeDamageAudioClip[Random.Range(0, takeDamageAudioClip.Length)];
+                    audioSource.Play();
+                }
+            }
+        }
+        else if (takeDamageAudioClip.Length != 0)
         {
             audioSource.clip = takeDamageAudioClip[Random.Range(0, takeDamageAudioClip.Length)];
             audioSource.Play();

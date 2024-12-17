@@ -76,6 +76,7 @@ public class PlayerAbilitiesInput : MonoBehaviour
             }
             else if (dashManaCost <= manaSystem.GetMana() && !isGlobalCooldownActive && Input.GetMouseButtonDown(1)) //Dash
             {
+                playerAudioHandler.PlayDash();
                 cursorTarget.AttackPrepare(1);
                 manaSystem.UseMana(dashManaCost);
                 StartCoroutine(GlobalCooldown(dashCooldownDuration));
