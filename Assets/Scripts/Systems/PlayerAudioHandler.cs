@@ -19,46 +19,82 @@ public class PlayerAudioHandler : MonoBehaviour
 
     public void PlayBasicAttack()
     {
-        if (!basicAttackIsPlaying)
+        if (AudioManager.Instance != null)
         {
-            foreach (AudioSource audio in basicAttack)
+            if (!AudioManager.Instance.GamePaused)
             {
-                AudioVolume(audio);
+                if (!basicAttackIsPlaying)
+                {
+                    foreach (AudioSource audio in basicAttack)
+                    {
+                        AudioVolume(audio);
+                    }
+
+                    StartCoroutine(BasicAttackIsPlaying());
+                }
             }
-
-            StartCoroutine(BasicAttackIsPlaying());
         }
-
     }
 
     public void PlayExplosion()
     {
-        AudioVolume(explosionAttack);
-        explosionAttack.Play();
+        if (AudioManager.Instance != null)
+        {
+            if (!AudioManager.Instance.GamePaused)
+            {
+                AudioVolume(explosionAttack);
+                explosionAttack.Play();
+            }
+        }
+
     }
 
     public void PlayWall()
     {
-        AudioVolume(wallAndCrystalShardAttack);
-        wallAndCrystalShardAttack.Play();
+        if (AudioManager.Instance != null)
+        {
+            if (!AudioManager.Instance.GamePaused)
+            {
+                AudioVolume(wallAndCrystalShardAttack);
+                wallAndCrystalShardAttack.Play();
+            }
+        }
     }
 
     public void PlayCrystalShard()
     {
-        AudioVolume(wallAndCrystalShardAttack);
-        wallAndCrystalShardAttack.Play();
+        if (AudioManager.Instance != null)
+        {
+            if (!AudioManager.Instance.GamePaused)
+            {
+                AudioVolume(wallAndCrystalShardAttack);
+                wallAndCrystalShardAttack.Play();
+            }
+        }
     }  
 
     public void PlayNotEnoughMana()
     {
-        AudioVolume(notEnoughMana);
-        notEnoughMana.Play();
+        if (AudioManager.Instance != null)
+        {
+            if (!AudioManager.Instance.GamePaused)
+            {
+                AudioVolume(notEnoughMana);
+                notEnoughMana.Play();
+            }
+        }
     }
 
     public void PlayDash()
     {
-        AudioVolume(dash);
-        dash.Play();
+        if (AudioManager.Instance != null)
+        {
+            if (!AudioManager.Instance.GamePaused)
+            {
+                AudioVolume(dash);
+                dash.Play();
+            }
+        }
     }
 
     IEnumerator BasicAttackIsPlaying()
@@ -77,9 +113,7 @@ public class PlayerAudioHandler : MonoBehaviour
     private void AudioVolume(AudioSource audioSource)
     {
         //Very inefficent way to do this...
-        if(AudioManager.Instance != null)
-        {
-            audioSource.volume = AudioManager.Instance.playerVolume;
-        }
+        
+        audioSource.volume = AudioManager.Instance.playerVolume;
     }
 }

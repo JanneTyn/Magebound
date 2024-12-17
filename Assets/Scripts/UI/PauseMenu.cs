@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject[] toDisable; //To Disable when Pause menu active and reactivate if resumin
+    public GameObject[] toDisable; //To Disable when Pause menu active and reactivate if resuming
     public GameObject pauseMenu; 
+    public GameObject settingsMenu;
 
     private bool pauseMenuIsActive = false;
 
@@ -15,6 +16,10 @@ public class PauseMenu : MonoBehaviour
         {
             if(!pauseMenuIsActive)
             {
+                if(AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.GamePaused = true;
+                }
                 Time.timeScale = 0; //Pause game
                 pauseMenu.SetActive(true); 
                 foreach (GameObject go in toDisable)
@@ -24,13 +29,21 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.GamePaused = false;
+                }
                 Time.timeScale = 1; //Continue Game
                 foreach (GameObject go in toDisable)
                 {
                     go.SetActive(true);
                 }
-                pauseMenu.SetActive(false);              
+                pauseMenu.SetActive(false);   
+                if(settingsMenu.active)
+                {
+                    settingsMenu.SetActive(false);
+                }
+
             }
 
         }
@@ -38,6 +51,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeButton()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.GamePaused = false;
+        }
         Time.timeScale = 1; //Continue game
         foreach (GameObject go in toDisable)
         {

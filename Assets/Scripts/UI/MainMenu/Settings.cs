@@ -17,16 +17,26 @@ public class Settings : MonoBehaviour
 
     public void MainVolumeSlider(Slider volume)
     {
-        AudioManager.Instance.AudioVolume(volume.value);
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.AudioVolume(volume.value);
+        }
     }
 
     public void PlayerVolumeSlider(Slider volume)
     {
-        AudioManager.Instance.playerVolume = volume.value;
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.playerVolume = volume.value;
+        }
+
     }
 
     public void EffectVolumeSlider(Slider volume)
     {
-        AudioManager.Instance.effectVolume = volume.value;
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.effectVolume = volume.value;
+        }
     }
 }
