@@ -6,7 +6,7 @@ public class EnemyDeathHandler : MonoBehaviour
 {
     public void HandleDeath()
     {
-        Animator animator = GetComponent<Animator>();
+        Animator animator = GetComponentInChildren<Animator>();
         if (animator != null)
         {
             animator.SetBool("IsDead", true);
@@ -19,14 +19,14 @@ public class EnemyDeathHandler : MonoBehaviour
             agent.enabled = false;
         }
 
-        GetComponent<EnemyAttack>().enabled = true;
+        GetComponent<EnemyAttack>().enabled = false;
 
         StartCoroutine(WaitForDeathAnimation());
     }
 
     private IEnumerator WaitForDeathAnimation()
     {
-        Animator animator = GetComponent<Animator>();
+        Animator animator = GetComponentInChildren<Animator>();
         if (animator != null)
         {
             if (animator.HasState(0, Animator.StringToHash("Dead")))

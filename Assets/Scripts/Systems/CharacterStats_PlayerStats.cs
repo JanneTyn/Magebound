@@ -59,7 +59,11 @@ public class CharacterStats_PlayerStats : CharacterStats
         GetComponentInChildren<Animator>().Play("Dead", 0);
         if(!playerDead)
         {
-            audioSource.PlayOneShot(deathAudioClip);
+            if(AudioManager.Instance != null)
+            {
+                audioSource.PlayOneShot(deathAudioClip, AudioManager.Instance.playerVolume);
+            }
+            
         }
         playerDead = true;
         

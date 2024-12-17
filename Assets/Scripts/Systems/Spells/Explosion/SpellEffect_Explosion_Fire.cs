@@ -115,7 +115,11 @@ public class SpellEffect_Explosion_Fire : SpellEffect_Explosive
 
     IEnumerator InitializeBurningGround()
     {
-        explosionImpactSound.Play();
+        if(AudioManager.Instance != null)
+        {
+            explosionImpactSound.volume = AudioManager.Instance.effectVolume;
+            explosionImpactSound.Play();
+        }     
         exploded = true;
         float t = 0;
         float life = GetComponent<VisualEffect>().GetFloat("GroundLife") - 1;

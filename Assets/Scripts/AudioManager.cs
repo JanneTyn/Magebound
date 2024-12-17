@@ -11,7 +11,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource iceAudio;
     [SerializeField] private AudioSource electricAudio;
     private int currentID = 1;
+    public float playerVolume = 1;
+    public float effectVolume = 1;
     public bool gameStarted = false;
+    public bool GamePaused = false;
 
     private void Awake()
     {
@@ -49,7 +52,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             mainAudio.volume = volume;
-            SwitchAudio(currentID, 0.01f);
+            SetAudio(currentID, volume);
         }
     }
 

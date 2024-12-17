@@ -154,7 +154,11 @@ public class SpellEffect_Explosion_Ice : SpellEffect_Explosive
 
     void SetExplosionArea()
     {
-        explosionImpactSound.Play();
+        if (AudioManager.Instance != null)
+        {
+            explosionImpactSound.volume = AudioManager.Instance.effectVolume;
+            explosionImpactSound.Play();
+        }
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         float timeMult = boltAliveTime * GetComponent<VisualEffect>().GetFloat("GrowSpeed");
         if (timeMult > 1) timeMult = 1;
