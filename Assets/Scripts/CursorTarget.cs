@@ -21,12 +21,21 @@ public class CursorTarget : MonoBehaviour
 
     private void Start()
     {
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         cam = GetComponent<Camera>();
         spellEffect = GameObject.Find("SpellBaseEffect").GetComponent<SpellBaseEffect>();
         spellExplosion = GameObject.Find("SpellBaseEffect").GetComponent<SpellExplosion>();
         spellShard = GameObject.Find("SpellBaseEffect").GetComponent<SpellShard>();
         player = GameObject.Find("Player");
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            hotSpot = new Vector2(150, 150);
+        }
+        else
+        {
+            hotSpot = new Vector2(68, 68);
+        }
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
 
     private void Update()
