@@ -3059,6 +3059,7 @@ MonoBehaviour:
   playerVolume: 1
   effectVolume: 1
   gameStarted: 0
+  GamePaused: 0
 --- !u!4 &983777159
 Transform:
   m_ObjectHideFlags: 0
