@@ -56,7 +56,7 @@ public class Ability_Wall : MonoBehaviour
             case 2:
 
                 //Spawn ice wall and set its size
-                var iceWall = Instantiate(walls[1], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
+                var iceWall = Instantiate(walls[1], spawnPosition, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
                 iceWall.length = Mathf.Clamp((distance - 1f) / 2, minWallSize, maxWallSize);
                 iceWall.size = 5;
 
@@ -65,7 +65,7 @@ public class Ability_Wall : MonoBehaviour
             case 3:
 
                 //Spawn electric wall and set its size
-                var electricWall = Instantiate(walls[2], midpoint, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
+                var electricWall = Instantiate(walls[2], spawnPosition, rotation).GetComponent<SpellEffect_WorldEffect_Wall>();
                 electricWall.length = Mathf.Clamp((distance - 1f) / 2, minWallSize, maxWallSize);
                 electricWall.size = 5;
 
