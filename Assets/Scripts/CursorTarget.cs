@@ -30,10 +30,12 @@ public class CursorTarget : MonoBehaviour
         if (Application.platform == RuntimePlatform.WindowsPlayer)
         {
             hotSpot = new Vector2(150, 150);
+            cursorMode = CursorMode.Auto;
         }
         else
         {
             hotSpot = new Vector2(68, 68);
+            cursorMode = CursorMode.ForceSoftware;
         }
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
