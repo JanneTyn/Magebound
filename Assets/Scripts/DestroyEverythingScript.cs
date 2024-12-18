@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class DestroyEverythingScript : MonoBehaviour
 {
+    
     private void Awake()
     {
-        if (AudioManager.Instance != null)
+        foreach (Transform child in transform)
         {
-            AudioManager.Instance.effectVolume = 0f;
+            Component[] components = child.GetComponents<Component>();
+
+            foreach (Component component in components)
+            {
+                if (component.GetType() != typeof(UnityEngine.VFX.VisualEffect) && component.GetType() != typeof(UnityEngine.Transform))
+                {
+                    Destroy(component);
+                }
+            }
         }
     }
     private void Start()
@@ -19,8 +28,7 @@ public class DestroyEverythingScript : MonoBehaviour
 
     private IEnumerator DestroyEverything()
     {
-        yield return new WaitForSeconds(2f);
-        AudioManager.Instance.effectVolume = 1f;
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 }
