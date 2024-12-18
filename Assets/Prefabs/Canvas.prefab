@@ -3751,7 +3751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1a82cfc3858509543970a0953154f28a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d6b1624fc9e17241aab88403de9d53f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5248,7 +5248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1a82cfc3858509543970a0953154f28a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d6b1624fc9e17241aab88403de9d53f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6242,7 +6242,7 @@ GameObject:
   - component: {fileID: 8256237317926088842}
   - component: {fileID: 2238380816881138803}
   m_Layer: 5
-  m_Name: GameOverScreen (Placeholder assets)
+  m_Name: GameOverScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8631,7 +8631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

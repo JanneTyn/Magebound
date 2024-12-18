@@ -2180,9 +2180,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7950211211166147006, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950211211166147006, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8619339680055307068, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001464741658526157, guid: 641e06603e3c4ed4ba2dff2f1bb883ad, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
