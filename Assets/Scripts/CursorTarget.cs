@@ -27,7 +27,7 @@ public class CursorTarget : MonoBehaviour
         spellShard = GameObject.Find("SpellBaseEffect").GetComponent<SpellShard>();
         player = GameObject.Find("Player");
 
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
             hotSpot = new Vector2(150, 150);
             cursorMode = CursorMode.Auto;
